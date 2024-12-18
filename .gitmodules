@@ -1,3 +1,9 @@
 [submodule "packages/nomad-FAIR"]
 	path = packages/nomad-FAIR
 	url = https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-FAIR.git
+[submodule "packages/nomad-parser-plugins-atomistic"]
+	path = packages/nomad-parser-plugins-atomistic
+	url = https://github.com/nomad-coe/atomistic-parsers.git
+[submodule "packages/nomad-schema-plugin-simulation-workflow"]
+	path = packages/nomad-schema-plugin-simulation-workflow
+	url = https://github.com/nomad-coe/nomad-schema-plugin-simulation-workflow.git
