@@ -1,4 +1,4 @@
-Start by forking main repository (/FAIRmat-NDFI/nomad-distro-dev) that will house all your plugins.
+Start by forking main repository (/FAIRmat-NFDI/nomad-distro-dev) that will house all your plugins.
 
 # NOMAD Dev Distribution
 
@@ -22,9 +22,10 @@ Below are instructions for how to create a dev environment for developing [nomad
    Docker nowadays comes with `docker compose` built in. Prior, you needed to
    install the stand-alone [docker-compose](https://docs.docker.com/compose/install/).
 
-2. Install [uv](https://docs.astral.sh/uv/getting-started/installation/). 
-uv is required to manage your development environment. It's recommended to use the standalone installer or perform a global installation.
-(`brew install uv` on macOS or `dnf install uv` on Fedora).
+2. Install [uv](https://docs.astral.sh/uv/getting-started/installation/) (v0.5.14 and above).
+   uv is required to manage your development environment. It's recommended to use the standalone installer or perform a global installation.
+   (`brew install uv` on macOS or `dnf install uv` on Fedora).
+
 
 3. Install [node.js](https://nodejs.org/en) (v20) and [yarn](https://classic.yarnpkg.com/en/docs/install/)(v1.22). We will use it to setup the GUI.
 
@@ -102,65 +103,66 @@ these two situations.
    we need to make some modifications in the `pyproject.toml`.
    These include adding the plugin package to `[project.dependencies]` and
    `[tool.uv.sources]` tables.
-   For the packages listed under `[tool.uv.sources]`, `uv` uses the local code
+   The packages listed under `[tool.uv.sources]` are loaded by `uv` using the local code
    directory made available under `packages/` with the previous
-   step.
+   step. This list will contain all the plugins that we need to actively develop in this environment.
 
-   To add a new plugin **not** listed under `[project.dependencies]`, you
-   must first add it as a dependency. After adding the dependencies, update the
+   If a new plugin is **not** listed under `[project.dependencies]`, we need
+   to first add it as a dependency. After adding the dependencies, update the
    `[tool.uv.sources]` section in your `pyproject.toml` file to reflect the new
    plugins.
 
-   You can use `uv add` which adds the dependency and the source in `pyproject.toml`
+   There are two ways of adding to these two lists:
+
+   * You can use `uv add` which adds the dependency and the source in `pyproject.toml`
    and sets up the environment:
 
+     ```bash
+     uv add packages/nomad-measurements
+     ```
+
+   Or if you've added multiple plugins as submodules, you should list them all together.
+
    ```bash
-   uv add nomad-measurements
+   uv add packages/nomad-measurements packages/PLUGIN_B packages/PLUGIN_C
    ```
+ 
+   * You can modify the `pyproject.toml` file manually:
 
-> [!NOTE]
-> You can also use `uv` to install a specific branch of the plugin submodule.
->
-> ```bash
-> uv add https://github.com/FAIRmat-NFDI/nomad-measurements.git --branch <specific-branch-name>
-> ```
-
-   Or you can modify the `pyproject.toml` file manually:
-
-   ```toml
-   [project]
-   dependencies = [
-   ...
-   "nomad-measurements",
-   ]
-
-   [tool.uv.sources]
-   ...
-   nomad-measurements = { workspace = true }
-   ```
-
+     ```toml
+     [project]
+     dependencies = [
+     ...
+     "nomad-measurements",
+     ]
+  
+     [tool.uv.sources]
+     ...
+     nomad-measurements = { workspace = true }
+     ```  
    
    Some of the plugins are already listed under
    `[project.dependencies]`. If you want to develop one of them, you
    have to add them under `[tool.uv.sources]`. We do this for `nomad-parser-plugins-electronics`.
+  
+   ```toml
+   [tool.uv.sources]
+   ...
+   nomad-parser-plugins-electronic = { workspace = true }
+   ```
 
-```toml
-[tool.uv.sources]
-...
-nomad-parser-plugins-electronic = { workspace = true }
-```
+ > [!NOTE]
+ > You can also use `uv` to install a specific branch of the plugin without adding a submodule locally.
+ >
+ > ```bash
+ > uv add https://github.com/FAIRmat-NFDI/nomad-measurements.git --branch <specific-branch-name>
+ > ```
+ > This command will not include the plugin in the `packages/` folder, and hence this plugin
+ > will not be editable. 
 
-4. Create a `nomad.yaml` file.
+A complete list of plugins maintained by FAIRmat-NFDI can by found in the [overview page](https://github.com/FAIRmat-NFDI) of the FAIRmat-NFDI organisation.
 
-This file is used to configure nomad. For more information on configuration options, refer to the detailed [nomad configuration docs](https://nomad-lab.eu/prod/v1/staging/docs/reference/config.html#setting-values-from-a-nomadyaml).
-
-Below is the default configuration for a development environment, using the test realm:
-
-```yaml
-keycloak:
-  realm_name: "fairdi_nomad_test"
-```
-
+    
 ### Day-to-Day Development
 
 After the initial setup, here’s how to manage your daily development tasks.
@@ -170,6 +172,12 @@ After the initial setup, here’s how to manage your daily development tasks.
    ```bash
    uv run poe setup
    ```
+
+   As part of the setup command, a `nomad.yaml` config file will be created, this file is used to configure nomad. 
+   It will be placed in the top-level directory of your repository, where all commands are executed from.
+
+   For more information on configuration options, refer to the detailed [nomad configuration docs](https://nomad-lab.eu/prod/v1/staging/docs/reference/config.html#setting-values-from-a-nomadyaml).
+
 
 > [!NOTE]
 >
@@ -212,7 +220,7 @@ After the initial setup, here’s how to manage your daily development tasks.
 
 > [!TIP]
 >
-> To run tests for a specific package in an isolated venv use: `uv sync --all-extras --package plugin_a && uv run --package plugin_a --directory packages/plugin_a pytest`
+> To run tests for a specific package in an isolated venv use: `uv run --exact --all-extras --package plugin_a --directory packages/plugin_a pytest`
 
 6. Linting & code formatting
 
@@ -322,3 +330,21 @@ To keep your fork up to date with the latest changes from the original repositor
    ```bash
    git push origin main
    ```
+
+### Common Issues and Solutions
+
+1. Failed to install phonopy.
+
+   ```console
+      uv venv -p 3.12
+      uv pip install 'numpy>=1.25'
+      uv pip install 'phonopy==2.11.0' --no-build-isolation
+   ```
+
+2. Failed to install pycifrw.
+   
+   The error usually indicates that clang was missing. `error: command 'clang'`. Installing `clang` should fix this issue.
+   
+
+
+
