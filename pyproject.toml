@@ -3,27 +3,22 @@ name = "nomad-distribution"
 description = "nomad distribution template"
 version = "0.1"
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 license = { file = "LICENSE" }
 dependencies = [
   "nomad-lab[parsing, infrastructure]>=1.3.10",
   "perovskite-solar-cell-database",
   'nomad-porous-materials; sys_platform != "win32"',
   "nomad-aitoolkit",
-<<<<<<< HEAD
-  "nomad-simulations==0.3.1",
-  "pynxtools[convert]==0.5.0",
-=======
-  "nomad-simulations>=0.3.1",
-  "pynxtools[apm,ellips,mpes,raman,stm,xps,xrd]==0.9.1",
->>>>>>> upstream/main
+  "nomad-simulations>=0.3.2",
+  "pynxtools[apm,ellips,mpes,raman,stm,xps,xrd]==0.10.0",
   "nomad-schema-plugin-run>=1.0.1",
   "nomad-normalizer-plugin-dos>=1.0",
   "nomad-normalizer-plugin-soap>=1.0",
   "nomad-normalizer-plugin-spectra>=1.0",
   "nomad-normalizer-plugin-system>=1.0",
   "nomad-parser-plugins-electronic>=1.0",
-  "nomad-parser-plugins-atomistic>=1.0",
+  "nomad-parser-plugins-atomistic>=1.0.6",
   "nomad-parser-plugins-database>=1.0",
   "nomad-external-eln-integrations",
 ]
@@ -78,6 +73,10 @@ cmd = "ruff check ."
 
 [tool.poe.tasks.ruff-format]
 cmd = "ruff format . --check"
+
+[tool.poe.tasks.hub]
+cmd = "nomad admin run hub"
+cwd = "packages/nomad-FAIR"
 
 [tool.poe.tasks.gui]
 cmd = "yarn run"
