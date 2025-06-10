@@ -207,6 +207,20 @@ After the initial setup, here’s how to manage your daily development tasks.
 
 4. Run the docs server (optional: only if you wish to run the documentation server):
 
+Add the `nomad-docs` repository as a submodule (if you have added it as a submodule already, skip this step):
+
+   ```bash
+   git submodule add https://github.com/FAIRmat-NFDI/nomad-docs.git packages/nomad-docs
+   ```
+
+Just like adding a new plugin, use `uv` to add `nomad-docs` to the environment:
+   ```bash
+   uv add packages/nomad-docs
+   ```
+
+At this moment, you can commit the changes made to your `nomad-dev-distro`.
+
+Now, everytime you wanna start the docs server, run the following:
    ```bash
    uv run poe docs
    ```
