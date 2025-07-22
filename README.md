@@ -117,20 +117,18 @@ these two situations.
 
    There are two ways of adding to these two lists:
 
-   * You can use `uv add` which adds the dependency and the source in `pyproject.toml`
-   and sets up the environment:
-
-     ```bash
-     uv add packages/nomad-measurements
-     ```
-
-   Or if you've added multiple plugins as submodules, you should list them all together.
-
+   a) You can use `uv add` which adds the dependency and the source in `pyproject.toml`
+   and sets up the environment.  
+   Adding multiple plugins should be done in a single command:
    ```bash
    uv add packages/nomad-measurements packages/PLUGIN_B packages/PLUGIN_C
    ```
+   In this example, we're just adding one:
+   ```bash
+   uv add packages/nomad-measurements
+   ```  
  
-   * You can modify the `pyproject.toml` file manually:
+   b) You can modify the `pyproject.toml` file manually:
 
      ```toml
      [project]
