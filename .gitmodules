@@ -1,3 +1,12 @@
 [submodule "packages/nomad-FAIR"]
 	path = packages/nomad-FAIR
 	url = https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-FAIR.git
+[submodule "packages/nomad-topology-normalizer"]
+	path = packages/nomad-topology-normalizer
+	url = https://github.com/FAIRmat-NFDI/nomad-topology-normalizer.git
+[submodule "packages/nomad-simulations"]
+	path = packages/nomad-simulations
+	url = https://github.com/FAIRmat-NFDI/nomad-simulations.git
+[submodule "packages/nomad-parser-plugins-simulation"]
+	path = packages/nomad-parser-plugins-simulation
+	url = https://github.com/FAIRmat-NFDI/nomad-parser-plugins-simulation.git
