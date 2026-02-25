@@ -1,0 +1,98 @@
+{
+  "data": {
+    "m_def": "nomad.datamodel.metainfo.basesections.v2.BaseSection",
+    "name": "test",
+    "datetime": "2026-02-25T09:30:12.883099+00:00"
+  },
+  "metadata": {
+    "entry_name": "test",
+    "entry_type": "BaseSection",
+    "mainfile": "/home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-topology-normalizer/tests/data/first.archive.yaml",
+    "text_search_contents": [
+      "test"
+    ],
+    "n_quantities": 12,
+    "quantities": [
+      "",
+      "data",
+      "data.datetime",
+      "data.name",
+      "metadata",
+      "metadata.entry_name",
+      "metadata.entry_type",
+      "metadata.mainfile",
+      "metadata.quantities",
+      "metadata.section_defs",
+      "metadata.section_defs.definition_id",
+      "metadata.section_defs.definition_qualified_name",
+      "metadata.section_defs.used_directly",
+      "metadata.sections",
+      "results",
+      "results.eln",
+      "results.eln.names",
+      "results.eln.sections",
+      "results.properties"
+    ],
+    "sections": [
+      "nomad.datamodel.datamodel.EntryArchive",
+      "nomad.datamodel.datamodel.EntryMetadata",
+      "nomad.datamodel.metainfo.basesections.v2.BaseSection",
+      "nomad.datamodel.results.ELN",
+      "nomad.datamodel.results.Properties",
+      "nomad.datamodel.results.Results"
+    ],
+    "section_defs": [
+      {
+        "definition_qualified_name": "nomad.datamodel.data.ArchiveSection",
+        "definition_id": "a4fc26727b8b3b1711ff8cea9896ac1910987509",
+        "used_directly": true
+      },
+      {
+        "definition_qualified_name": "nomad.datamodel.data.EntryData",
+        "definition_id": "486f476f18785f5f4bcbac10db7304d7de35636b",
+        "used_directly": true
+      },
+      {
+        "definition_qualified_name": "nomad.datamodel.datamodel.EntryArchive",
+        "definition_id": "bcc6ac73717e02b9f169171882ac0a7375341892",
+        "used_directly": true
+      },
+      {
+        "definition_qualified_name": "nomad.datamodel.datamodel.EntryMetadata",
+        "definition_id": "089b7260031778a419dd5f905453a6ee10eb74b6",
+        "used_directly": true
+      },
+      {
+        "definition_qualified_name": "nomad.datamodel.metainfo.basesections.v2.BaseSection",
+        "definition_id": "27eab57e815d1478e275cc608a4d9a78ba0a268e",
+        "used_directly": true
+      },
+      {
+        "definition_qualified_name": "nomad.datamodel.results.ELN",
+        "definition_id": "007663da7ce382ddfc731f92b5445a0532b06bf9",
+        "used_directly": true
+      },
+      {
+        "definition_qualified_name": "nomad.datamodel.results.Properties",
+        "definition_id": "0c07391238cf25ac1e6bdc2fea220cff66a8a350",
+        "used_directly": true
+      },
+      {
+        "definition_qualified_name": "nomad.datamodel.results.Results",
+        "definition_id": "1c20cefadcf10cab672aae434168de685180574a",
+        "used_directly": true
+      }
+    ]
+  },
+  "results": {
+    "properties": {},
+    "eln": {
+      "sections": [
+        "BaseSection"
+      ],
+      "names": [
+        "test"
+      ]
+    }
+  }
+}

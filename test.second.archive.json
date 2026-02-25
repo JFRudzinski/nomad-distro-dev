@@ -1,0 +1,254 @@
+WARNING  nomad.client         2026-02-25T08:43:52Z no model_system found in archive.data
+  - nomad.client.normalizer: ResultsNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.1.dev270+g0806fc9ba
+  - taskName: None
+{
+  "data": {
+    "m_def": "nomad.datamodel.metainfo.basesections.v2.System",
+    "name": "second",
+    "datetime": "2026-02-25T09:43:52.296107+00:00",
+    "sub_systems": [
+      {
+        "m_def": "nomad.datamodel.metainfo.basesections.v2.NestedSubSystem",
+        "system": "#/data/sub_systems/0/nested_system",
+        "subsystem_properties": {
+          "atomic_fraction": 0.5
+        },
+        "nested_system": {
+          "datetime": "2026-02-25T09:43:52.293448+00:00",
+          "formula": "PbI2"
+        }
+      },
+      {
+        "m_def": "nomad.datamodel.metainfo.basesections.v2.NestedSubSystem",
+        "system": "#/data/sub_systems/1/nested_system",
+        "subsystem_properties": {
+          "atomic_fraction": 0.25
+        },
+        "nested_system": {
+          "datetime": "2026-02-25T09:43:52.295210+00:00",
+          "formula": "CsI"
+        }
+      },
+      {
+        "m_def": "nomad.datamodel.metainfo.basesections.v2.SubSystem",
+        "system": "../uploads/TH6iAZB9T9Gf9XdkhErkjA/archive/YwFrjVbyNYREe5INJ9A6NqWogqP-#/data",
+        "subsystem_properties": {
+          "atomic_fraction": 0.25
+        }
+      }
+    ]
+  },
+  "metadata": {
+    "entry_name": "second",
+    "entry_type": "System",
+    "mainfile": "/home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-topology-normalizer/tests/data/second.archive.yaml",
+    "text_search_contents": [
+      "second",
+      "CsI",
+      "PbI2"
+    ],
+    "n_quantities": 67,
+    "quantities": [
+      "",
+      "data",
+      "data.datetime",
+      "data.name",
+      "data.sub_systems",
+      "data.sub_systems.nested_system",
+      "data.sub_systems.nested_system.datetime",
+      "data.sub_systems.nested_system.formula",
+      "data.sub_systems.subsystem_properties",
+      "data.sub_systems.subsystem_properties.atomic_fraction",
+      "data.sub_systems.system",
+      "metadata",
+      "metadata.entry_name",
+      "metadata.entry_type",
+      "metadata.mainfile",
+      "metadata.quantities",
+      "metadata.section_defs",
+      "metadata.section_defs.definition_id",
+      "metadata.section_defs.definition_qualified_name",
+      "metadata.section_defs.used_directly",
+      "metadata.sections",
+      "results",
+      "results.eln",
+      "results.eln.names",
+      "results.eln.sections",
+      "results.material",
+      "results.material.topology",
+      "results.material.topology.atomic_fraction",
+      "results.material.topology.child_systems",
+      "results.material.topology.description",
+      "results.material.topology.label",
+      "results.material.topology.method",
+      "results.material.topology.parent_system",
+      "results.material.topology.system_id",
+      "results.material.topology.system_relation",
+      "results.material.topology.system_relation.type",
+      "results.properties"
+    ],
+    "sections": [
+      "nomad.datamodel.datamodel.EntryArchive",
+      "nomad.datamodel.datamodel.EntryMetadata",
+      "nomad.datamodel.metainfo.basesections.v2.NestedSubSystem",
+      "nomad.datamodel.metainfo.basesections.v2.SubSystem",
+      "nomad.datamodel.metainfo.basesections.v2.SubSystemProperties",
+      "nomad.datamodel.metainfo.basesections.v2.System",
+      "nomad.datamodel.results.ELN",
+      "nomad.datamodel.results.Material",
+      "nomad.datamodel.results.Properties",
+      "nomad.datamodel.results.Relation",
+      "nomad.datamodel.results.Results",
+      "nomad.datamodel.results.System"
+    ],
+    "section_defs": [
+      {
+        "definition_qualified_name": "nomad.datamodel.data.ArchiveSection",
+        "definition_id": "a4fc26727b8b3b1711ff8cea9896ac1910987509",
+        "used_directly": true
+      },
+      {
+        "definition_qualified_name": "nomad.datamodel.data.EntryData",
+        "definition_id": "486f476f18785f5f4bcbac10db7304d7de35636b",
+        "used_directly": false
+      },
+      {
+        "definition_qualified_name": "nomad.datamodel.datamodel.EntryArchive",
+        "definition_id": "bcc6ac73717e02b9f169171882ac0a7375341892",
+        "used_directly": true
+      },
+      {
+        "definition_qualified_name": "nomad.datamodel.datamodel.EntryMetadata",
+        "definition_id": "089b7260031778a419dd5f905453a6ee10eb74b6",
+        "used_directly": true
+      },
+      {
+        "definition_qualified_name": "nomad.datamodel.metainfo.basesections.v2.BaseSection",
+        "definition_id": "27eab57e815d1478e275cc608a4d9a78ba0a268e",
+        "used_directly": false
+      },
+      {
+        "definition_qualified_name": "nomad.datamodel.metainfo.basesections.v2.Entity",
+        "definition_id": "af82c76d9afbdac02c6bb00ccf910783a19080de",
+        "used_directly": true
+      },
+      {
+        "definition_qualified_name": "nomad.datamodel.metainfo.basesections.v2.NestedSubSystem",
+        "definition_id": "dcba7d9787d669e0466f8003220d857c0f629049",
+        "used_directly": true
+      },
+      {
+        "definition_qualified_name": "nomad.datamodel.metainfo.basesections.v2.SubSystem",
+        "definition_id": "d4e1f33ddc90f86c6fa034bf53dac7676602cdec",
+        "used_directly": true
+      },
+      {
+        "definition_qualified_name": "nomad.datamodel.metainfo.basesections.v2.SubSystemProperties",
+        "definition_id": "121e247d10b2b5f231338ad765673d77f061848c",
+        "used_directly": true
+      },
+      {
+        "definition_qualified_name": "nomad.datamodel.metainfo.basesections.v2.System",
+        "definition_id": "2a16c4688951d303d7b15ebbdced1f3af1168a08",
+        "used_directly": true
+      },
+      {
+        "definition_qualified_name": "nomad.datamodel.results.ELN",
+        "definition_id": "007663da7ce382ddfc731f92b5445a0532b06bf9",
+        "used_directly": true
+      },
+      {
+        "definition_qualified_name": "nomad.datamodel.results.Material",
+        "definition_id": "c42263dc2c5fcb455a85f3fbaa818a39285514b7",
+        "used_directly": true
+      },
+      {
+        "definition_qualified_name": "nomad.datamodel.results.Properties",
+        "definition_id": "0c07391238cf25ac1e6bdc2fea220cff66a8a350",
+        "used_directly": true
+      },
+      {
+        "definition_qualified_name": "nomad.datamodel.results.Relation",
+        "definition_id": "5e71a2ae6e60c4cf6144475dad0dcd2b55f85dbb",
+        "used_directly": true
+      },
+      {
+        "definition_qualified_name": "nomad.datamodel.results.Results",
+        "definition_id": "1c20cefadcf10cab672aae434168de685180574a",
+        "used_directly": true
+      },
+      {
+        "definition_qualified_name": "nomad.datamodel.results.System",
+        "definition_id": "802d9aab5b9b0e87b3af9e7cdc0a62f8d6cc3f44",
+        "used_directly": true
+      }
+    ]
+  },
+  "results": {
+    "material": {
+      "topology": [
+        {
+          "system_id": "results/material/topology/0",
+          "label": "original",
+          "method": "parser",
+          "description": "A representative system chosen from the original simulation.",
+          "child_systems": [
+            "results/material/topology/1"
+          ],
+          "system_relation": {
+            "type": "root"
+          }
+        },
+        {
+          "system_id": "results/material/topology/1",
+          "label": "second",
+          "method": "parser",
+          "description": "Imported from v2.System",
+          "parent_system": "results/material/topology/0",
+          "child_systems": [
+            "results/material/topology/2",
+            "results/material/topology/3",
+            "results/material/topology/4"
+          ]
+        },
+        {
+          "system_id": "results/material/topology/2",
+          "label": "subsystem",
+          "method": "parser",
+          "description": "Imported from v2.System",
+          "parent_system": "results/material/topology/1",
+          "atomic_fraction": 0.5
+        },
+        {
+          "system_id": "results/material/topology/3",
+          "label": "subsystem",
+          "method": "parser",
+          "description": "Imported from v2.System",
+          "parent_system": "results/material/topology/1",
+          "atomic_fraction": 0.25
+        },
+        {
+          "system_id": "results/material/topology/4",
+          "label": "subsystem",
+          "method": "parser",
+          "description": "Imported from v2.System",
+          "parent_system": "results/material/topology/1",
+          "atomic_fraction": 0.25
+        }
+      ]
+    },
+    "properties": {},
+    "eln": {
+      "sections": [
+        "System"
+      ],
+      "names": [
+        "second"
+      ]
+    }
+  }
+}

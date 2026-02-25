@@ -8,6 +8,360 @@
 
 ---
 
+## Investigation Update (2026-02-24) - v2 System/Results Population Gap
+
+### Context
+
+User-reported issue during post-migration testing: the "System normalizer" behavior is not correct for the v2 schema path (`archive.data`), and the expected system information in `archive.results` is not being populated (likely `results.material.topology` and/or related results structure/system fields).
+
+### Findings (Round 1, static code tracing)
+
+1. **v2 normalization path currently only initializes `results` and calls `TopologyNormalizer`**
+   - `ResultsNormalizerBase._normalize_with_data_schema()` creates `results` and `results.properties` if missing, then directly runs `TopologyNormalizer.normalize(...)`.
+   - It does **not** run any v2-specific "system/results structure" population step.
+   - Reference: `packages/nomad-topology-normalizer/src/nomad_topology_normalizer/normalizers/results.py:259`
+
+2. **`TopologyNormalizer` v2 path only guarantees minimal `results.material` and appends topology**
+   - `TopologyNormalizer.normalize()` creates a `_MinimalMaterialNormalizer` result if needed, then computes topology and appends it to `results.material.topology`.
+   - This is intentionally minimal and does not replace the legacy full material/system normalization cascade.
+   - Reference: `packages/nomad-topology-normalizer/src/nomad_topology_normalizer/normalizers/topology.py:344`
+
+3. **No dedicated v2 "System normalizer" exists in this package yet**
+   - There is no local v2 system/results-population normalizer equivalent to the legacy run-schema-driven logic.
+   - The legacy `normalize_run()` path still contains the richer `properties(...)` + `MaterialNormalizer(...)` flow, but it depends on `archive.run`/legacy caches and is not used for v2.
+   - Reference: `packages/nomad-topology-normalizer/src/nomad_topology_normalizer/normalizers/results.py:318`
+
+4. **Current tests do not assert populated v2 system/results content**
+   - The v2 tests mostly verify routing and "no crash" behavior.
+   - `test_data_schema_creates_topology` only checks `results.material is not None`, not actual topology/system content.
+   - Reference: `packages/nomad-topology-normalizer/tests/normalizers/test_results_normalizer.py:109`
+
+5. **Local test execution currently blocked in this workspace environment**
+   - Import-time plugin loading fails due missing module: `nomad_utility_workflows.apps`.
+   - This prevents running the package tests locally without adjusting the environment.
+
+### Likely Root Cause
+
+The migration successfully rerouted v2 entries into the plugin, but the v2 branch currently performs only a **partial normalization cascade** (results init + topology). The legacy system/material/results structure population logic was not fully ported (or invoked) for `archive.data` entries.
+
+### Proposed Approach (next implementation round)
+
+1. **Define the exact target fields first**
+   - Confirm whether the missing field is:
+     - `archive.results.material.topology` (most likely actual issue), or
+     - `archive.results.properties.structures.*`, or
+     - another `archive.results.*` system-related field.
+   - The user mentioned `archive.results.system` "I think"; this should be verified against a failing archive/example.
+
+2. **Add a v2 results/system population step in `_normalize_with_data_schema()`**
+   - Create a small v2-focused normalizer/helper (e.g. `SystemResultsNormalizer` or similar) that:
+     - selects representative `ModelSystem`,
+     - maps core structure/system fields into `archive.results` (the exact targets to be confirmed),
+     - runs before `TopologyNormalizer` so topology can reuse richer material/system context.
+
+3. **Reduce reliance on `_MinimalMaterialNormalizer`**
+   - Either:
+     - replace it with a proper v2 `MaterialNormalizer` invocation once required inputs are available, or
+     - keep it temporarily but populate the missing results/system/structures fields explicitly in the new v2 step.
+
+4. **Add regression tests that assert actual populated content**
+   - v2 route should assert at least one concrete field (e.g. topology length/root topology label and selected representative system-derived fields).
+   - Avoid tests that only check that normalization returns without error.
+
+### Notes for next round
+
+- First implementation target should be the smallest patch that restores expected system/topology population in `archive.results` for v2 entries.
+- After patching, update this section with:
+  - exact field(s) fixed,
+  - tests added/updated,
+  - any remaining TODOs for full material/system parity with legacy path.
+
+### Local Environment Note (2026-02-24)
+
+- Before continuing implementation, startup of local `nomad app/worker` is currently very slow.
+- Based on repo setup (`docker compose` infra + `uv run poe start` / `uv run nomad admin run appworker`), likely causes are stale infrastructure volumes (especially Elasticsearch/Mongo/Temporal) and/or stale `uv` virtual environment after dependency/plugin changes.
+- Next step (user-requested): perform a targeted local cleanup/reset sequence and verify service readiness before restarting appworker.
+- During troubleshooting, two optional plugin dependencies were removed from root `pyproject.toml`:
+  - `perovskite-solar-cell-database`
+  - `nomad-porous-materials` (non-Windows)
+- Potential impact: only relevant if local startup/config/tests import or rely on those plugins' entry points/schemas/apps. Otherwise removal should not block NOMAD core startup and may reduce plugin load overhead.
+
+### Appworker startup investigation (2026-02-24)
+
+- `docker compose` infrastructure is healthy (`elastic`, `mongo`, `rabbitmq`, `temporal` all `Up`).
+- `nomad admin run appworker --dev` is not a good single-point diagnostic because it launches `run_app` and `run_action_internal_worker` in a `ProcessPoolExecutor`, making stalls opaque.
+- Isolated test of `nomad admin run app` shows the startup block is in **app import/plugin loading**, not worker/Temporal.
+
+**Root cause found**
+- During app import (`nomad.app.main` -> OPTIMADE mapping init -> dynamic plugin quantity loading), NOMAD loads an external plugin entry point:
+  - `nomad_external_eln_integrations.schema_packages.labfolder`
+- That plugin imports `lxml.html.clean`, which now requires a separate package:
+  - `lxml_html_clean` (or `lxml[html_clean]`)
+- Resulting import error:
+  - `ImportError: lxml.html.clean module is now a separate project lxml_html_clean`
+
+**Impact**
+- App startup appears to "stall" while loading plugins and then fails before uvicorn logs appear.
+- `appworker` inherits the same issue because one child process is the app.
+
+**Workarounds / fixes**
+1. Install the missing dependency in the dev environment:
+   - `lxml_html_clean` (preferred quick fix)
+   - or `lxml[html_clean]`
+2. Alternatively disable/exclude the offending external ELN plugin entry point in local plugin config if not needed for this work.
+
+**Note**
+- A secondary CLI bug was also observed after the import error (`StopIteration` in `run_cli` error handling), but it is not the root cause of the startup failure.
+- User confirmed an alternative workaround: removing the offending plugin dependency from root `pyproject.toml` improved startup time and avoided the import failure.
+
+**Future diagnostics (repeatable)**
+- Prefer isolating app and worker instead of `appworker`:
+  - `uv run nomad admin run app --port 8000`
+  - `uv run nomad admin run worker`
+- If app stalls before uvicorn logs, suspect import/plugin loading. Useful commands:
+  - `PYTHONPROFILEIMPORTTIME=1 uv run nomad admin run app --port 8000 2> import-times.log`
+  - `UV_CACHE_DIR=/tmp/uv-cache uv run nomad admin run app --port 8000`
+- Check infra separately:
+  - `docker compose ps`
+  - `docker compose logs --tail=100 elastic mongo rabbitmq temporal`
+
+---
+
+## Investigation Update (2026-02-24) - `results.material.topology[*].cell` and visualizer breakage
+
+### Verification: `Cell` origin (important correction)
+
+- `results.material.topology[*].cell` is **not** a runschema-only class.
+- The `Cell` section is defined in **`nomad-FAIR` results schema** as `nomad.datamodel.results.Cell`.
+- References:
+  - `packages/nomad-FAIR/nomad/datamodel/results.py:733` (`class Cell`)
+  - `packages/nomad-FAIR/nomad/datamodel/results.py:1410` (`System.cell = SubSection(Cell)`)
+
+### What changed in v2 path (likely root cause)
+
+- In legacy NOMAD topology normalization, `add_system_info(...)` populates `system.cell` from atomistic structure data using `cell_from_ase_atoms(...)`.
+  - `packages/nomad-FAIR/nomad/normalizing/topology.py:117`
+  - `packages/nomad-FAIR/nomad/normalizing/topology.py:137`
+- In the v2 port, `add_system_info_2(...)` only handles indexed subsystems and formulas/fractions, and returns early when `system.indices` is missing.
+  - This means the root/original topology node (typically `topology[0]`) does **not** get `cell`.
+  - `packages/nomad-topology-normalizer/src/nomad_topology_normalizer/normalizers/topology.py:184`
+  - Early return: `.../topology.py:197`
+
+### Downstream impact in `nomad-FAIR` GUI / APIs
+
+1. **Material topology UI uses `results.material.topology.cell.*` directly**
+   - Cell tab and quantities read `node.cell.a/b/c/...`.
+   - `packages/nomad-FAIR/gui/src/components/entry/properties/MaterialCardTopology.js:317`
+   - `packages/nomad-FAIR/gui/src/components/entry/properties/MaterialCardTopology.js:420`
+
+2. **Structure visualizer (NGL) uses root topology `cell` metadata**
+   - `StructureNGL` resolves the root topology system and then accesses `root?.cell`, but later dereferences `metaCell.a/b/c` without guarding `metaCell`.
+   - Missing `root.cell` can therefore break rendering.
+   - `packages/nomad-FAIR/gui/src/components/visualization/StructureNGL.js:357`
+   - `packages/nomad-FAIR/gui/src/components/visualization/StructureNGL.js:367`
+
+3. **Search/indexing/tests rely on `results.material.topology.cell.*`**
+   - Multiple search widgets/tests and topology normalizer tests explicitly use quantities like `results.material.topology.cell.a`.
+   - This confirms the `results.Cell` shape is an established downstream contract, not legacy-only baggage.
+
+### Check in `nomad-simulations`: does "cell" still exist?
+
+Yes, but it is represented differently:
+
+- `ModelSystem` inherits from `Representation`, and `Representation` stores:
+  - `lattice_vectors`
+  - `periodic_boundary_conditions`
+  - `volume` / `area` / `length`
+- References:
+  - `packages/nomad-simulations/src/nomad_simulations/schema_packages/model_system.py:1234` (`class ModelSystem(System, Representation)`)
+  - `packages/nomad-simulations/src/nomad_simulations/schema_packages/model_system.py:135` (`class Representation`)
+  - `.../model_system.py:181` (`lattice_vectors`)
+  - `.../model_system.py:192` (`periodic_boundary_conditions`)
+  - `.../model_system.py:201` (`volume`)
+
+Also:
+- `ModelSystem.to_ase_atoms()` already reconstructs ASE Atoms from v2 model system + lattice vectors/PBC.
+  - `packages/nomad-simulations/src/nomad_simulations/schema_packages/model_system.py:1675`
+
+### Conclusion
+
+- We do **not** need to redefine `Cell` in basesections to fix current breakage.
+- The correct near-term fix is to **map v2 `ModelSystem` cell data into existing `nomad.datamodel.results.Cell`** when building `results.material.topology`.
+
+### Proposed plan (next implementation round)
+
+1. **Restore root topology cell population in v2 path**
+   - For the root/original topology node, build ASE atoms from representative `ModelSystem.to_ase_atoms()`.
+   - Populate `system.cell` using existing `cell_from_ase_atoms(...)`.
+
+2. **Audit root topology atom metadata (`atoms` / `atoms_ref`)**
+   - The NGL visualizer root resolution also relies on root topology atom metadata.
+   - If missing in v2, populate root `atoms` (or equivalent supported field) from the representative `ModelSystem` using `nomad_atoms_from_ase_atoms(...)`.
+   - This may be required in addition to `cell`.
+
+3. **Keep `results.Cell` as the downstream compatibility contract**
+   - Continue using `nomad.datamodel.results.Cell` in `results.material.topology`.
+   - No basesections schema redesign needed for this bugfix.
+
+4. **Add regression tests**
+   - v2 topology root (`results.material.topology[0]`) should have non-empty `cell` when representative `ModelSystem` has lattice vectors.
+   - If applicable, add assertion for root atom payload presence needed by visualization/system export code.
+
+### Implementation Update (2026-02-24, Round 2)
+
+Implemented a first compatibility fix in the v2 topology path to restore root topology metadata expected by NOMAD UI/visualization:
+
+1. **Root/original topology node now gets `cell` in v2 path**
+   - `add_system_info_2(...)` was extended to detect the root topology node (`system_relation.type == 'root'`) and derive:
+     - `n_atoms` (from `len(parent_system.particle_states)`)
+     - `cell` (via `parent_system.to_ase_atoms()` + existing `cell_from_ase_atoms(...)`)
+     - root atom payload (`atoms`, when supported by the results schema)
+   - This keeps compatibility with the downstream `results.material.topology[*].cell` contract used by GUI and visualizer.
+
+2. **Subsystems with explicit indices now inherit root atom payload via `atoms_ref` (if supported)**
+   - Added nearest-parent atom payload resolution in `add_system_info_2(...)` so indexed subsystems can reference root atoms similarly to legacy behavior.
+   - This should improve compatibility with structure export and visualizer code paths that expect `atoms_ref` on indexed topology nodes.
+
+3. **Root indices remain implicit (not stored)**
+   - Intentionally did **not** generate `indices` for the root node.
+   - Reason: NOMAD GUI (`StructureNGL`) uses "no indices + atoms/atoms_ref" to identify the root system.
+
+4. **Small follow-up fix**
+   - `topology_calculation()` now passes `self.entry_archive` to `get_topology_original(...)` so dimensionality can be inherited when available.
+
+5. **Regression test added**
+   - New test asserts the v2 root topology node has:
+     - label `original`
+     - implicit root indices (`None`)
+     - populated `cell`
+     - root atom payload (`atoms` or `atoms_ref`)
+   - File: `packages/nomad-topology-normalizer/tests/normalizers/test_results_normalizer.py`
+
+### Validation status
+
+- ✅ Syntax check passed (`python3 -m py_compile`) for modified files
+- ⚠️ Full pytest run still not possible in current local environment due plugin import issues seen earlier (`nomad_utility_workflows.apps` missing during NOMAD plugin loading)
+
+### Real-archive validation update (2026-02-24, `test.h5md.archive.json`)
+
+- Running normalization against the real archive exposed a type mismatch in the new subsystem `atoms_ref` propagation:
+  - `results.System.atoms_ref` expected a reference-typed value (legacy-compatible, runschema-related in this environment)
+  - but the v2 patch passed a `nomad.datamodel.metainfo.system.Atoms` object (`NOMADAtoms`)
+  - This caused a hard `TypeError` during metainfo normalization.
+
+**Action taken**
+- Removed the new `atoms_ref` propagation for indexed subsystems.
+- Kept the root-node compatibility fix (`root.cell`, root `atoms`, root formulas/n_atoms), which is the primary target for visualization recovery.
+- Refactored the v2 helper to a more NOMAD-style access pattern (direct metainfo attributes like `system.cell`, `system.system_relation`, `parent_system.particle_states`) with only a narrow guard for schema-conditional `results.System.atoms`.
+
+**Implication**
+- The visualizer should have a better chance to work now (root topology metadata restored).
+- Indexed subsystem file download/export may still be limited if it specifically requires `atoms_ref` on subsystems.
+- A later improvement can add proper `atoms_ref` support with a type-compatible reference object/path (if still needed).
+- Note: A traceback mentioning `system.atoms_ref = atoms_payload` indicates a run against the pre-fix code version.
+
+### Real-archive validation update (2026-02-24, follow-up run)
+
+- Follow-up normalization run on `test.h5md.archive.json` no longer crashes (the previous `atoms_ref` `TypeError` is gone).
+- Remaining output contains warnings only:
+  - `current_lambda_index ... no Lambda grid` (unrelated to topology normalization)
+  - `SimulationWorkflow.map_inputs/map_outputs ... positional arguments` (likely separate `nomad-simulations` workflow API mismatch)
+  - `SyntaxWarning` about assigning `NOMADAtoms` to `results.System.atoms` (non-fatal, but indicates schema type mismatch / compatibility issue for root atom payload assignment)
+  - `RuntimeWarning` in `atomutils` angle calculation (likely degenerate/collapsed cell vectors in input; non-fatal)
+
+**Next validation target**
+- Inspect normalized archive output and UI behavior to confirm that `results.material.topology[0].cell` is now present and the visualizer works.
+
+### Remaining validation / follow-up
+
+- Verify against the real failing archive (`test.h5md.archive.json`) that:
+  - `results.material.topology[0].cell` is present
+  - structure visualizer loads
+  - subsystem file download/export works (if previously broken)
+- If visualizer still fails, inspect whether additional root metadata (`atoms_ref` resolution format, PBC, or `atoms` payload shape) is missing in the API response.
+
+### Tooling update (2026-02-24)
+
+- Ran Ruff lint check locally via `uv run ruff check` (sandbox/network prevented `uvx ruff@0.15.1 check` from fetching Ruff).
+- Fixed one `E501` line-length issue in `packages/nomad-topology-normalizer/src/nomad_topology_normalizer/normalizers/topology.py`.
+- Current local Ruff status: `All checks passed!`
+- Package-local verification also passes (`uv run ruff check src/nomad_topology_normalizer/normalizers/topology.py` from `packages/nomad-topology-normalizer`).
+- `uvx` usage note: correct syntax is `uvx ruff@0.15.1 check` (not `uvx ruff@0.15.1 ruff check`).
+
+---
+
+## Investigation Update (2026-02-24) - Non-simulation `archive.data` routing bug
+
+### Findings
+
+- The logical switch in `ResultsNormalizerBase._is_v2_data_schema()` was indeed too permissive.
+- Before the fix, it returned `True` for **any** non-`None` `archive.data`, even when:
+  - `archive.data` was a custom non-simulation schema section (`test.archive.yaml`)
+  - `archive.data` was a generic `BaseSection` without `model_system` (`first.archive.yaml`)
+- Root cause: final fallback in `_is_v2_data_schema()` returned `True` even when `archive.data` had no `model_system` and was not a `basesections.v2.System`.
+
+### Impact
+
+- Non-simulation entries were incorrectly routed into the simulation-oriented v2 normalization path.
+- This can result in missing or incomplete `archive.results.material.topology` population because the v2 path assumes simulation/system semantics.
+
+### Fix implemented
+
+- Tightened `_is_v2_data_schema()` routing:
+  - `True` for direct `basesections.v2.System`
+  - `True` for sections with `model_system` (including empty `model_system`, for partially parsed `Simulation`)
+  - `False` for arbitrary/custom `archive.data` sections without `model_system`
+
+### Additional root cause (discovered while debugging `test.first.archive.json`)
+
+- The legacy fallback path was not actually delegating to `nomad-FAIR`'s `ResultsNormalizer`, despite the method docstring claiming so.
+- Previous implementation only:
+  - initialized `results`/`results.properties`
+  - called local `normalize_run()` **only if** `archive.run[0]` existed
+- For non-simulation custom `archive.data` entries (no `run`), this meant effectively **no legacy results normalization** happened, which matches the observed `test.first.archive.json` output (only minimal `results` from other normalizers like ELN).
+
+### Additional fix implemented
+
+- `_normalize_with_legacy()` now truly delegates to:
+  - `nomad.normalizing.results.ResultsNormalizer`
+- Plugin-level measurement normalization is skipped when legacy delegation is used, to avoid double-processing (legacy normalizer already handles measurements).
+
+### Test coverage
+
+- Added regression test to ensure custom non-simulation `archive.data` routes to the legacy path.
+- Added regression test to ensure legacy fallback actually delegates to `nomad-FAIR` `ResultsNormalizer`.
+
+### Notes on `tests/data/*`
+
+- `test.archive.yaml` and `first.archive.yaml` should **not** take the v2 simulation path.
+- `second.archive.yaml` is a direct `basesections.v2.System`, so it will still take the v2 path (generic `SystemV2` handling). If its topology/system info is still incomplete, that is a separate `topology_data()`/generic-v2 mapping issue, not the routing-switch bug.
+
+### Validation follow-up (2026-02-25)
+
+- `test.second.archive.json` looks consistent with the intended generic `SystemV2` handling:
+  - `results.material.topology` is populated from `topology_data()`
+  - subsystem `atomic_fraction` values are propagated
+  - no simulation-specific `model_system` is required for this case
+- `test.first.archive.json` (`basesections.v2.BaseSection`) contains no structural/system semantics, so lack of topology/system info in `results.material.topology` is likely expected (or at least not evidence of a v2-simulation routing bug by itself).
+- The routing fixes remain consistent with this:
+  - `first` should avoid v2 simulation path
+  - `second` should still use the v2 generic `SystemV2` path
+
+### Minor observation
+
+- `test.second.archive.json` logs `no model_system found in archive.data` from representative-system selection, even though normalization proceeds correctly via direct `SystemV2` fallback. This warning is likely noisy for direct `archive.data: SystemV2` entries and could be cleaned up later.
+
+### Documentation
+
+- Added a dedicated routing note with visual diagrams:
+  - `dev_notes/results_topology_routing.md`
+  - Covers:
+    - results-level split (legacy vs v2)
+    - topology-level split inside v2 (simulation hierarchy vs MatID vs generic `SystemV2`)
+    - examples for `first.archive.yaml` vs `second.archive.yaml`
+
+---
+
 ## Circular Import Workaround
 
 A critical implementation detail: **ResultsNormalizerBase does NOT inherit from `nomad.normalizing.Normalizer`**.
