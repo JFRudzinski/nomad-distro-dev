@@ -14,6 +14,7 @@ dependencies = [
   "nomad-topology-normalizer",
   "nomad-simulations",
   "nomad-simulation-parsers",
+  "fairmat-onboarding",
 ]
 
 [tool.uv.workspace]
@@ -28,6 +29,7 @@ nomad-external-eln-integrations = { git = "https://github.com/FAIRmat-NFDI/nomad
 nomad-topology-normalizer = { workspace = true }
 nomad-simulations = { workspace = true }
 nomad-simulation-parsers = { workspace = true }
+fairmat-onboarding = { workspace = true }
 
 [tool.uv]
 extra-index-url = [

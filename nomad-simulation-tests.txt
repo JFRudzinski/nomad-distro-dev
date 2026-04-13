@@ -1,0 +1,481 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.9, pytest-7.4.4, pluggy-1.6.0
+rootdir: /home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-simulations
+plugins: socket-0.7.0, timeout-2.4.0, split-0.10.0, anyio-4.12.1, asyncio-0.23.8, cov-7.0.0, xdist-3.8.0
+asyncio: mode=Mode.STRICT
+collected 971 items
+
+tests/test_atoms_state.py .............................................. [  4%]
+.........                                                                [  5%]
+tests/test_basis_set.py ..............................................   [ 10%]
+tests/test_contributions.py .                                            [ 10%]
+tests/test_data_types.py ............................................... [ 15%]
+.....................................s.s.........s.s.........s.s........ [ 22%]
+.s.......s....                                                           [ 24%]
+tests/test_doc_snippets.py ......................                        [ 26%]
+tests/test_force_field.py .............................                  [ 29%]
+tests/test_general.py ................                                   [ 31%]
+tests/test_general_particles.py ....                                     [ 31%]
+tests/test_model_method.py ............................................. [ 36%]
+........................................................................ [ 43%]
+................................................                         [ 48%]
+tests/test_model_system.py ............................................. [ 53%]
+........................................................................ [ 60%]
+......                                                                   [ 61%]
+tests/test_numerical_settings.py ....................................... [ 65%]
+......                                                                   [ 65%]
+tests/test_outputs.py ...........FFF                                     [ 67%]
+tests/test_physical_properties.py ............                           [ 68%]
+tests/test_variables.py ......                                           [ 69%]
+tests/test_workflow_doc_verticals.py ..                                  [ 69%]
+tests/properties/test_band_gap.py ..............                         [ 70%]
+tests/properties/test_band_structure.py ...........................      [ 73%]
+tests/properties/test_energies.py ...                                    [ 73%]
+tests/properties/test_fermi_surface.py ..                                [ 74%]
+tests/properties/test_forces.py ..                                       [ 74%]
+tests/properties/test_greens_function.py ............................... [ 77%]
+............                                                             [ 78%]
+tests/properties/test_hopping_matrix.py ....                             [ 79%]
+tests/properties/test_permittivity.py ..........                         [ 80%]
+tests/properties/test_spectral_profile.py .....FFF........               [ 81%]
+tests/utils/test_libxc.py ....                                           [ 82%]
+tests/utils/test_molecular_dynamics.py .......                           [ 82%]
+tests/utils/test_utils.py ......                                         [ 83%]
+tests/workflow/test_beyond_dft.py .s                                     [ 83%]
+tests/workflow/test_beyond_hf.py .                                       [ 83%]
+tests/workflow/test_convergence_targets.py ............................. [ 86%]
+......................                                                   [ 89%]
+tests/workflow/test_coupled_cluster.py ..                                [ 89%]
+tests/workflow/test_dmft.py ..                                           [ 89%]
+tests/workflow/test_elastic.py ..                                        [ 89%]
+tests/workflow/test_equation_of_state.py ......                          [ 90%]
+tests/workflow/test_general.py .............                             [ 91%]
+tests/workflow/test_geometry_optimization.py .....                       [ 92%]
+tests/workflow/test_gw.py ..                                             [ 92%]
+tests/workflow/test_max_ent.py ..                                        [ 92%]
+tests/workflow/test_molecular_dynamics.py .............................. [ 95%]
+.............................                                            [ 98%]
+tests/workflow/test_phonon.py ..                                         [ 98%]
+tests/workflow/test_photon_polarization.py ..                            [ 99%]
+tests/workflow/test_single_point.py ...                                  [ 99%]
+tests/workflow/test_tb.py ..                                             [ 99%]
+tests/workflow/test_thermodynamics.py .                                  [ 99%]
+tests/workflow/test_xs.py ...                                            [100%]
+
+=================================== FAILURES ===================================
+________________ TestOutputs.test_normalize[model_system1-None] ________________
+
+self = <tests.test_outputs.TestOutputs object at 0x72ca7e0e2d50>
+model_system = example system:ModelSystem(name), model_method = None
+
+    @pytest.mark.parametrize(
+        'model_system, model_method',
+        [
+            (None, None),
+            (ModelSystem(name='example system'), None),
+            (None, ModelMethod(name='example method')),
+            (ModelSystem(name='example system'), ModelMethod(name='example method')),
+        ],
+    )
+    def test_normalize(
+        self, model_system: ModelSystem | None, model_method: ModelMethod | None
+    ):
+        """
+        Test the `normalize` method.
+    
+        Args:
+            model_system (Optional[ModelSystem]): The expected `model_system_ref` obtained after normalization and
+            initially stored under `Simulation.model_system[0]`.
+            model_method (Optional[ModelMethod]): The expected `model_method_ref` obtained after normalization and
+            initially stored under `Simulation.model_method[0]`.
+        """
+        outputs = Outputs()
+        simulation = generate_simulation(
+            model_system=[model_system] if model_system else [],
+            model_method=[model_method] if model_method else [],
+            outputs=[outputs],
+        )
+        outputs.normalize(archive=EntryArchive(), logger=logger)
+        if model_system is not None:
+>           assert outputs.model_system_ref == simulation.model_system[-1]
+E           assert None == example system:ModelSystem(name)
+E            +  where None = Outputs().model_system_ref
+
+tests/test_outputs.py:176: AssertionError
+________________ TestOutputs.test_normalize[None-model_method2] ________________
+
+self = <tests.test_outputs.TestOutputs object at 0x72ca7e0e2de0>
+model_system = None, model_method = example method:ModelMethod(name)
+
+    @pytest.mark.parametrize(
+        'model_system, model_method',
+        [
+            (None, None),
+            (ModelSystem(name='example system'), None),
+            (None, ModelMethod(name='example method')),
+            (ModelSystem(name='example system'), ModelMethod(name='example method')),
+        ],
+    )
+    def test_normalize(
+        self, model_system: ModelSystem | None, model_method: ModelMethod | None
+    ):
+        """
+        Test the `normalize` method.
+    
+        Args:
+            model_system (Optional[ModelSystem]): The expected `model_system_ref` obtained after normalization and
+            initially stored under `Simulation.model_system[0]`.
+            model_method (Optional[ModelMethod]): The expected `model_method_ref` obtained after normalization and
+            initially stored under `Simulation.model_method[0]`.
+        """
+        outputs = Outputs()
+        simulation = generate_simulation(
+            model_system=[model_system] if model_system else [],
+            model_method=[model_method] if model_method else [],
+            outputs=[outputs],
+        )
+        outputs.normalize(archive=EntryArchive(), logger=logger)
+        if model_system is not None:
+            assert outputs.model_system_ref == simulation.model_system[-1]
+            assert outputs.model_system_ref.name == 'example system'
+        else:
+            assert outputs.model_system_ref is None
+        if model_method is not None:
+>           assert outputs.model_method_ref == simulation.model_method[-1]
+E           assert None == example method:ModelMethod(name)
+E            +  where None = Outputs().model_method_ref
+
+tests/test_outputs.py:181: AssertionError
+___________ TestOutputs.test_normalize[model_system3-model_method3] ____________
+
+self = <tests.test_outputs.TestOutputs object at 0x72ca7e0e2e70>
+model_system = example system:ModelSystem(name)
+model_method = example method:ModelMethod(name)
+
+    @pytest.mark.parametrize(
+        'model_system, model_method',
+        [
+            (None, None),
+            (ModelSystem(name='example system'), None),
+            (None, ModelMethod(name='example method')),
+            (ModelSystem(name='example system'), ModelMethod(name='example method')),
+        ],
+    )
+    def test_normalize(
+        self, model_system: ModelSystem | None, model_method: ModelMethod | None
+    ):
+        """
+        Test the `normalize` method.
+    
+        Args:
+            model_system (Optional[ModelSystem]): The expected `model_system_ref` obtained after normalization and
+            initially stored under `Simulation.model_system[0]`.
+            model_method (Optional[ModelMethod]): The expected `model_method_ref` obtained after normalization and
+            initially stored under `Simulation.model_method[0]`.
+        """
+        outputs = Outputs()
+        simulation = generate_simulation(
+            model_system=[model_system] if model_system else [],
+            model_method=[model_method] if model_method else [],
+            outputs=[outputs],
+        )
+        outputs.normalize(archive=EntryArchive(), logger=logger)
+        if model_system is not None:
+>           assert outputs.model_system_ref == simulation.model_system[-1]
+E           assert None == example system:ModelSystem(name)
+E            +  where None = Outputs().model_system_ref
+
+tests/test_outputs.py:176: AssertionError
+___________ TestElectronicDensityOfStates.test_extract_projected_dos ___________
+
+self = <tests.properties.test_spectral_profile.TestElectronicDensityOfStates object at 0x72ca7de4f950>
+simulation_electronic_dos = Simulation(model_system, outputs)
+
+    def test_extract_projected_dos(self, simulation_electronic_dos: Simulation):
+        """
+        Test the `extract_projected_dos` method.
+        """
+        # Get Outputs and ElectronicDensityOfStates from the simulation fixture
+        outputs = simulation_electronic_dos.outputs[0]
+        electronic_dos = outputs.electronic_dos[0]
+    
+        # Initial tests for the passed `projected_dos` (only orbital PDOS)
+        assert len(electronic_dos.projected_dos) == 3  # only orbital projected DOS
+        orbital_projected = electronic_dos.extract_projected_dos('orbital', logger)
+        atom_projected = electronic_dos.extract_projected_dos('atom', logger)
+        assert len(orbital_projected) == 3 and len(atom_projected) == 0
+        orbital_projected_names = [orb_pdos.name for orb_pdos in orbital_projected]
+        assert orbital_projected_names == [
+            'orbital s Ga',
+            'orbital px As',
+            'orbital py As',
+        ]
+        assert (
+            orbital_projected[0].entity_ref
+            == outputs.model_system_ref.particle_states[0].electronic_state.sub_states[
+                0
+            ]
+>       )
+E       AttributeError: 'NoneType' object has no attribute 'particle_states'
+
+tests/properties/test_spectral_profile.py:137: AttributeError
+_____ TestElectronicDensityOfStates.test_generate_from_pdos[None-result0] ______
+
+self = <tests.properties.test_spectral_profile.TestElectronicDensityOfStates object at 0x72ca7de4fda0>
+simulation_electronic_dos = Simulation(model_system, outputs), value = None
+result = [1.5, 1.2, 0, 0, 0, 0.8, ...]
+
+    @pytest.mark.parametrize(
+        'value, result',
+        [
+            (None, [1.5, 1.2, 0, 0, 0, 0.8, 1.3]),
+            ([30.5, 1.2, 0, 0, 0, 0.8, 1.3], [30.5, 1.2, 0, 0, 0, 0.8, 1.3]),
+        ],
+    )
+    def test_generate_from_pdos(
+        self,
+        simulation_electronic_dos: Simulation,
+        value: list[float] | None,
+        result: list[float],
+    ):
+        """
+        Test the `generate_from_projected_dos` method.
+        """
+        # Get Outputs and ElectronicDensityOfStates from the simulation fixture
+        outputs = simulation_electronic_dos.outputs[0]
+        electronic_dos = outputs.electronic_dos[0]
+    
+        # Add `value`
+        if value is not None:
+            electronic_dos.value = value * ureg('1/joule')
+    
+        val = electronic_dos.generate_from_projected_dos(logger)
+        assert (val.magnitude == result).all()
+    
+        # Testing both orbital and atom projected DOS: expect 5 entries (3 orbitals + 2 atoms)
+        assert len(electronic_dos.projected_dos) == 5
+        orbital_projected = electronic_dos.extract_projected_dos('orbital', logger)
+        atom_projected = electronic_dos.extract_projected_dos('atom', logger)
+        assert len(orbital_projected) == 3 and len(atom_projected) == 2
+        atom_projected_names = [ap.name for ap in atom_projected]
+        assert atom_projected_names == ['atom Ga', 'atom As']
+        # Check that the entity_ref of the atom PDOS points to the ElectronicState (not AtomsState)
+        # This is the new architectural pattern where ElectronicState serves as gateway
+        assert (
+            atom_projected[0].entity_ref
+            == outputs.model_system_ref.particle_states[0].electronic_state
+>       )
+E       AttributeError: 'NoneType' object has no attribute 'particle_states'
+
+tests/properties/test_spectral_profile.py:196: AttributeError
+____ TestElectronicDensityOfStates.test_generate_from_pdos[value1-result1] _____
+
+self = <tests.properties.test_spectral_profile.TestElectronicDensityOfStates object at 0x72ca7de4fec0>
+simulation_electronic_dos = Simulation(model_system, outputs)
+value = [30.5, 1.2, 0, 0, 0, 0.8, ...], result = [30.5, 1.2, 0, 0, 0, 0.8, ...]
+
+    @pytest.mark.parametrize(
+        'value, result',
+        [
+            (None, [1.5, 1.2, 0, 0, 0, 0.8, 1.3]),
+            ([30.5, 1.2, 0, 0, 0, 0.8, 1.3], [30.5, 1.2, 0, 0, 0, 0.8, 1.3]),
+        ],
+    )
+    def test_generate_from_pdos(
+        self,
+        simulation_electronic_dos: Simulation,
+        value: list[float] | None,
+        result: list[float],
+    ):
+        """
+        Test the `generate_from_projected_dos` method.
+        """
+        # Get Outputs and ElectronicDensityOfStates from the simulation fixture
+        outputs = simulation_electronic_dos.outputs[0]
+        electronic_dos = outputs.electronic_dos[0]
+    
+        # Add `value`
+        if value is not None:
+            electronic_dos.value = value * ureg('1/joule')
+    
+        val = electronic_dos.generate_from_projected_dos(logger)
+        assert (val.magnitude == result).all()
+    
+        # Testing both orbital and atom projected DOS: expect 5 entries (3 orbitals + 2 atoms)
+        assert len(electronic_dos.projected_dos) == 5
+        orbital_projected = electronic_dos.extract_projected_dos('orbital', logger)
+        atom_projected = electronic_dos.extract_projected_dos('atom', logger)
+        assert len(orbital_projected) == 3 and len(atom_projected) == 2
+        atom_projected_names = [ap.name for ap in atom_projected]
+        assert atom_projected_names == ['atom Ga', 'atom As']
+        # Check that the entity_ref of the atom PDOS points to the ElectronicState (not AtomsState)
+        # This is the new architectural pattern where ElectronicState serves as gateway
+        assert (
+            atom_projected[0].entity_ref
+            == outputs.model_system_ref.particle_states[0].electronic_state
+>       )
+E       AttributeError: 'NoneType' object has no attribute 'particle_states'
+
+tests/properties/test_spectral_profile.py:196: AttributeError
+=============================== warnings summary ===============================
+../nomad-simulation-parsers/src/nomad_simulation_parsers/parsers/phonopy/parser.py:18
+  /home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-simulation-parsers/src/nomad_simulation_parsers/parsers/phonopy/parser.py:18: DeprecationWarning: phonopy.units.* is deprecated. Use phonopy.physical_units.physical_units instead.
+    from phonopy.units import THzToEv
+
+../../.venv/lib/python3.12/site-packages/dosnormalizer/__init__.py:28
+  /home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/.venv/lib/python3.12/site-packages/dosnormalizer/__init__.py:28: PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    return DosNormalizer(**self.dict())
+
+../../.venv/lib/python3.12/site-packages/spectranormalizer/__init__.py:28
+  /home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/.venv/lib/python3.12/site-packages/spectranormalizer/__init__.py:28: PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    return SpectraNormalizer(**self.dict())
+
+../../.venv/lib/python3.12/site-packages/systemnormalizer/__init__.py:28
+  /home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/.venv/lib/python3.12/site-packages/systemnormalizer/__init__.py:28: PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    return SystemNormalizer(**self.dict())
+
+../../.venv/lib/python3.12/site-packages/soapnormalizer/__init__.py:28
+  /home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/.venv/lib/python3.12/site-packages/soapnormalizer/__init__.py:28: PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    return SoapNormalizer(**self.dict())
+
+tests/test_atoms_state.py: 7 warnings
+tests/test_basis_set.py: 24 warnings
+tests/test_force_field.py: 7 warnings
+tests/test_general.py: 1 warning
+tests/test_model_method.py: 24 warnings
+tests/test_model_system.py: 18 warnings
+tests/test_numerical_settings.py: 19 warnings
+  /home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/.venv/lib/python3.12/site-packages/logstash/formatter.py:73: DeprecationWarning: datetime.datetime.utcfromtimestamp() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.fromtimestamp(timestamp, datetime.UTC).
+    tstamp = datetime.utcfromtimestamp(time)
+
+tests/test_basis_set.py: 5 warnings
+tests/test_general.py: 9 warnings
+  /home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/metainfo.py:1378: SyntaxWarning: Representation() is not derived from its definition nomad_simulations.schema_packages.model_system.ModelSystem.representations:SubSection.
+    warnings.warn(
+
+tests/test_model_system.py::TestModelSystem::test_to_ase_atoms
+  /home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/metainfo.py:1378: SyntaxWarning: modified:Representation(name, lattice_vectors, periodic_boundary_conditions) is not derived from its definition nomad_simulations.schema_packages.model_system.ModelSystem.representations:SubSection.
+    warnings.warn(
+
+tests/test_model_system.py::TestModelSystem::test_resolve_system_type_dim[positions0-pbc0-atom-0]
+tests/test_model_system.py::TestModelSystem::test_resolve_system_type_dim[positions1-pbc1-bulk-3]
+tests/test_model_system.py::TestModelSystem::test_resolve_system_type_dim[positions2-pbc2-molecule / cluster-0]
+tests/test_model_system.py::TestModelSystem::test_normalize
+  /home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/metainfo.py:1378: SyntaxWarning: Representation(lattice_vectors, periodic_boundary_conditions) is not derived from its definition nomad_simulations.schema_packages.model_system.ModelSystem.representations:SubSection.
+    warnings.warn(
+
+tests/test_model_system.py::test_hierarchical_composition_and_branch_depth[1]
+tests/test_model_system.py::test_hierarchical_composition_and_branch_depth[3]
+  /home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/metainfo.py:1378: SyntaxWarning: Representation(periodic_boundary_conditions) is not derived from its definition nomad_simulations.schema_packages.model_system.ModelSystem.representations:SubSection.
+    warnings.warn(
+
+tests/test_model_system.py::test_symmetry_analysis_fields[fcc_aluminum]
+tests/test_model_system.py::test_symmetry_analysis_fields[bcc_iron]
+tests/test_model_system.py::test_symmetry_analysis_fields[simple_cubic_polonium]
+tests/test_model_system.py::test_symmetry_analysis_fields[diamond_silicon]
+  /home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/.venv/lib/python3.12/site-packages/spglib/spg.py:438: DeprecationWarning: Set OLD_ERROR_HANDLING to false and catch the errors directly.
+    _set_no_error(_throw)
+
+tests/test_numerical_settings.py: 16 warnings
+  /home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/metainfo.py:1378: SyntaxWarning: primitive:Representation(name, lattice_vectors, periodic_boundary_conditions) is not derived from its definition nomad_simulations.schema_packages.model_system.ModelSystem.representations:SubSection.
+    warnings.warn(
+
+tests/test_numerical_settings.py::test_kspace_subsection_normalization_order[KMesh]
+tests/test_numerical_settings.py::test_kspace_subsection_normalization_order[KLinePath]
+  /home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-simulations/src/nomad_simulations/schema_packages/numerical_settings.py:867: DeprecationWarning: Please use atoms.cell.reciprocal()
+    return 2 * np.pi * ase_atoms.get_reciprocal_cell() / ureg.angstrom
+
+tests/test_physical_properties.py: 3 warnings
+tests/test_variables.py: 2 warnings
+tests/properties/test_band_gap.py: 4 warnings
+tests/properties/test_greens_function.py: 2 warnings
+tests/properties/test_permittivity.py: 9 warnings
+tests/properties/test_spectral_profile.py: 5 warnings
+tests/utils/test_molecular_dynamics.py: 13 warnings
+tests/utils/test_utils.py: 4 warnings
+tests/workflow/test_convergence_targets.py: 3 warnings
+tests/workflow/test_geometry_optimization.py: 1 warning
+tests/workflow/test_molecular_dynamics.py: 8 warnings
+tests/workflow/test_thermodynamics.py: 1 warning
+  /home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/.venv/lib/python3.12/site-packages/logstash/formatter.py:73: DeprecationWarning:
+  
+  datetime.datetime.utcfromtimestamp() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.fromtimestamp(timestamp, datetime.UTC).
+
+tests/properties/test_band_structure.py: 24 warnings
+tests/properties/test_spectral_profile.py: 1 warning
+  /home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/metainfo.py:1378: SyntaxWarning:
+  
+  original:Representation(name, lattice_vectors, periodic_boundary_conditions) is not derived from its definition nomad_simulations.schema_packages.model_system.ModelSystem.representations:SubSection.
+
+tests/properties/test_permittivity.py::TestPermittivity::test_resolve_type[None-None-static]
+tests/properties/test_permittivity.py::TestPermittivity::test_resolve_type[kmesh_grid1-None-static]
+tests/properties/test_permittivity.py::TestPermittivity::test_resolve_type[kmesh_grid2-None-static]
+tests/properties/test_permittivity.py::TestPermittivity::test_resolve_type[kmesh_grid3-frequency3-dynamic]
+tests/properties/test_permittivity.py::TestPermittivity::test_extract_absorption_spectra[None-None-None-None]
+tests/properties/test_permittivity.py::TestPermittivity::test_extract_absorption_spectra[kmesh_grid1-frequencies_points1-value1-None]
+tests/properties/test_permittivity.py::TestPermittivity::test_extract_absorption_spectra[kmesh_grid2-frequencies_points2-value2-None]
+tests/properties/test_permittivity.py::TestPermittivity::test_extract_absorption_spectra[kmesh_grid3-frequencies_points3-value3-None]
+tests/properties/test_permittivity.py::TestPermittivity::test_extract_absorption_spectra[kmesh_grid4-frequencies_points4-value4-result4]
+  /home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/metainfo.py:1378: SyntaxWarning:
+  
+  primitive:Representation(name, lattice_vectors, periodic_boundary_conditions) is not derived from its definition nomad_simulations.schema_packages.model_system.ModelSystem.representations:SubSection.
+
+tests/properties/test_permittivity.py::TestPermittivity::test_extract_absorption_spectra[kmesh_grid4-frequencies_points4-value4-result4]
+  /home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/metainfo.py:1378: SyntaxWarning:
+  
+  Frequency(points) is not derived from its definition nomad_simulations.schema_packages.properties.spectral_profile.SpectralProfile.frequencies:SubSection.
+
+tests/properties/test_spectral_profile.py::TestElectronicDensityOfStates::test_resolve_normalization_factor
+tests/workflow/test_equation_of_state.py::TestEquationOfState::test_tasks[energies3-volumes3-expected3]
+  /home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/metainfo.py:1378: SyntaxWarning:
+  
+  Representation() is not derived from its definition nomad_simulations.schema_packages.model_system.ModelSystem.representations:SubSection.
+
+tests/utils/test_molecular_dynamics.py::test_archive_to_universe_masses_from_forcefield
+tests/utils/test_molecular_dynamics.py::test_archive_to_universe_charges_from_forcefield
+tests/utils/test_molecular_dynamics.py::test_archive_to_universe_charges_zero_fallback
+tests/utils/test_molecular_dynamics.py::test_archive_to_universe_topology_not_at_index_0
+tests/utils/test_molecular_dynamics.py::test_archive_to_universe_base_model_method_no_attribute_error
+  /home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/.venv/lib/python3.12/site-packages/MDAnalysis/core/universe.py:1916: UserWarning:
+  
+  there is no reference attributes in this universe to guess types from
+
+tests/utils/test_molecular_dynamics.py::test_archive_to_universe_masses_from_forcefield
+tests/utils/test_molecular_dynamics.py::test_archive_to_universe_charges_from_forcefield
+tests/utils/test_molecular_dynamics.py::test_archive_to_universe_charges_zero_fallback
+tests/utils/test_molecular_dynamics.py::test_archive_to_universe_topology_not_at_index_0
+tests/utils/test_molecular_dynamics.py::test_archive_to_universe_base_model_method_no_attribute_error
+  /home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/.venv/lib/python3.12/site-packages/MDAnalysis/core/universe.py:1916: UserWarning:
+  
+  there is no reference attributes (elements, types, or names) in this universe to guess mass from
+
+tests/utils/test_utils.py::test_get_sibling_section_result_idempotent_and_no_mutation
+tests/utils/test_utils.py::test_get_sibling_section_edge_cases_stable[-0-None]
+tests/utils/test_utils.py::test_get_sibling_section_edge_cases_stable[representations-5-None]
+  /home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/metainfo.py:1378: SyntaxWarning:
+  
+  original:Representation(name) is not derived from its definition nomad_simulations.schema_packages.model_system.ModelSystem.representations:SubSection.
+
+tests/utils/test_utils.py::test_get_sibling_section_result_idempotent_and_no_mutation
+  /home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/metainfo.py:1378: SyntaxWarning:
+  
+  primitive:Representation(name) is not derived from its definition nomad_simulations.schema_packages.model_system.ModelSystem.representations:SubSection.
+
+tests/workflow/test_equation_of_state.py::TestEquationOfState::test_tasks[energies0-volumes0-expected0]
+tests/workflow/test_equation_of_state.py::TestEquationOfState::test_tasks[energies1-volumes1-expected1]
+tests/workflow/test_equation_of_state.py::TestEquationOfState::test_tasks[energies2-volumes2-expected2]
+tests/workflow/test_equation_of_state.py::TestEquationOfState::test_tasks[energies3-volumes3-expected3]
+tests/workflow/test_equation_of_state.py::TestEquationOfState::test_tasks[energies4-volumes4-expected4]
+  /home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/metainfo.py:1378: SyntaxWarning:
+  
+  Representation(lattice_vectors) is not derived from its definition nomad_simulations.schema_packages.model_system.ModelSystem.representations:SubSection.
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/test_outputs.py::TestOutputs::test_normalize[model_system1-None]
+FAILED tests/test_outputs.py::TestOutputs::test_normalize[None-model_method2]
+FAILED tests/test_outputs.py::TestOutputs::test_normalize[model_system3-model_method3]
+FAILED tests/properties/test_spectral_profile.py::TestElectronicDensityOfStates::test_extract_projected_dos
+FAILED tests/properties/test_spectral_profile.py::TestElectronicDensityOfStates::test_generate_from_pdos[None-result0]
+FAILED tests/properties/test_spectral_profile.py::TestElectronicDensityOfStates::test_generate_from_pdos[value1-result1]
+=========== 6 failed, 956 passed, 9 skipped, 259 warnings in 12.53s ============

@@ -1,0 +1,1892 @@
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not find `reciprocal_lattice_vectors`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not resolve `bravais_lattice` and `lattice` ASE object from the `ModelSystem`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad_simulations.sc 2026-03-30T12:15:17Z Could not find `model_systems` to resolve reciprocal lattice vectors.
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not find `reciprocal_lattice_vectors`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not find `model_systems` to resolve high symmetry points.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad_simulations.sc 2026-03-30T12:15:17Z Could not find `model_systems` to resolve reciprocal lattice vectors.
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad_simulations.sc 2026-03-30T12:15:17Z Could not find `model_systems` to resolve reciprocal lattice vectors.
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not find `reciprocal_lattice_vectors`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not find `model_systems` to resolve high symmetry points.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad_simulations.sc 2026-03-30T12:15:17Z Could not find `model_systems` to resolve reciprocal lattice vectors.
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Exception raised in resolve_pdos_name: name
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z The index of the sibling_section is out of range.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not resolve the referenced `ModelSystem` in the `Outputs`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Exception raised in resolve_pdos_name: name
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z The index of the sibling_section is out of range.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not resolve the referenced `ModelSystem` in the `Outputs`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Exception raised in resolve_pdos_name: name
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z The index of the sibling_section is out of range.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not resolve the referenced `ModelSystem` in the `Outputs`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Exception raised in resolve_pdos_name: name
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z The index of the sibling_section is out of range.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not resolve the referenced `ModelSystem` in the `Outputs`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Exception raised in resolve_pdos_name: name
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z The index of the sibling_section is out of range.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not resolve the referenced `ModelSystem` in the `Outputs`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Exception raised in resolve_pdos_name: name
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z The index of the sibling_section is out of range.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not resolve the referenced `ModelSystem` in the `Outputs`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Exception raised in resolve_pdos_name: name
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z The index of the sibling_section is out of range.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not resolve the referenced `ModelSystem` in the `Outputs`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Exception raised in resolve_pdos_name: name
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z The index of the sibling_section is out of range.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not resolve the referenced `ModelSystem` in the `Outputs`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Exception raised in resolve_pdos_name: name
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z The index of the sibling_section is out of range.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not resolve the referenced `ModelSystem` in the `Outputs`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Exception raised in resolve_pdos_name: name
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z The index of the sibling_section is out of range.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not resolve the referenced `ModelSystem` in the `Outputs`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Exception raised in resolve_pdos_name: name
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z The index of the sibling_section is out of range.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not resolve the referenced `ModelSystem` in the `Outputs`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Exception raised in resolve_pdos_name: name
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z The index of the sibling_section is out of range.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not resolve the referenced `ModelSystem` in the `Outputs`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Exception raised in resolve_pdos_name: name
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z The index of the sibling_section is out of range.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not resolve the referenced `ModelSystem` in the `Outputs`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Exception raised in resolve_pdos_name: name
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z The index of the sibling_section is out of range.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not resolve the referenced `ModelSystem` in the `Outputs`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Exception raised in resolve_pdos_name: name
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z The index of the sibling_section is out of range.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not resolve the referenced `ModelSystem` in the `Outputs`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Exception raised in resolve_pdos_name: name
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z The index of the sibling_section is out of range.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not resolve the referenced `ModelSystem` in the `Outputs`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Exception raised in resolve_pdos_name: name
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z The index of the sibling_section is out of range.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not resolve the referenced `ModelSystem` in the `Outputs`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Exception raised in resolve_pdos_name: name
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z The index of the sibling_section is out of range.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not resolve the referenced `ModelSystem` in the `Outputs`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Exception raised in resolve_pdos_name: name
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z The index of the sibling_section is out of range.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not resolve the referenced `ModelSystem` in the `Outputs`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Exception raised in resolve_pdos_name: name
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z The index of the sibling_section is out of range.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not resolve the referenced `ModelSystem` in the `Outputs`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Exception raised in resolve_pdos_name: name
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z The index of the sibling_section is out of range.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not resolve the referenced `ModelSystem` in the `Outputs`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Exception raised in resolve_pdos_name: name
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z The index of the sibling_section is out of range.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not resolve the referenced `ModelSystem` in the `Outputs`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Exception raised in resolve_pdos_name: name
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z The index of the sibling_section is out of range.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not resolve the referenced `ModelSystem` in the `Outputs`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Exception raised in resolve_pdos_name: name
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z The index of the sibling_section is out of range.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not resolve the referenced `ModelSystem` in the `Outputs`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Exception raised in resolve_pdos_name: name
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z The index of the sibling_section is out of range.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not resolve the referenced `ModelSystem` in the `Outputs`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Exception raised in resolve_pdos_name: name
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z The index of the sibling_section is out of range.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not resolve the referenced `ModelSystem` in the `Outputs`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Exception raised in resolve_pdos_name: name
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z The index of the sibling_section is out of range.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not resolve the referenced `ModelSystem` in the `Outputs`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Exception raised in resolve_pdos_name: name
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z The index of the sibling_section is out of range.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not resolve the referenced `ModelSystem` in the `Outputs`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Exception raised in resolve_pdos_name: name
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z The index of the sibling_section is out of range.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not resolve the referenced `ModelSystem` in the `Outputs`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Exception raised in resolve_pdos_name: name
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z The index of the sibling_section is out of range.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not resolve the referenced `ModelSystem` in the `Outputs`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Exception raised in resolve_pdos_name: name
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z The index of the sibling_section is out of range.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not resolve the referenced `ModelSystem` in the `Outputs`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Exception raised in resolve_pdos_name: name
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z The index of the sibling_section is out of range.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not resolve the referenced `ModelSystem` in the `Outputs`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Exception raised in resolve_pdos_name: name
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z The index of the sibling_section is out of range.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not resolve the referenced `ModelSystem` in the `Outputs`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Exception raised in resolve_pdos_name: name
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z The index of the sibling_section is out of range.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not resolve the referenced `ModelSystem` in the `Outputs`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Exception raised in resolve_pdos_name: name
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z The index of the sibling_section is out of range.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not resolve the referenced `ModelSystem` in the `Outputs`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Exception raised in resolve_pdos_name: name
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z The index of the sibling_section is out of range.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not resolve the referenced `ModelSystem` in the `Outputs`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Exception raised in resolve_pdos_name: name
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z The index of the sibling_section is out of range.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not resolve the referenced `ModelSystem` in the `Outputs`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Exception raised in resolve_pdos_name: name
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z The index of the sibling_section is out of range.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not resolve the referenced `ModelSystem` in the `Outputs`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Exception raised in resolve_pdos_name: name
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z The index of the sibling_section is out of range.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not resolve the referenced `ModelSystem` in the `Outputs`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Exception raised in resolve_pdos_name: name
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z The index of the sibling_section is out of range.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not resolve the referenced `ModelSystem` in the `Outputs`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Exception raised in resolve_pdos_name: name
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z The index of the sibling_section is out of range.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not resolve the referenced `ModelSystem` in the `Outputs`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Exception raised in resolve_pdos_name: name
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z The index of the sibling_section is out of range.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not resolve the referenced `ModelSystem` in the `Outputs`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Exception raised in resolve_pdos_name: name
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z The index of the sibling_section is out of range.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not resolve the referenced `ModelSystem` in the `Outputs`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Exception raised in resolve_pdos_name: name
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z The index of the sibling_section is out of range.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not resolve the referenced `ModelSystem` in the `Outputs`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Exception raised in resolve_pdos_name: name
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z The index of the sibling_section is out of range.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not resolve the referenced `ModelSystem` in the `Outputs`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Exception raised in resolve_pdos_name: name
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z The index of the sibling_section is out of range.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not resolve the referenced `ModelSystem` in the `Outputs`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Exception raised in resolve_pdos_name: name
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z The index of the sibling_section is out of range.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not resolve the referenced `ModelSystem` in the `Outputs`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Exception raised in resolve_pdos_name: name
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z The index of the sibling_section is out of range.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not resolve the referenced `ModelSystem` in the `Outputs`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Exception raised in resolve_pdos_name: name
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z The index of the sibling_section is out of range.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not resolve the referenced `ModelSystem` in the `Outputs`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Exception raised in resolve_pdos_name: name
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z The index of the sibling_section is out of range.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not resolve the referenced `ModelSystem` in the `Outputs`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Exception raised in resolve_pdos_name: name
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z The index of the sibling_section is out of range.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not resolve the referenced `ModelSystem` in the `Outputs`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Exception raised in resolve_pdos_name: name
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z The index of the sibling_section is out of range.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not resolve the referenced `ModelSystem` in the `Outputs`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Exception raised in resolve_pdos_name: name
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z The index of the sibling_section is out of range.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not resolve the referenced `ModelSystem` in the `Outputs`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Exception raised in resolve_pdos_name: name
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z The index of the sibling_section is out of range.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not resolve the referenced `ModelSystem` in the `Outputs`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Exception raised in resolve_pdos_name: name
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z The index of the sibling_section is out of range.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not resolve the referenced `ModelSystem` in the `Outputs`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Exception raised in resolve_pdos_name: name
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z The index of the sibling_section is out of range.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not resolve the referenced `ModelSystem` in the `Outputs`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Exception raised in resolve_pdos_name: name
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z The index of the sibling_section is out of range.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not resolve the referenced `ModelSystem` in the `Outputs`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Exception raised in resolve_pdos_name: name
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z The index of the sibling_section is out of range.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not resolve the referenced `ModelSystem` in the `Outputs`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Exception raised in resolve_pdos_name: name
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z The index of the sibling_section is out of range.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not resolve the referenced `ModelSystem` in the `Outputs`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Exception raised in resolve_pdos_name: name
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z The index of the sibling_section is out of range.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not resolve the referenced `ModelSystem` in the `Outputs`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Exception raised in resolve_pdos_name: name
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z The index of the sibling_section is out of range.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not resolve the referenced `ModelSystem` in the `Outputs`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Exception raised in resolve_pdos_name: name
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z The index of the sibling_section is out of range.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not resolve the referenced `ModelSystem` in the `Outputs`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Exception raised in resolve_pdos_name: name
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z The index of the sibling_section is out of range.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not resolve the referenced `ModelSystem` in the `Outputs`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Exception raised in resolve_pdos_name: name
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z The index of the sibling_section is out of range.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not resolve the referenced `ModelSystem` in the `Outputs`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Exception raised in resolve_pdos_name: name
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z The index of the sibling_section is out of range.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not resolve the referenced `ModelSystem` in the `Outputs`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Exception raised in resolve_pdos_name: name
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z The index of the sibling_section is out of range.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not resolve the referenced `ModelSystem` in the `Outputs`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Exception raised in resolve_pdos_name: name
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z The index of the sibling_section is out of range.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not resolve the referenced `ModelSystem` in the `Outputs`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Exception raised in resolve_pdos_name: name
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z The index of the sibling_section is out of range.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not resolve the referenced `ModelSystem` in the `Outputs`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Exception raised in resolve_pdos_name: name
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z The index of the sibling_section is out of range.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not resolve the referenced `ModelSystem` in the `Outputs`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Exception raised in resolve_pdos_name: name
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z The index of the sibling_section is out of range.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not resolve the referenced `ModelSystem` in the `Outputs`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Exception raised in resolve_pdos_name: name
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z The index of the sibling_section is out of range.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not resolve the referenced `ModelSystem` in the `Outputs`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Exception raised in resolve_pdos_name: name
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z The index of the sibling_section is out of range.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not resolve the referenced `ModelSystem` in the `Outputs`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Exception raised in resolve_pdos_name: name
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z The index of the sibling_section is out of range.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not resolve the referenced `ModelSystem` in the `Outputs`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Exception raised in resolve_pdos_name: name
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z The index of the sibling_section is out of range.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not resolve the referenced `ModelSystem` in the `Outputs`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Exception raised in resolve_pdos_name: name
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z The index of the sibling_section is out of range.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not resolve the referenced `ModelSystem` in the `Outputs`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Exception raised in resolve_pdos_name: name
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z The index of the sibling_section is out of range.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not resolve the referenced `ModelSystem` in the `Outputs`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Exception raised in resolve_pdos_name: name
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z The index of the sibling_section is out of range.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not resolve the referenced `ModelSystem` in the `Outputs`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Exception raised in resolve_pdos_name: name
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z The index of the sibling_section is out of range.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not resolve the referenced `ModelSystem` in the `Outputs`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Exception raised in resolve_pdos_name: name
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z The index of the sibling_section is out of range.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not resolve the referenced `ModelSystem` in the `Outputs`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Exception raised in resolve_pdos_name: name
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z The index of the sibling_section is out of range.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not resolve the referenced `ModelSystem` in the `Outputs`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Exception raised in resolve_pdos_name: name
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z The index of the sibling_section is out of range.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not resolve the referenced `ModelSystem` in the `Outputs`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Exception raised in resolve_pdos_name: name
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z The index of the sibling_section is out of range.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not resolve the referenced `ModelSystem` in the `Outputs`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Exception raised in resolve_pdos_name: name
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z The index of the sibling_section is out of range.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+WARNING  nomad.client         2026-03-30T12:15:17Z Could not resolve the referenced `ModelSystem` in the `Outputs`.
+  - nomad.client.normalizer: MetainfoNormalizer
+  - nomad.commit: 
+  - nomad.deployment: oasis
+  - nomad.service: cli
+  - nomad.version: 1.4.2.dev102+g3cabd3349
+  - taskName: None
+/home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/metainfo.py:1373: SyntaxWarning: Atoms(atomic_numbers, species, labels, positions, lattice_vectors, periodic) is not derived from its definition nomad.datamodel.results.System.atoms:SubSection.
+  warnings.warn(
+/home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/metainfo.py:1373: SyntaxWarning: Atoms(atomic_numbers, species, labels, positions, lattice_vectors, periodic) is not derived from its definition nomad.datamodel.results.System.atoms:SubSection.
+  warnings.warn(
+Traceback (most recent call last):
+  File "/home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/.venv/bin/nomad", line 10, in <module>
+    sys.exit(run_cli())
+             ^^^^^^^^^
+  File "/home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/cli/cli.py", line 77, in run_cli
+    return cli(obj=POPO())  # pylint: disable=E1120,E1123
+           ^^^^^^^^^^^^^^^
+  File "/home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/.venv/lib/python3.12/site-packages/click/core.py", line 1485, in __call__
+    return self.main(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/.venv/lib/python3.12/site-packages/click/core.py", line 1406, in main
+    rv = self.invoke(ctx)
+         ^^^^^^^^^^^^^^^^
+  File "/home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/.venv/lib/python3.12/site-packages/click/core.py", line 1873, in invoke
+    return _process_result(sub_ctx.command.invoke(sub_ctx))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/.venv/lib/python3.12/site-packages/click/core.py", line 1269, in invoke
+    return ctx.invoke(self.callback, **ctx.params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/.venv/lib/python3.12/site-packages/click/core.py", line 824, in invoke
+    return callback(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/cli/parse.py", line 119, in _parse
+    entry_archive.m_to_dict(with_meta=archive_with_meta),
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/metainfo.py", line 1974, in m_to_dict
+    return {key: value for key, value in items()}
+                                         ^^^^^^^
+  File "/home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/metainfo.py", line 1971, in items
+    yield name, sub_section.m_to_dict(**kwargs)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/metainfo.py", line 1974, in m_to_dict
+    return {key: value for key, value in items()}
+                                         ^^^^^^^
+  File "/home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/metainfo.py", line 1971, in items
+    yield name, sub_section.m_to_dict(**kwargs)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/metainfo.py", line 1974, in m_to_dict
+    return {key: value for key, value in items()}
+                                         ^^^^^^^
+  File "/home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/metainfo.py", line 1971, in items
+    yield name, sub_section.m_to_dict(**kwargs)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/metainfo.py", line 1974, in m_to_dict
+    return {key: value for key, value in items()}
+                                         ^^^^^^^
+  File "/home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/metainfo.py", line 1964, in items
+    None if item is None else item.m_to_dict(**kwargs)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/metainfo.py", line 1974, in m_to_dict
+    return {key: value for key, value in items()}
+                                         ^^^^^^^
+  File "/home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/metainfo.py", line 1964, in items
+    None if item is None else item.m_to_dict(**kwargs)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/metainfo.py", line 1974, in m_to_dict
+    return {key: value for key, value in items()}
+                                         ^^^^^^^
+  File "/home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/metainfo.py", line 1931, in items
+    yield name, serialize_quantity(quantity, path)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/metainfo.py", line 1776, in serialize_quantity
+    return quantity_type.serialize(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/metainfo.py", line 576, in serialize
+    return _convert(value)
+           ^^^^^^^^^^^^^^^
+  File "/home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/metainfo.py", line 572, in _convert
+    intermediate = self._serialize_impl(section, v)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/metainfo.py", line 646, in _serialize_impl
+    parent_path: str = super()._serialize_impl(section, value)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/metainfo.py", line 560, in _serialize_impl
+    return value.qualified_name()
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/metainfo.py", line 1015, in __getattr__
+    raise AttributeError(name)
+AttributeError: qualified_name

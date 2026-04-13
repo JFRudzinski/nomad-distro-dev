@@ -1,0 +1,2660 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.9, pytest-7.4.4, pluggy-1.6.0
+rootdir: /home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-topology-normalizer
+plugins: socket-0.7.0, timeout-2.4.0, split-0.10.0, anyio-4.12.1, asyncio-0.23.8, cov-7.0.0, xdist-3.8.0
+asyncio: mode=Mode.STRICT
+collected 63 items
+
+tests/normalizers/test_material_normalizer.py .........                  [ 14%]
+tests/normalizers/test_normalizer_helper.py ....                         [ 20%]
+tests/normalizers/test_results_normalizer.py F..FFFFFFFFFFFFFFFFFFFFFF.s [ 63%]
+                                                                         [ 63%]
+tests/normalizers/test_symmetry_adapter.py ...                           [ 68%]
+tests/normalizers/test_topology_normalizer.py .FFFFFFFF..FF.....         [ 96%]
+tests/schema_packages/test_schema_package.py .F                          [100%]
+
+=================================== FAILURES ===================================
+______________________ test_schema_detection_data_schema _______________________
+
+archive_with_data_schema = EntryArchive(data, metadata, results)
+caplog = <_pytest.logging.LogCaptureFixture object at 0x758689522120>
+
+    def test_schema_detection_data_schema(archive_with_data_schema, caplog):
+        """Test that v2 data schema is detected and routed correctly."""
+        normalizer = ResultsNormalizer()
+    
+        # Clear any previous log records
+        caplog.clear()
+    
+        # Run normalization
+>       normalizer.normalize(archive_with_data_schema, LOGGER)
+
+tests/normalizers/test_results_normalizer.py:161: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/nomad_topology_normalizer/normalizers/results.py:234: in normalize
+    self._normalize_with_data_schema(archive, self.logger, system_v2)
+src/nomad_topology_normalizer/normalizers/results.py:296: in _normalize_with_data_schema
+    topology_normalizer.normalize(archive, logger, system_v2=system_v2)
+src/nomad_topology_normalizer/normalizers/topology.py:488: in normalize
+    ).material(populate_topology=False)
+src/nomad_topology_normalizer/normalizers/material.py:242: in material
+    material.symmetry = self.symmetry()
+src/nomad_topology_normalizer/normalizers/material.py:503: in symmetry
+    proto = self.repr_system.prototype if self.repr_system else None
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = test_system:ModelSystem(name, lattice_vectors, periodic_boundary_conditions, type, is_representative, n_particles, positions, particle_states)
+name = 'prototype'
+
+    def __getattr__(self, name):
+        if name.startswith('a_'):
+            if (annotation_name := name[2:]) in self.m_annotations:
+                return self.m_get_annotations(annotation_name)
+        elif name in self.m_def.all_aliases or self.m_def.has_variable_names:
+            # the first case will not throw
+            # the second case will throw if the name is not found
+            # we do not blindly try `m_get` for all unidentified names since it is very slow
+            try:
+                return self.m_get(name)
+            except (MetainfoError, ValueError):
+                pass
+    
+>       raise AttributeError(name)
+E       AttributeError: prototype
+
+../nomad-FAIR/nomad/metainfo/metainfo.py:1020: AttributeError
+------------------------------ Captured log call -------------------------------
+INFO     test_results_normalizer:results.py:233 {"event": "Using v2 data schema results normalization", "normalizer": "ResultsNormalizerBase", "timestamp": "2026-04-07T11:22:29Z"}
+ERROR    test_results_normalizer:material.py:240 {"event": "issue in creating formula information", "exception": "Traceback (most recent call last):\n  File \"/home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-topology-normalizer/src/nomad_topology_normalizer/normalizers/material.py\", line 199, in material\n    material.structural_type = self.structural_type\n    ^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/metainfo.py\", line 969, in __setattr__\n    return super().__setattr__(name, value)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/metainfo.py\", line 722, in wrapper\n    return method(self, obj, value, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/metainfo.py\", line 3186, in __set__\n    value = self.type.normalize(value, section=obj, **kwargs)\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/data_type.py\", line 786, in normalize\n    return self._normalize_impl(value, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/data_type.py\", line 1088, in _normalize_impl\n    return self._validate_value(value)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/data_type.py\", line 1073, in _validate_value\n    raise ValueError(f'{value} is not a value of this enumeration.')\nValueError: molecule is not a value of this enumeration.", "normalizer": "ResultsNormalizerBase", "timestamp": "2026-04-07T11:22:29Z"}
+_____________________ test_schema_detection_nested_system ______________________
+
+archive_with_nested_system = EntryArchive(data, metadata, results)
+caplog = <_pytest.logging.LogCaptureFixture object at 0x758689144b60>
+
+    def test_schema_detection_nested_system(archive_with_nested_system, caplog):
+        """Test that nested SystemV2 is detected and causes v2 normalization."""
+        normalizer = ResultsNormalizer()
+        caplog.clear()
+    
+        # Run normalization
+>       normalizer.normalize(archive_with_nested_system, LOGGER)
+
+tests/normalizers/test_results_normalizer.py:232: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/nomad_topology_normalizer/normalizers/results.py:234: in normalize
+    self._normalize_with_data_schema(archive, self.logger, system_v2)
+src/nomad_topology_normalizer/normalizers/results.py:296: in _normalize_with_data_schema
+    topology_normalizer.normalize(archive, logger, system_v2=system_v2)
+src/nomad_topology_normalizer/normalizers/topology.py:475: in normalize
+    self._initialize_representative_system(archive, system_v2)
+src/nomad_topology_normalizer/normalizers/topology.py:445: in _initialize_representative_system
+    self.repr_system = self._representative_system(archive)
+src/nomad_topology_normalizer/normalizers/normalizer.py:70: in _representative_system
+    if not archive.data or len(archive.data.model_system) == 0:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = Container(sub), name = 'model_system'
+
+    def __getattr__(self, name):
+        if name.startswith('a_'):
+            if (annotation_name := name[2:]) in self.m_annotations:
+                return self.m_get_annotations(annotation_name)
+        elif name in self.m_def.all_aliases or self.m_def.has_variable_names:
+            # the first case will not throw
+            # the second case will throw if the name is not found
+            # we do not blindly try `m_get` for all unidentified names since it is very slow
+            try:
+                return self.m_get(name)
+            except (MetainfoError, ValueError):
+                pass
+    
+>       raise AttributeError(name)
+E       AttributeError: model_system
+
+../nomad-FAIR/nomad/metainfo/metainfo.py:1020: AttributeError
+------------------------------ Captured log call -------------------------------
+INFO     test_results_normalizer:results.py:233 {"event": "Using v2 data schema results normalization", "normalizer": "ResultsNormalizerBase", "timestamp": "2026-04-07T11:22:30Z"}
+________________ test_data_schema_initializes_results_sections _________________
+
+archive_with_data_schema = EntryArchive(data, metadata, results)
+
+    def test_data_schema_initializes_results_sections(archive_with_data_schema):
+        """v2 data schema path should initialize key results sections."""
+        normalizer = ResultsNormalizer()
+    
+        # Run normalization
+>       normalizer.normalize(archive_with_data_schema, LOGGER)
+
+tests/normalizers/test_results_normalizer.py:249: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/nomad_topology_normalizer/normalizers/results.py:234: in normalize
+    self._normalize_with_data_schema(archive, self.logger, system_v2)
+src/nomad_topology_normalizer/normalizers/results.py:296: in _normalize_with_data_schema
+    topology_normalizer.normalize(archive, logger, system_v2=system_v2)
+src/nomad_topology_normalizer/normalizers/topology.py:488: in normalize
+    ).material(populate_topology=False)
+src/nomad_topology_normalizer/normalizers/material.py:242: in material
+    material.symmetry = self.symmetry()
+src/nomad_topology_normalizer/normalizers/material.py:503: in symmetry
+    proto = self.repr_system.prototype if self.repr_system else None
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = test_system:ModelSystem(name, lattice_vectors, periodic_boundary_conditions, type, is_representative, n_particles, positions, particle_states)
+name = 'prototype'
+
+    def __getattr__(self, name):
+        if name.startswith('a_'):
+            if (annotation_name := name[2:]) in self.m_annotations:
+                return self.m_get_annotations(annotation_name)
+        elif name in self.m_def.all_aliases or self.m_def.has_variable_names:
+            # the first case will not throw
+            # the second case will throw if the name is not found
+            # we do not blindly try `m_get` for all unidentified names since it is very slow
+            try:
+                return self.m_get(name)
+            except (MetainfoError, ValueError):
+                pass
+    
+>       raise AttributeError(name)
+E       AttributeError: prototype
+
+../nomad-FAIR/nomad/metainfo/metainfo.py:1020: AttributeError
+------------------------------ Captured log call -------------------------------
+INFO     test_results_normalizer:results.py:233 {"event": "Using v2 data schema results normalization", "normalizer": "ResultsNormalizerBase", "timestamp": "2026-04-07T11:22:30Z"}
+ERROR    test_results_normalizer:material.py:240 {"event": "issue in creating formula information", "exception": "Traceback (most recent call last):\n  File \"/home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-topology-normalizer/src/nomad_topology_normalizer/normalizers/material.py\", line 199, in material\n    material.structural_type = self.structural_type\n    ^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/metainfo.py\", line 969, in __setattr__\n    return super().__setattr__(name, value)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/metainfo.py\", line 722, in wrapper\n    return method(self, obj, value, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/metainfo.py\", line 3186, in __set__\n    value = self.type.normalize(value, section=obj, **kwargs)\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/data_type.py\", line 786, in normalize\n    return self._normalize_impl(value, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/data_type.py\", line 1088, in _normalize_impl\n    return self._validate_value(value)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/data_type.py\", line 1073, in _validate_value\n    raise ValueError(f'{value} is not a value of this enumeration.')\nValueError: molecule is not a value of this enumeration.", "normalizer": "ResultsNormalizerBase", "timestamp": "2026-04-07T11:22:30Z"}
+______________ test_data_schema_populates_method_from_simulation _______________
+
+    def test_data_schema_populates_method_from_simulation():
+        """v2 Simulation program/model_method should populate results.method."""
+        archive = EntryArchive(metadata=EntryMetadata())
+        archive.results = Results()
+        archive.results.properties = Properties()
+    
+        simulation = Simulation()
+        simulation.program = Program(
+            name='VASP', version='6.4.2', version_internal='git-abc123'
+        )
+        simulation.model_method.append(DFT())
+        simulation.model_method.append(Wannier(localization_type='maximally_localized'))
+    
+        model_system = ModelSystem(
+            name='test_system',
+            type='bulk',
+            is_representative=True,
+            positions=np.array([[0.0, 0.0, 0.0], [1.0, 0.0, 0.0]]) * ureg.angstrom,
+            n_particles=2,
+        )
+        model_system.particle_states.append(
+            AtomsState(chemical_symbol='Si', atomic_number=14)
+        )
+        model_system.particle_states.append(
+            AtomsState(chemical_symbol='Si', atomic_number=14)
+        )
+        model_system.lattice_vectors = np.eye(3) * 5.43 * ureg.angstrom
+        model_system.periodic_boundary_conditions = [True, True, True]
+        simulation.model_system.append(model_system)
+    
+        archive.data = simulation
+    
+        normalizer = ResultsNormalizer()
+>       normalizer.normalize(archive, LOGGER)
+
+tests/normalizers/test_results_normalizer.py:289: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/nomad_topology_normalizer/normalizers/results.py:234: in normalize
+    self._normalize_with_data_schema(archive, self.logger, system_v2)
+src/nomad_topology_normalizer/normalizers/results.py:296: in _normalize_with_data_schema
+    topology_normalizer.normalize(archive, logger, system_v2=system_v2)
+src/nomad_topology_normalizer/normalizers/topology.py:488: in normalize
+    ).material(populate_topology=False)
+src/nomad_topology_normalizer/normalizers/material.py:242: in material
+    material.symmetry = self.symmetry()
+src/nomad_topology_normalizer/normalizers/material.py:503: in symmetry
+    proto = self.repr_system.prototype if self.repr_system else None
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = test_system:ModelSystem(name, lattice_vectors, periodic_boundary_conditions, type, is_representative, n_particles, positions, particle_states)
+name = 'prototype'
+
+    def __getattr__(self, name):
+        if name.startswith('a_'):
+            if (annotation_name := name[2:]) in self.m_annotations:
+                return self.m_get_annotations(annotation_name)
+        elif name in self.m_def.all_aliases or self.m_def.has_variable_names:
+            # the first case will not throw
+            # the second case will throw if the name is not found
+            # we do not blindly try `m_get` for all unidentified names since it is very slow
+            try:
+                return self.m_get(name)
+            except (MetainfoError, ValueError):
+                pass
+    
+>       raise AttributeError(name)
+E       AttributeError: prototype
+
+../nomad-FAIR/nomad/metainfo/metainfo.py:1020: AttributeError
+------------------------------ Captured log call -------------------------------
+INFO     test_results_normalizer:results.py:233 {"event": "Using v2 data schema results normalization", "normalizer": "ResultsNormalizerBase", "timestamp": "2026-04-07T11:22:31Z"}
+_______________ test_data_schema_skips_unsupported_method_names ________________
+
+    def test_data_schema_skips_unsupported_method_names():
+        """Unsupported model methods should be ignored for results.method transfer."""
+        archive = EntryArchive(metadata=EntryMetadata())
+        archive.results = Results()
+        archive.results.properties = Properties()
+    
+        simulation = Simulation()
+        simulation.program = Program(name='VASP')
+        simulation.model_method.append(DFT())
+        simulation.model_method.append(ModelMethod(name='HF'))
+    
+        model_system = ModelSystem(
+            name='test_system',
+            type='bulk',
+            is_representative=True,
+            positions=np.array([[0.0, 0.0, 0.0], [1.0, 0.0, 0.0]]) * ureg.angstrom,
+            n_particles=2,
+        )
+        model_system.particle_states.append(
+            AtomsState(chemical_symbol='Si', atomic_number=14)
+        )
+        model_system.particle_states.append(
+            AtomsState(chemical_symbol='Si', atomic_number=14)
+        )
+        model_system.lattice_vectors = np.eye(3) * 5.43 * ureg.angstrom
+        model_system.periodic_boundary_conditions = [True, True, True]
+        simulation.model_system.append(model_system)
+        archive.data = simulation
+    
+        normalizer = ResultsNormalizer()
+>       normalizer.normalize(archive, LOGGER)
+
+tests/normalizers/test_results_normalizer.py:336: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/nomad_topology_normalizer/normalizers/results.py:234: in normalize
+    self._normalize_with_data_schema(archive, self.logger, system_v2)
+src/nomad_topology_normalizer/normalizers/results.py:296: in _normalize_with_data_schema
+    topology_normalizer.normalize(archive, logger, system_v2=system_v2)
+src/nomad_topology_normalizer/normalizers/topology.py:488: in normalize
+    ).material(populate_topology=False)
+src/nomad_topology_normalizer/normalizers/material.py:242: in material
+    material.symmetry = self.symmetry()
+src/nomad_topology_normalizer/normalizers/material.py:503: in symmetry
+    proto = self.repr_system.prototype if self.repr_system else None
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = test_system:ModelSystem(name, lattice_vectors, periodic_boundary_conditions, type, is_representative, n_particles, positions, particle_states)
+name = 'prototype'
+
+    def __getattr__(self, name):
+        if name.startswith('a_'):
+            if (annotation_name := name[2:]) in self.m_annotations:
+                return self.m_get_annotations(annotation_name)
+        elif name in self.m_def.all_aliases or self.m_def.has_variable_names:
+            # the first case will not throw
+            # the second case will throw if the name is not found
+            # we do not blindly try `m_get` for all unidentified names since it is very slow
+            try:
+                return self.m_get(name)
+            except (MetainfoError, ValueError):
+                pass
+    
+>       raise AttributeError(name)
+E       AttributeError: prototype
+
+../nomad-FAIR/nomad/metainfo/metainfo.py:1020: AttributeError
+------------------------------ Captured log call -------------------------------
+INFO     test_results_normalizer:results.py:233 {"event": "Using v2 data schema results normalization", "normalizer": "ResultsNormalizerBase", "timestamp": "2026-04-07T11:22:31Z"}
+_____________ test_data_schema_maps_method_details_for_gw_bse_dmft _____________
+
+    def test_data_schema_maps_method_details_for_gw_bse_dmft():
+        """v2 method details should map to legacy-equivalent results fields."""
+        archive = EntryArchive(metadata=EntryMetadata())
+        archive.results = Results()
+        archive.results.properties = Properties()
+    
+        simulation = Simulation()
+        simulation.program = Program(name='VASP')
+        simulation.model_method.append(GW(type='G0W0'))
+        simulation.model_method.append(BSE(type='RPA', solver='TDA'))
+        simulation.model_method.append(
+            DMFT(
+                impurity_solver='CT-HYB',
+                magnetic_state='paramagnetic',
+                inverse_temperature=(1.0 / ureg.eV),
+            )
+        )
+    
+        model_system = ModelSystem(
+            name='test_system',
+            type='bulk',
+            is_representative=True,
+            positions=np.array([[0.0, 0.0, 0.0], [1.0, 0.0, 0.0]]) * ureg.angstrom,
+            n_particles=2,
+        )
+        model_system.particle_states.append(
+            AtomsState(chemical_symbol='Si', atomic_number=14)
+        )
+        model_system.particle_states.append(
+            AtomsState(chemical_symbol='Si', atomic_number=14)
+        )
+        model_system.lattice_vectors = np.eye(3) * 5.43 * ureg.angstrom
+        model_system.periodic_boundary_conditions = [True, True, True]
+        simulation.model_system.append(model_system)
+        archive.data = simulation
+    
+        normalizer = ResultsNormalizer()
+>       normalizer.normalize(archive, LOGGER)
+
+tests/normalizers/test_results_normalizer.py:381: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/nomad_topology_normalizer/normalizers/results.py:234: in normalize
+    self._normalize_with_data_schema(archive, self.logger, system_v2)
+src/nomad_topology_normalizer/normalizers/results.py:296: in _normalize_with_data_schema
+    topology_normalizer.normalize(archive, logger, system_v2=system_v2)
+src/nomad_topology_normalizer/normalizers/topology.py:488: in normalize
+    ).material(populate_topology=False)
+src/nomad_topology_normalizer/normalizers/material.py:242: in material
+    material.symmetry = self.symmetry()
+src/nomad_topology_normalizer/normalizers/material.py:503: in symmetry
+    proto = self.repr_system.prototype if self.repr_system else None
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = test_system:ModelSystem(name, lattice_vectors, periodic_boundary_conditions, type, is_representative, n_particles, positions, particle_states)
+name = 'prototype'
+
+    def __getattr__(self, name):
+        if name.startswith('a_'):
+            if (annotation_name := name[2:]) in self.m_annotations:
+                return self.m_get_annotations(annotation_name)
+        elif name in self.m_def.all_aliases or self.m_def.has_variable_names:
+            # the first case will not throw
+            # the second case will throw if the name is not found
+            # we do not blindly try `m_get` for all unidentified names since it is very slow
+            try:
+                return self.m_get(name)
+            except (MetainfoError, ValueError):
+                pass
+    
+>       raise AttributeError(name)
+E       AttributeError: prototype
+
+../nomad-FAIR/nomad/metainfo/metainfo.py:1020: AttributeError
+------------------------------ Captured log call -------------------------------
+INFO     test_results_normalizer:results.py:233 {"event": "Using v2 data schema results normalization", "normalizer": "ResultsNormalizerBase", "timestamp": "2026-04-07T11:22:31Z"}
+________ test_data_schema_method_name_uses_first_supported_model_method ________
+
+    def test_data_schema_method_name_uses_first_supported_model_method():
+        """Method name should use first supported model_method for compatibility."""
+        archive = EntryArchive(metadata=EntryMetadata())
+        archive.results = Results()
+        archive.results.properties = Properties()
+    
+        simulation = Simulation()
+        simulation.program = Program(name='VASP')
+        # Intentionally place DMFT first and DFT last.
+        simulation.model_method.append(
+            DMFT(
+                impurity_solver='CT-HYB',
+                magnetic_state='paramagnetic',
+            )
+        )
+        simulation.model_method.append(GW(type='G0W0'))
+        simulation.model_method.append(DFT())
+    
+        model_system = ModelSystem(
+            name='test_system',
+            type='bulk',
+            is_representative=True,
+            positions=np.array([[0.0, 0.0, 0.0], [1.0, 0.0, 0.0]]) * ureg.angstrom,
+            n_particles=2,
+        )
+        model_system.particle_states.append(
+            AtomsState(chemical_symbol='Si', atomic_number=14)
+        )
+        model_system.particle_states.append(
+            AtomsState(chemical_symbol='Si', atomic_number=14)
+        )
+        model_system.lattice_vectors = np.eye(3) * 5.43 * ureg.angstrom
+        model_system.periodic_boundary_conditions = [True, True, True]
+        simulation.model_system.append(model_system)
+        archive.data = simulation
+    
+        normalizer = ResultsNormalizer()
+>       normalizer.normalize(archive, LOGGER)
+
+tests/normalizers/test_results_normalizer.py:435: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/nomad_topology_normalizer/normalizers/results.py:234: in normalize
+    self._normalize_with_data_schema(archive, self.logger, system_v2)
+src/nomad_topology_normalizer/normalizers/results.py:296: in _normalize_with_data_schema
+    topology_normalizer.normalize(archive, logger, system_v2=system_v2)
+src/nomad_topology_normalizer/normalizers/topology.py:488: in normalize
+    ).material(populate_topology=False)
+src/nomad_topology_normalizer/normalizers/material.py:242: in material
+    material.symmetry = self.symmetry()
+src/nomad_topology_normalizer/normalizers/material.py:503: in symmetry
+    proto = self.repr_system.prototype if self.repr_system else None
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = test_system:ModelSystem(name, lattice_vectors, periodic_boundary_conditions, type, is_representative, n_particles, positions, particle_states)
+name = 'prototype'
+
+    def __getattr__(self, name):
+        if name.startswith('a_'):
+            if (annotation_name := name[2:]) in self.m_annotations:
+                return self.m_get_annotations(annotation_name)
+        elif name in self.m_def.all_aliases or self.m_def.has_variable_names:
+            # the first case will not throw
+            # the second case will throw if the name is not found
+            # we do not blindly try `m_get` for all unidentified names since it is very slow
+            try:
+                return self.m_get(name)
+            except (MetainfoError, ValueError):
+                pass
+    
+>       raise AttributeError(name)
+E       AttributeError: prototype
+
+../nomad-FAIR/nomad/metainfo/metainfo.py:1020: AttributeError
+------------------------------ Captured log call -------------------------------
+INFO     test_results_normalizer:results.py:233 {"event": "Using v2 data schema results normalization", "normalizer": "ResultsNormalizerBase", "timestamp": "2026-04-07T11:22:31Z"}
+_______________ test_data_schema_maps_dft_spin_and_jacobs_ladder _______________
+
+    def test_data_schema_maps_dft_spin_and_jacobs_ladder():
+        """v2 DFT metadata should map to legacy-equivalent DFT result fields."""
+        archive = EntryArchive(metadata=EntryMetadata())
+        archive.results = Results()
+        archive.results.properties = Properties()
+    
+        simulation = Simulation()
+        simulation.program = Program(name='VASP')
+        simulation.model_method.append(DFT(is_spin_polarized=True, jacobs_ladder='GGA'))
+    
+        model_system = ModelSystem(
+            name='test_system',
+            type='bulk',
+            is_representative=True,
+            positions=np.array([[0.0, 0.0, 0.0], [1.0, 0.0, 0.0]]) * ureg.angstrom,
+            n_particles=2,
+        )
+        model_system.particle_states.append(
+            AtomsState(chemical_symbol='Si', atomic_number=14)
+        )
+        model_system.particle_states.append(
+            AtomsState(chemical_symbol='Si', atomic_number=14)
+        )
+        model_system.lattice_vectors = np.eye(3) * 5.43 * ureg.angstrom
+        model_system.periodic_boundary_conditions = [True, True, True]
+        simulation.model_system.append(model_system)
+        archive.data = simulation
+    
+        normalizer = ResultsNormalizer()
+>       normalizer.normalize(archive, LOGGER)
+
+tests/normalizers/test_results_normalizer.py:470: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/nomad_topology_normalizer/normalizers/results.py:234: in normalize
+    self._normalize_with_data_schema(archive, self.logger, system_v2)
+src/nomad_topology_normalizer/normalizers/results.py:296: in _normalize_with_data_schema
+    topology_normalizer.normalize(archive, logger, system_v2=system_v2)
+src/nomad_topology_normalizer/normalizers/topology.py:488: in normalize
+    ).material(populate_topology=False)
+src/nomad_topology_normalizer/normalizers/material.py:242: in material
+    material.symmetry = self.symmetry()
+src/nomad_topology_normalizer/normalizers/material.py:503: in symmetry
+    proto = self.repr_system.prototype if self.repr_system else None
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = test_system:ModelSystem(name, lattice_vectors, periodic_boundary_conditions, type, is_representative, n_particles, positions, particle_states)
+name = 'prototype'
+
+    def __getattr__(self, name):
+        if name.startswith('a_'):
+            if (annotation_name := name[2:]) in self.m_annotations:
+                return self.m_get_annotations(annotation_name)
+        elif name in self.m_def.all_aliases or self.m_def.has_variable_names:
+            # the first case will not throw
+            # the second case will throw if the name is not found
+            # we do not blindly try `m_get` for all unidentified names since it is very slow
+            try:
+                return self.m_get(name)
+            except (MetainfoError, ValueError):
+                pass
+    
+>       raise AttributeError(name)
+E       AttributeError: prototype
+
+../nomad-FAIR/nomad/metainfo/metainfo.py:1020: AttributeError
+------------------------------ Captured log call -------------------------------
+INFO     test_results_normalizer:results.py:233 {"event": "Using v2 data schema results normalization", "normalizer": "ResultsNormalizerBase", "timestamp": "2026-04-07T11:22:32Z"}
+_____________ test_data_schema_maps_outputs_electronic_properties ______________
+
+    def test_data_schema_maps_outputs_electronic_properties():
+        """v2 outputs should map electronic properties into results."""
+        archive = EntryArchive(metadata=EntryMetadata())
+        archive.results = Results()
+        archive.results.properties = Properties()
+    
+        simulation = Simulation()
+        simulation.program = Program(name='VASP')
+        simulation.model_method.append(DFT())
+    
+        model_system = ModelSystem(
+            name='test_system',
+            type='bulk',
+            is_representative=True,
+            positions=np.array([[0.0, 0.0, 0.0], [1.0, 0.0, 0.0]]) * ureg.angstrom,
+            n_particles=2,
+        )
+        model_system.particle_states.append(
+            AtomsState(chemical_symbol='Si', atomic_number=14)
+        )
+        model_system.particle_states.append(
+            AtomsState(chemical_symbol='Si', atomic_number=14)
+        )
+        model_system.lattice_vectors = np.eye(3) * 5.43 * ureg.angstrom
+        model_system.periodic_boundary_conditions = [True, True, True]
+        simulation.model_system.append(model_system)
+    
+        output = Outputs()
+        output.electronic_band_gaps.append(ElectronicBandGap(value=1.5 * ureg.eV))
+        dos = ElectronicDensityOfStates(
+            value=np.array([0.1, 0.2, 0.3]) / ureg.eV, spin_channel=0
+        )
+        dos.energies = Energy2(points=np.array([-1.0, 0.0, 1.0]) * ureg.eV)
+        output.electronic_dos.append(dos)
+        band_structure = ElectronicBandStructure(value=np.array([[1.0, 1.1]]) * ureg.eV)
+        band_structure.k_path = _kline_path()
+        output.electronic_band_structures.append(band_structure)
+        greens_function = ElectronicGreensFunction(value=(1.0 + 0.0j) / ureg.eV)
+        greens_function.matsubara_frequency = MatsubaraFrequency(
+            points=np.array([0.1j, 0.2j]) * ureg.eV
+        )
+        output.electronic_greens_functions.append(greens_function)
+        absorption = AbsorptionSpectrum(value=np.array([0.5, 0.6]) / ureg.eV)
+        absorption.energies = Energy2(points=np.array([0.0, 1.0]) * ureg.eV)
+        output.absorption_spectra.append(absorption)
+        output.radii_of_gyration.append(SimRadiusOfGyration(value=1.2e-10 * ureg.meter))
+        output.temperatures.append(SimTemperature(value=300 * ureg.kelvin))
+        output.potential_energies.append(SimPotentialEnergy(value=-5.0 * ureg.eV))
+        simulation.outputs.append(output)
+    
+        output_2 = Outputs()
+        output_2.temperatures.append(SimTemperature(value=320 * ureg.kelvin))
+        output_2.potential_energies.append(SimPotentialEnergy(value=-4.8 * ureg.eV))
+        simulation.outputs.append(output_2)
+        archive.data = simulation
+    
+        normalizer = ResultsNormalizer()
+>       normalizer.normalize(archive, LOGGER)
+
+tests/normalizers/test_results_normalizer.py:537: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/nomad_topology_normalizer/normalizers/results.py:234: in normalize
+    self._normalize_with_data_schema(archive, self.logger, system_v2)
+src/nomad_topology_normalizer/normalizers/results.py:296: in _normalize_with_data_schema
+    topology_normalizer.normalize(archive, logger, system_v2=system_v2)
+src/nomad_topology_normalizer/normalizers/topology.py:488: in normalize
+    ).material(populate_topology=False)
+src/nomad_topology_normalizer/normalizers/material.py:242: in material
+    material.symmetry = self.symmetry()
+src/nomad_topology_normalizer/normalizers/material.py:503: in symmetry
+    proto = self.repr_system.prototype if self.repr_system else None
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = test_system:ModelSystem(name, lattice_vectors, periodic_boundary_conditions, type, is_representative, n_particles, positions, particle_states)
+name = 'prototype'
+
+    def __getattr__(self, name):
+        if name.startswith('a_'):
+            if (annotation_name := name[2:]) in self.m_annotations:
+                return self.m_get_annotations(annotation_name)
+        elif name in self.m_def.all_aliases or self.m_def.has_variable_names:
+            # the first case will not throw
+            # the second case will throw if the name is not found
+            # we do not blindly try `m_get` for all unidentified names since it is very slow
+            try:
+                return self.m_get(name)
+            except (MetainfoError, ValueError):
+                pass
+    
+>       raise AttributeError(name)
+E       AttributeError: prototype
+
+../nomad-FAIR/nomad/metainfo/metainfo.py:1020: AttributeError
+------------------------------ Captured log call -------------------------------
+INFO     test_results_normalizer:results.py:233 {"event": "Using v2 data schema results normalization", "normalizer": "ResultsNormalizerBase", "timestamp": "2026-04-07T11:22:32Z"}
+________ test_data_schema_uses_latest_output_for_electronic_properties _________
+
+    def test_data_schema_uses_latest_output_for_electronic_properties():
+        """Electronic mapping should keep latest output payload for legacy parity."""
+        archive = EntryArchive(metadata=EntryMetadata())
+        archive.results = Results()
+        archive.results.properties = Properties()
+    
+        simulation = Simulation()
+        simulation.program = Program(name='VASP')
+        simulation.model_method.append(DFT())
+    
+        model_system = ModelSystem(
+            name='test_system',
+            type='bulk',
+            is_representative=True,
+            positions=np.array([[0.0, 0.0, 0.0], [1.0, 0.0, 0.0]]) * ureg.angstrom,
+            n_particles=2,
+        )
+        model_system.particle_states.append(
+            AtomsState(chemical_symbol='Si', atomic_number=14)
+        )
+        model_system.particle_states.append(
+            AtomsState(chemical_symbol='Si', atomic_number=14)
+        )
+        model_system.lattice_vectors = np.eye(3) * 5.43 * ureg.angstrom
+        model_system.periodic_boundary_conditions = [True, True, True]
+        simulation.model_system.append(model_system)
+    
+        output_1 = Outputs()
+        output_1.electronic_band_gaps.append(ElectronicBandGap(value=1.5 * ureg.eV))
+        band_structure_1 = ElectronicBandStructure(value=np.array([[1.0, 1.1]]) * ureg.eV)
+        band_structure_1.k_path = _kline_path()
+        output_1.electronic_band_structures.append(band_structure_1)
+        simulation.outputs.append(output_1)
+    
+        output_2 = Outputs()
+        output_2.electronic_band_gaps.append(ElectronicBandGap(value=2.5 * ureg.eV))
+        band_structure_2 = ElectronicBandStructure(value=np.array([[2.0, 2.1]]) * ureg.eV)
+        band_structure_2.k_path = _kline_path()
+        output_2.electronic_band_structures.append(band_structure_2)
+        simulation.outputs.append(output_2)
+    
+        archive.data = simulation
+    
+        normalizer = ResultsNormalizer()
+>       normalizer.normalize(archive, LOGGER)
+
+tests/normalizers/test_results_normalizer.py:606: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/nomad_topology_normalizer/normalizers/results.py:234: in normalize
+    self._normalize_with_data_schema(archive, self.logger, system_v2)
+src/nomad_topology_normalizer/normalizers/results.py:296: in _normalize_with_data_schema
+    topology_normalizer.normalize(archive, logger, system_v2=system_v2)
+src/nomad_topology_normalizer/normalizers/topology.py:488: in normalize
+    ).material(populate_topology=False)
+src/nomad_topology_normalizer/normalizers/material.py:242: in material
+    material.symmetry = self.symmetry()
+src/nomad_topology_normalizer/normalizers/material.py:503: in symmetry
+    proto = self.repr_system.prototype if self.repr_system else None
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = test_system:ModelSystem(name, lattice_vectors, periodic_boundary_conditions, type, is_representative, n_particles, positions, particle_states)
+name = 'prototype'
+
+    def __getattr__(self, name):
+        if name.startswith('a_'):
+            if (annotation_name := name[2:]) in self.m_annotations:
+                return self.m_get_annotations(annotation_name)
+        elif name in self.m_def.all_aliases or self.m_def.has_variable_names:
+            # the first case will not throw
+            # the second case will throw if the name is not found
+            # we do not blindly try `m_get` for all unidentified names since it is very slow
+            try:
+                return self.m_get(name)
+            except (MetainfoError, ValueError):
+                pass
+    
+>       raise AttributeError(name)
+E       AttributeError: prototype
+
+../nomad-FAIR/nomad/metainfo/metainfo.py:1020: AttributeError
+------------------------------ Captured log call -------------------------------
+INFO     test_results_normalizer:results.py:233 {"event": "Using v2 data schema results normalization", "normalizer": "ResultsNormalizerBase", "timestamp": "2026-04-07T11:22:32Z"}
+_ test_data_schema_prefers_representative_system_outputs_for_electronic_properties _
+
+    def test_data_schema_prefers_representative_system_outputs_for_electronic_properties():
+        """Electronic mapping should prefer outputs linked to representative system."""
+        archive = EntryArchive(metadata=EntryMetadata())
+        archive.results = Results()
+        archive.results.properties = Properties()
+    
+        simulation = Simulation()
+        simulation.program = Program(name='VASP')
+        simulation.model_method.append(DFT())
+    
+        representative_system = ModelSystem(
+            name='rep_system',
+            type='bulk',
+            is_representative=True,
+            positions=np.array([[0.0, 0.0, 0.0], [1.0, 0.0, 0.0]]) * ureg.angstrom,
+            n_particles=2,
+        )
+        representative_system.particle_states.append(
+            AtomsState(chemical_symbol='Si', atomic_number=14)
+        )
+        representative_system.particle_states.append(
+            AtomsState(chemical_symbol='Si', atomic_number=14)
+        )
+        representative_system.lattice_vectors = np.eye(3) * 5.43 * ureg.angstrom
+        representative_system.periodic_boundary_conditions = [True, True, True]
+    
+        other_system = ModelSystem(
+            name='other_system',
+            type='bulk',
+            is_representative=False,
+            positions=np.array([[0.0, 0.0, 0.0], [2.0, 0.0, 0.0]]) * ureg.angstrom,
+            n_particles=2,
+        )
+        other_system.particle_states.append(AtomsState(chemical_symbol='Ge', atomic_number=32))
+        other_system.particle_states.append(AtomsState(chemical_symbol='Ge', atomic_number=32))
+        other_system.lattice_vectors = np.eye(3) * 5.43 * ureg.angstrom
+        other_system.periodic_boundary_conditions = [True, True, True]
+    
+        simulation.model_system.append(representative_system)
+        simulation.model_system.append(other_system)
+    
+        # If supported by current schema version, set explicit representative index.
+        if 'representative_index' in simulation.m_def.all_quantities:
+            simulation.representative_index = 0
+    
+        output_rep = Outputs()
+        output_rep.model_system_ref = representative_system
+        output_rep.electronic_band_gaps.append(ElectronicBandGap(value=1.5 * ureg.eV))
+        band_structure_rep = ElectronicBandStructure(value=np.array([[1.0, 1.1]]) * ureg.eV)
+        band_structure_rep.k_path = _kline_path()
+        output_rep.electronic_band_structures.append(band_structure_rep)
+        simulation.outputs.append(output_rep)
+    
+        output_other = Outputs()
+        output_other.model_system_ref = other_system
+        output_other.electronic_band_gaps.append(ElectronicBandGap(value=2.5 * ureg.eV))
+        band_structure_other = ElectronicBandStructure(value=np.array([[2.0, 2.1]]) * ureg.eV)
+        band_structure_other.k_path = _kline_path()
+        output_other.electronic_band_structures.append(band_structure_other)
+        simulation.outputs.append(output_other)
+    
+        archive.data = simulation
+    
+        normalizer = ResultsNormalizer()
+>       normalizer.normalize(archive, LOGGER)
+
+tests/normalizers/test_results_normalizer.py:679: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/nomad_topology_normalizer/normalizers/results.py:234: in normalize
+    self._normalize_with_data_schema(archive, self.logger, system_v2)
+src/nomad_topology_normalizer/normalizers/results.py:296: in _normalize_with_data_schema
+    topology_normalizer.normalize(archive, logger, system_v2=system_v2)
+src/nomad_topology_normalizer/normalizers/topology.py:488: in normalize
+    ).material(populate_topology=False)
+src/nomad_topology_normalizer/normalizers/material.py:242: in material
+    material.symmetry = self.symmetry()
+src/nomad_topology_normalizer/normalizers/material.py:503: in symmetry
+    proto = self.repr_system.prototype if self.repr_system else None
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = rep_system:ModelSystem(name, lattice_vectors, periodic_boundary_conditions, type, is_representative, n_particles, positions, particle_states)
+name = 'prototype'
+
+    def __getattr__(self, name):
+        if name.startswith('a_'):
+            if (annotation_name := name[2:]) in self.m_annotations:
+                return self.m_get_annotations(annotation_name)
+        elif name in self.m_def.all_aliases or self.m_def.has_variable_names:
+            # the first case will not throw
+            # the second case will throw if the name is not found
+            # we do not blindly try `m_get` for all unidentified names since it is very slow
+            try:
+                return self.m_get(name)
+            except (MetainfoError, ValueError):
+                pass
+    
+>       raise AttributeError(name)
+E       AttributeError: prototype
+
+../nomad-FAIR/nomad/metainfo/metainfo.py:1020: AttributeError
+------------------------------ Captured log call -------------------------------
+INFO     test_results_normalizer:results.py:233 {"event": "Using v2 data schema results normalization", "normalizer": "ResultsNormalizerBase", "timestamp": "2026-04-07T11:22:33Z"}
+_____ test_data_schema_band_structure_mapping_does_not_create_run_sections _____
+
+    def test_data_schema_band_structure_mapping_does_not_create_run_sections():
+        """Band structure mapping from v2 outputs must not create legacy run/calculation."""
+        archive = EntryArchive(metadata=EntryMetadata())
+        archive.results = Results()
+        archive.results.properties = Properties()
+    
+        simulation = Simulation()
+        simulation.program = Program(name='VASP')
+        simulation.model_method.append(DFT())
+    
+        model_system = ModelSystem(
+            name='test_system',
+            type='bulk',
+            is_representative=True,
+            positions=np.array([[0.0, 0.0, 0.0], [1.0, 0.0, 0.0]]) * ureg.angstrom,
+            n_particles=2,
+        )
+        model_system.particle_states.append(
+            AtomsState(chemical_symbol='Si', atomic_number=14)
+        )
+        model_system.particle_states.append(
+            AtomsState(chemical_symbol='Si', atomic_number=14)
+        )
+        model_system.lattice_vectors = np.eye(3) * 5.43 * ureg.angstrom
+        model_system.periodic_boundary_conditions = [True, True, True]
+        simulation.model_system.append(model_system)
+    
+        output = Outputs()
+        band_structure = ElectronicBandStructure(value=np.array([[1.0, 1.1]]) * ureg.eV)
+        band_structure.k_path = _kline_path()
+        output.electronic_band_structures.append(band_structure)
+        simulation.outputs.append(output)
+        archive.data = simulation
+    
+        normalizer = ResultsNormalizer()
+>       normalizer.normalize(archive, LOGGER)
+
+tests/normalizers/test_results_normalizer.py:723: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/nomad_topology_normalizer/normalizers/results.py:234: in normalize
+    self._normalize_with_data_schema(archive, self.logger, system_v2)
+src/nomad_topology_normalizer/normalizers/results.py:296: in _normalize_with_data_schema
+    topology_normalizer.normalize(archive, logger, system_v2=system_v2)
+src/nomad_topology_normalizer/normalizers/topology.py:488: in normalize
+    ).material(populate_topology=False)
+src/nomad_topology_normalizer/normalizers/material.py:242: in material
+    material.symmetry = self.symmetry()
+src/nomad_topology_normalizer/normalizers/material.py:503: in symmetry
+    proto = self.repr_system.prototype if self.repr_system else None
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = test_system:ModelSystem(name, lattice_vectors, periodic_boundary_conditions, type, is_representative, n_particles, positions, particle_states)
+name = 'prototype'
+
+    def __getattr__(self, name):
+        if name.startswith('a_'):
+            if (annotation_name := name[2:]) in self.m_annotations:
+                return self.m_get_annotations(annotation_name)
+        elif name in self.m_def.all_aliases or self.m_def.has_variable_names:
+            # the first case will not throw
+            # the second case will throw if the name is not found
+            # we do not blindly try `m_get` for all unidentified names since it is very slow
+            try:
+                return self.m_get(name)
+            except (MetainfoError, ValueError):
+                pass
+    
+>       raise AttributeError(name)
+E       AttributeError: prototype
+
+../nomad-FAIR/nomad/metainfo/metainfo.py:1020: AttributeError
+------------------------------ Captured log call -------------------------------
+INFO     test_results_normalizer:results.py:233 {"event": "Using v2 data schema results normalization", "normalizer": "ResultsNormalizerBase", "timestamp": "2026-04-07T11:22:33Z"}
+_ test_data_schema_band_structure_uses_numerical_settings_kline_path_fallback __
+
+    def test_data_schema_band_structure_uses_numerical_settings_kline_path_fallback():
+        """Band mapping should fall back to model-method k_line_path when bs.k_path is missing."""
+        archive = EntryArchive(metadata=EntryMetadata())
+        archive.results = Results()
+        archive.results.properties = Properties()
+    
+        simulation = Simulation()
+        simulation.program = Program(name='VASP')
+    
+        dft = DFT()
+        k_space = KSpace()
+>       k_space.k_line_path = KLinePath(
+            points=np.array([[0.0, 0.0, 0.0], [0.5, 0.0, 0.0]])
+        )
+
+tests/normalizers/test_results_normalizer.py:749: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../nomad-FAIR/nomad/metainfo/metainfo.py:839: in __init__
+    self.m_update_from_dict(kwargs, skip_virtual=False)
+../nomad-FAIR/nomad/metainfo/metainfo.py:2091: in m_update_from_dict
+    self.m_set(
+../nomad-FAIR/nomad/metainfo/metainfo.py:1104: in m_set
+    return definition.__set__(self, value, **kwargs)
+../nomad-FAIR/nomad/metainfo/metainfo.py:722: in wrapper
+    return method(self, obj, value, **kwargs)
+../nomad-FAIR/nomad/metainfo/metainfo.py:3186: in __set__
+    value = self.type.normalize(value, section=obj, **kwargs)
+../nomad-FAIR/nomad/metainfo/metainfo.py:551: in normalize
+    return self._check_shape(_convert(value))
+../nomad-FAIR/nomad/metainfo/metainfo.py:549: in _convert
+    return self._normalize_impl(_v, section=section, context=context)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <nomad.metainfo.metainfo.QuantityReference object at 0x75868d1ee9f0>
+value = array([[0. , 0. , 0. ],
+       [0.5, 0. , 0. ]])
+kwargs = {'context': None, 'section': KLinePath()}
+
+    def _normalize_impl(self, value, **kwargs):
+        if isinstance(value, str):
+            assert isinstance(self._proxy_type, QuantityReference)
+            return MProxy(
+                value.rsplit('/', 1)[0],
+                m_proxy_section=kwargs.get('section', None),
+                m_proxy_context=kwargs.get('context', None),
+                m_proxy_type=self._proxy_type,
+            )
+    
+>       if not value.m_is_set(self.target_quantity_def):
+E       AttributeError: 'numpy.ndarray' object has no attribute 'm_is_set'
+
+../nomad-FAIR/nomad/metainfo/metainfo.py:645: AttributeError
+______ test_data_schema_band_structure_uses_kline_vertex_values_fallback _______
+
+    def test_data_schema_band_structure_uses_kline_vertex_values_fallback():
+        """Band mapping should use high_symmetry_path_values when k_line points are missing."""
+        archive = EntryArchive(metadata=EntryMetadata())
+        archive.results = Results()
+        archive.results.properties = Properties()
+    
+        simulation = Simulation()
+        simulation.program = Program(name='exciting')
+    
+        dft = DFT()
+        k_space = KSpace()
+        k_line_path = KLinePath()
+        k_line_path.high_symmetry_path_values = np.array(
+            [[0.0, 0.0, 0.0], [0.5, 0.0, 0.0], [0.5, 0.5, 0.0]]
+        )
+        k_space.k_line_path = k_line_path
+        dft.numerical_settings.append(k_space)
+        simulation.model_method.append(dft)
+    
+        model_system = ModelSystem(
+            name='test_system',
+            type='bulk',
+            is_representative=True,
+            positions=np.array([[0.0, 0.0, 0.0], [1.0, 0.0, 0.0]]) * ureg.angstrom,
+            n_particles=2,
+        )
+        model_system.particle_states.append(
+            AtomsState(chemical_symbol='Si', atomic_number=14)
+        )
+        model_system.particle_states.append(
+            AtomsState(chemical_symbol='Si', atomic_number=14)
+        )
+        model_system.lattice_vectors = np.eye(3) * 5.43 * ureg.angstrom
+        model_system.periodic_boundary_conditions = [True, True, True]
+        simulation.model_system.append(model_system)
+    
+        output = Outputs()
+        band_structure = ElectronicBandStructure(value=np.array([[1.0, 1.1]]) * ureg.eV)
+        output.electronic_band_structures.append(band_structure)
+        simulation.outputs.append(output)
+        archive.data = simulation
+    
+        normalizer = ResultsNormalizer()
+>       normalizer.normalize(archive, LOGGER)
+
+tests/normalizers/test_results_normalizer.py:832: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/nomad_topology_normalizer/normalizers/results.py:234: in normalize
+    self._normalize_with_data_schema(archive, self.logger, system_v2)
+src/nomad_topology_normalizer/normalizers/results.py:296: in _normalize_with_data_schema
+    topology_normalizer.normalize(archive, logger, system_v2=system_v2)
+src/nomad_topology_normalizer/normalizers/topology.py:488: in normalize
+    ).material(populate_topology=False)
+src/nomad_topology_normalizer/normalizers/material.py:242: in material
+    material.symmetry = self.symmetry()
+src/nomad_topology_normalizer/normalizers/material.py:503: in symmetry
+    proto = self.repr_system.prototype if self.repr_system else None
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = test_system:ModelSystem(name, lattice_vectors, periodic_boundary_conditions, type, is_representative, n_particles, positions, particle_states)
+name = 'prototype'
+
+    def __getattr__(self, name):
+        if name.startswith('a_'):
+            if (annotation_name := name[2:]) in self.m_annotations:
+                return self.m_get_annotations(annotation_name)
+        elif name in self.m_def.all_aliases or self.m_def.has_variable_names:
+            # the first case will not throw
+            # the second case will throw if the name is not found
+            # we do not blindly try `m_get` for all unidentified names since it is very slow
+            try:
+                return self.m_get(name)
+            except (MetainfoError, ValueError):
+                pass
+    
+>       raise AttributeError(name)
+E       AttributeError: prototype
+
+../nomad-FAIR/nomad/metainfo/metainfo.py:1020: AttributeError
+------------------------------ Captured log call -------------------------------
+INFO     test_results_normalizer:results.py:233 {"event": "Using v2 data schema results normalization", "normalizer": "ResultsNormalizerBase", "timestamp": "2026-04-07T11:22:33Z"}
+______________ test_data_schema_populates_deprecated_dos_mapping _______________
+
+    def test_data_schema_populates_deprecated_dos_mapping():
+        """v2 DOS mapping writes deprecated dos_electronic compatibility mirror."""
+        archive = EntryArchive(metadata=EntryMetadata())
+        archive.results = Results()
+        archive.results.properties = Properties()
+    
+        simulation = Simulation()
+        simulation.program = Program(name='VASP')
+        simulation.model_method.append(DFT())
+    
+        model_system = ModelSystem(
+            name='test_system',
+            type='bulk',
+            is_representative=True,
+            positions=np.array([[0.0, 0.0, 0.0], [1.0, 0.0, 0.0]]) * ureg.angstrom,
+            n_particles=2,
+        )
+        model_system.particle_states.append(
+            AtomsState(chemical_symbol='Si', atomic_number=14)
+        )
+        model_system.particle_states.append(
+            AtomsState(chemical_symbol='Si', atomic_number=14)
+        )
+        model_system.lattice_vectors = np.eye(3) * 5.43 * ureg.angstrom
+        model_system.periodic_boundary_conditions = [True, True, True]
+        simulation.model_system.append(model_system)
+    
+        output = Outputs()
+        dos = ElectronicDensityOfStates(
+            value=np.array([0.1, 0.2, 0.3]) / ureg.eV,
+            spin_channel=0,
+        )
+        dos.energies = Energy2(points=np.array([-1.0, 0.0, 1.0]) * ureg.eV)
+        output.electronic_dos.append(dos)
+        simulation.outputs.append(output)
+        archive.data = simulation
+    
+        normalizer = ResultsNormalizer()
+>       normalizer.normalize(archive, LOGGER)
+
+tests/normalizers/test_results_normalizer.py:880: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/nomad_topology_normalizer/normalizers/results.py:234: in normalize
+    self._normalize_with_data_schema(archive, self.logger, system_v2)
+src/nomad_topology_normalizer/normalizers/results.py:296: in _normalize_with_data_schema
+    topology_normalizer.normalize(archive, logger, system_v2=system_v2)
+src/nomad_topology_normalizer/normalizers/topology.py:488: in normalize
+    ).material(populate_topology=False)
+src/nomad_topology_normalizer/normalizers/material.py:242: in material
+    material.symmetry = self.symmetry()
+src/nomad_topology_normalizer/normalizers/material.py:503: in symmetry
+    proto = self.repr_system.prototype if self.repr_system else None
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = test_system:ModelSystem(name, lattice_vectors, periodic_boundary_conditions, type, is_representative, n_particles, positions, particle_states)
+name = 'prototype'
+
+    def __getattr__(self, name):
+        if name.startswith('a_'):
+            if (annotation_name := name[2:]) in self.m_annotations:
+                return self.m_get_annotations(annotation_name)
+        elif name in self.m_def.all_aliases or self.m_def.has_variable_names:
+            # the first case will not throw
+            # the second case will throw if the name is not found
+            # we do not blindly try `m_get` for all unidentified names since it is very slow
+            try:
+                return self.m_get(name)
+            except (MetainfoError, ValueError):
+                pass
+    
+>       raise AttributeError(name)
+E       AttributeError: prototype
+
+../nomad-FAIR/nomad/metainfo/metainfo.py:1020: AttributeError
+------------------------------ Captured log call -------------------------------
+INFO     test_results_normalizer:results.py:233 {"event": "Using v2 data schema results normalization", "normalizer": "ResultsNormalizerBase", "timestamp": "2026-04-07T11:22:34Z"}
+__________ test_data_schema_populates_deprecated_dos_with_references ___________
+
+    def test_data_schema_populates_deprecated_dos_with_references():
+        """Deprecated dos_electronic should point to run/calculation compatibility refs."""
+        archive = EntryArchive(metadata=EntryMetadata())
+        archive.results = Results()
+        archive.results.properties = Properties()
+    
+        simulation = Simulation()
+        simulation.program = Program(name='VASP')
+        simulation.model_method.append(DFT())
+    
+        model_system = ModelSystem(
+            name='test_system',
+            type='bulk',
+            is_representative=True,
+            positions=np.array([[0.0, 0.0, 0.0], [1.0, 0.0, 0.0]]) * ureg.angstrom,
+            n_particles=2,
+        )
+        model_system.particle_states.append(
+            AtomsState(chemical_symbol='Si', atomic_number=14)
+        )
+        model_system.particle_states.append(
+            AtomsState(chemical_symbol='Si', atomic_number=14)
+        )
+        model_system.lattice_vectors = np.eye(3) * 5.43 * ureg.angstrom
+        model_system.periodic_boundary_conditions = [True, True, True]
+        simulation.model_system.append(model_system)
+    
+        output = Outputs()
+        dos = ElectronicDensityOfStates(
+            value=np.array([0.1, 0.2, 0.3]) / ureg.eV,
+            spin_channel=0,
+        )
+        dos.energies = Energy2(points=np.array([-1.0, 0.0, 1.0]) * ureg.eV)
+        output.electronic_dos.append(dos)
+        simulation.outputs.append(output)
+        archive.data = simulation
+    
+        normalizer = ResultsNormalizer()
+>       normalizer.normalize(archive, LOGGER)
+
+tests/normalizers/test_results_normalizer.py:934: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/nomad_topology_normalizer/normalizers/results.py:234: in normalize
+    self._normalize_with_data_schema(archive, self.logger, system_v2)
+src/nomad_topology_normalizer/normalizers/results.py:296: in _normalize_with_data_schema
+    topology_normalizer.normalize(archive, logger, system_v2=system_v2)
+src/nomad_topology_normalizer/normalizers/topology.py:488: in normalize
+    ).material(populate_topology=False)
+src/nomad_topology_normalizer/normalizers/material.py:242: in material
+    material.symmetry = self.symmetry()
+src/nomad_topology_normalizer/normalizers/material.py:503: in symmetry
+    proto = self.repr_system.prototype if self.repr_system else None
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = test_system:ModelSystem(name, lattice_vectors, periodic_boundary_conditions, type, is_representative, n_particles, positions, particle_states)
+name = 'prototype'
+
+    def __getattr__(self, name):
+        if name.startswith('a_'):
+            if (annotation_name := name[2:]) in self.m_annotations:
+                return self.m_get_annotations(annotation_name)
+        elif name in self.m_def.all_aliases or self.m_def.has_variable_names:
+            # the first case will not throw
+            # the second case will throw if the name is not found
+            # we do not blindly try `m_get` for all unidentified names since it is very slow
+            try:
+                return self.m_get(name)
+            except (MetainfoError, ValueError):
+                pass
+    
+>       raise AttributeError(name)
+E       AttributeError: prototype
+
+../nomad-FAIR/nomad/metainfo/metainfo.py:1020: AttributeError
+------------------------------ Captured log call -------------------------------
+INFO     test_results_normalizer:results.py:233 {"event": "Using v2 data schema results normalization", "normalizer": "ResultsNormalizerBase", "timestamp": "2026-04-07T11:22:34Z"}
+___________ test_data_schema_replaces_malformed_existing_dos_entries ___________
+
+    def test_data_schema_replaces_malformed_existing_dos_entries():
+        """v2 DOS mapping should replace stale malformed DOS references in results."""
+        archive = EntryArchive(metadata=EntryMetadata())
+        archive.results = Results()
+        archive.results.properties = Properties()
+        archive.results.properties.electronic = archive.results.properties.m_create(
+            ElectronicProperties
+        )
+    
+        # Simulate stale malformed entry that can crash GUI (missing energies/total)
+        archive.results.properties.electronic.m_add_sub_section(
+            ElectronicProperties.dos_electronic, DOSElectronic()
+        )
+    
+        simulation = Simulation()
+        simulation.program = Program(name='VASP')
+        simulation.model_method.append(DFT())
+    
+        model_system = ModelSystem(
+            name='test_system',
+            type='bulk',
+            is_representative=True,
+            positions=np.array([[0.0, 0.0, 0.0], [1.0, 0.0, 0.0]]) * ureg.angstrom,
+            n_particles=2,
+        )
+        model_system.particle_states.append(
+            AtomsState(chemical_symbol='Si', atomic_number=14)
+        )
+        model_system.particle_states.append(
+            AtomsState(chemical_symbol='Si', atomic_number=14)
+        )
+        model_system.lattice_vectors = np.eye(3) * 5.43 * ureg.angstrom
+        model_system.periodic_boundary_conditions = [True, True, True]
+        simulation.model_system.append(model_system)
+    
+        output = Outputs()
+        dos = ElectronicDensityOfStates(
+            value=np.array([0.1, 0.2, 0.3]) / ureg.eV,
+            spin_channel=0,
+        )
+        dos.energies = Energy2(points=np.array([-1.0, 0.0, 1.0]) * ureg.eV)
+        output.electronic_dos.append(dos)
+        simulation.outputs.append(output)
+        archive.data = simulation
+    
+>       ResultsNormalizer().normalize(archive, LOGGER)
+
+tests/normalizers/test_results_normalizer.py:1002: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/nomad_topology_normalizer/normalizers/results.py:234: in normalize
+    self._normalize_with_data_schema(archive, self.logger, system_v2)
+src/nomad_topology_normalizer/normalizers/results.py:296: in _normalize_with_data_schema
+    topology_normalizer.normalize(archive, logger, system_v2=system_v2)
+src/nomad_topology_normalizer/normalizers/topology.py:488: in normalize
+    ).material(populate_topology=False)
+src/nomad_topology_normalizer/normalizers/material.py:242: in material
+    material.symmetry = self.symmetry()
+src/nomad_topology_normalizer/normalizers/material.py:503: in symmetry
+    proto = self.repr_system.prototype if self.repr_system else None
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = test_system:ModelSystem(name, lattice_vectors, periodic_boundary_conditions, type, is_representative, n_particles, positions, particle_states)
+name = 'prototype'
+
+    def __getattr__(self, name):
+        if name.startswith('a_'):
+            if (annotation_name := name[2:]) in self.m_annotations:
+                return self.m_get_annotations(annotation_name)
+        elif name in self.m_def.all_aliases or self.m_def.has_variable_names:
+            # the first case will not throw
+            # the second case will throw if the name is not found
+            # we do not blindly try `m_get` for all unidentified names since it is very slow
+            try:
+                return self.m_get(name)
+            except (MetainfoError, ValueError):
+                pass
+    
+>       raise AttributeError(name)
+E       AttributeError: prototype
+
+../nomad-FAIR/nomad/metainfo/metainfo.py:1020: AttributeError
+------------------------------ Captured log call -------------------------------
+INFO     test_results_normalizer:results.py:233 {"event": "Using v2 data schema results normalization", "normalizer": "ResultsNormalizerBase", "timestamp": "2026-04-07T11:22:34Z"}
+__ test_data_schema_drops_malformed_stale_dos_without_new_electronic_payload ___
+
+    def test_data_schema_drops_malformed_stale_dos_without_new_electronic_payload():
+        """Malformed stale dos_electronic should be removed to avoid GUI crashes."""
+        archive = EntryArchive(metadata=EntryMetadata())
+        archive.results = Results()
+        archive.results.properties = Properties()
+        archive.results.properties.electronic = archive.results.properties.m_create(
+            ElectronicProperties
+        )
+        archive.results.properties.electronic.m_add_sub_section(
+            ElectronicProperties.dos_electronic, DOSElectronic()
+        )
+    
+        simulation = Simulation()
+        simulation.program = Program(name='VASP')
+        simulation.model_method.append(DFT())
+    
+        model_system = ModelSystem(
+            name='test_system',
+            type='bulk',
+            is_representative=True,
+            positions=np.array([[0.0, 0.0, 0.0], [1.0, 0.0, 0.0]]) * ureg.angstrom,
+            n_particles=2,
+        )
+        model_system.particle_states.append(
+            AtomsState(chemical_symbol='Si', atomic_number=14)
+        )
+        model_system.particle_states.append(
+            AtomsState(chemical_symbol='Si', atomic_number=14)
+        )
+        model_system.lattice_vectors = np.eye(3) * 5.43 * ureg.angstrom
+        model_system.periodic_boundary_conditions = [True, True, True]
+        simulation.model_system.append(model_system)
+    
+        # No electronic payload in outputs: only thermodynamic quantity.
+        output = Outputs()
+        output.temperatures.append(SimTemperature(value=300 * ureg.kelvin))
+        simulation.outputs.append(output)
+        archive.data = simulation
+    
+>       ResultsNormalizer().normalize(archive, LOGGER)
+
+tests/normalizers/test_results_normalizer.py:1056: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/nomad_topology_normalizer/normalizers/results.py:234: in normalize
+    self._normalize_with_data_schema(archive, self.logger, system_v2)
+src/nomad_topology_normalizer/normalizers/results.py:296: in _normalize_with_data_schema
+    topology_normalizer.normalize(archive, logger, system_v2=system_v2)
+src/nomad_topology_normalizer/normalizers/topology.py:488: in normalize
+    ).material(populate_topology=False)
+src/nomad_topology_normalizer/normalizers/material.py:242: in material
+    material.symmetry = self.symmetry()
+src/nomad_topology_normalizer/normalizers/material.py:503: in symmetry
+    proto = self.repr_system.prototype if self.repr_system else None
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = test_system:ModelSystem(name, lattice_vectors, periodic_boundary_conditions, type, is_representative, n_particles, positions, particle_states)
+name = 'prototype'
+
+    def __getattr__(self, name):
+        if name.startswith('a_'):
+            if (annotation_name := name[2:]) in self.m_annotations:
+                return self.m_get_annotations(annotation_name)
+        elif name in self.m_def.all_aliases or self.m_def.has_variable_names:
+            # the first case will not throw
+            # the second case will throw if the name is not found
+            # we do not blindly try `m_get` for all unidentified names since it is very slow
+            try:
+                return self.m_get(name)
+            except (MetainfoError, ValueError):
+                pass
+    
+>       raise AttributeError(name)
+E       AttributeError: prototype
+
+../nomad-FAIR/nomad/metainfo/metainfo.py:1020: AttributeError
+------------------------------ Captured log call -------------------------------
+INFO     test_results_normalizer:results.py:233 {"event": "Using v2 data schema results normalization", "normalizer": "ResultsNormalizerBase", "timestamp": "2026-04-07T11:22:35Z"}
+_________ test_data_schema_does_not_create_empty_electronic_properties _________
+
+    def test_data_schema_does_not_create_empty_electronic_properties():
+        """Non-electronic outputs should not instantiate empty properties.electronic."""
+        archive = EntryArchive(metadata=EntryMetadata())
+        archive.results = Results()
+        archive.results.properties = Properties()
+    
+        simulation = Simulation()
+        simulation.program = Program(name='VASP')
+        simulation.model_method.append(DFT())
+    
+        model_system = ModelSystem(
+            name='test_system',
+            type='bulk',
+            is_representative=True,
+            positions=np.array([[0.0, 0.0, 0.0], [1.0, 0.0, 0.0]]) * ureg.angstrom,
+            n_particles=2,
+        )
+        model_system.particle_states.append(
+            AtomsState(chemical_symbol='Si', atomic_number=14)
+        )
+        model_system.particle_states.append(
+            AtomsState(chemical_symbol='Si', atomic_number=14)
+        )
+        model_system.lattice_vectors = np.eye(3) * 5.43 * ureg.angstrom
+        model_system.periodic_boundary_conditions = [True, True, True]
+        simulation.model_system.append(model_system)
+    
+        output = Outputs()
+        output.radii_of_gyration.append(SimRadiusOfGyration(value=1.2e-10 * ureg.meter))
+        output.temperatures.append(SimTemperature(value=300 * ureg.kelvin))
+        output.potential_energies.append(SimPotentialEnergy(value=-5.0 * ureg.eV))
+        simulation.outputs.append(output)
+        archive.data = simulation
+    
+        normalizer = ResultsNormalizer()
+>       normalizer.normalize(archive, LOGGER)
+
+tests/normalizers/test_results_normalizer.py:1098: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/nomad_topology_normalizer/normalizers/results.py:234: in normalize
+    self._normalize_with_data_schema(archive, self.logger, system_v2)
+src/nomad_topology_normalizer/normalizers/results.py:296: in _normalize_with_data_schema
+    topology_normalizer.normalize(archive, logger, system_v2=system_v2)
+src/nomad_topology_normalizer/normalizers/topology.py:488: in normalize
+    ).material(populate_topology=False)
+src/nomad_topology_normalizer/normalizers/material.py:242: in material
+    material.symmetry = self.symmetry()
+src/nomad_topology_normalizer/normalizers/material.py:503: in symmetry
+    proto = self.repr_system.prototype if self.repr_system else None
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = test_system:ModelSystem(name, lattice_vectors, periodic_boundary_conditions, type, is_representative, n_particles, positions, particle_states)
+name = 'prototype'
+
+    def __getattr__(self, name):
+        if name.startswith('a_'):
+            if (annotation_name := name[2:]) in self.m_annotations:
+                return self.m_get_annotations(annotation_name)
+        elif name in self.m_def.all_aliases or self.m_def.has_variable_names:
+            # the first case will not throw
+            # the second case will throw if the name is not found
+            # we do not blindly try `m_get` for all unidentified names since it is very slow
+            try:
+                return self.m_get(name)
+            except (MetainfoError, ValueError):
+                pass
+    
+>       raise AttributeError(name)
+E       AttributeError: prototype
+
+../nomad-FAIR/nomad/metainfo/metainfo.py:1020: AttributeError
+------------------------------ Captured log call -------------------------------
+INFO     test_results_normalizer:results.py:233 {"event": "Using v2 data schema results normalization", "normalizer": "ResultsNormalizerBase", "timestamp": "2026-04-07T11:22:35Z"}
+_________________ test_data_schema_logs_unmapped_output_groups _________________
+
+archive_with_data_schema = EntryArchive(data, metadata, results)
+caplog = <_pytest.logging.LogCaptureFixture object at 0x758688309bb0>
+
+    def test_data_schema_logs_unmapped_output_groups(archive_with_data_schema, caplog):
+        """Unsupported outputs should stay unset and produce a TODO log."""
+        output = Outputs()
+        output.total_forces.append(
+            TotalForce(value=np.array([[1.0, 0.0, 0.0]]) * ureg.newton)
+        )
+        archive_with_data_schema.data.outputs.append(output)
+    
+        normalizer = ResultsNormalizer()
+        caplog.clear()
+>       normalizer.normalize(archive_with_data_schema, LOGGER)
+
+tests/normalizers/test_results_normalizer.py:1117: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/nomad_topology_normalizer/normalizers/results.py:234: in normalize
+    self._normalize_with_data_schema(archive, self.logger, system_v2)
+src/nomad_topology_normalizer/normalizers/results.py:296: in _normalize_with_data_schema
+    topology_normalizer.normalize(archive, logger, system_v2=system_v2)
+src/nomad_topology_normalizer/normalizers/topology.py:488: in normalize
+    ).material(populate_topology=False)
+src/nomad_topology_normalizer/normalizers/material.py:242: in material
+    material.symmetry = self.symmetry()
+src/nomad_topology_normalizer/normalizers/material.py:503: in symmetry
+    proto = self.repr_system.prototype if self.repr_system else None
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = test_system:ModelSystem(name, lattice_vectors, periodic_boundary_conditions, type, is_representative, n_particles, positions, particle_states)
+name = 'prototype'
+
+    def __getattr__(self, name):
+        if name.startswith('a_'):
+            if (annotation_name := name[2:]) in self.m_annotations:
+                return self.m_get_annotations(annotation_name)
+        elif name in self.m_def.all_aliases or self.m_def.has_variable_names:
+            # the first case will not throw
+            # the second case will throw if the name is not found
+            # we do not blindly try `m_get` for all unidentified names since it is very slow
+            try:
+                return self.m_get(name)
+            except (MetainfoError, ValueError):
+                pass
+    
+>       raise AttributeError(name)
+E       AttributeError: prototype
+
+../nomad-FAIR/nomad/metainfo/metainfo.py:1020: AttributeError
+------------------------------ Captured log call -------------------------------
+INFO     test_results_normalizer:results.py:233 {"event": "Using v2 data schema results normalization", "normalizer": "ResultsNormalizerBase", "timestamp": "2026-04-07T11:22:35Z"}
+ERROR    test_results_normalizer:material.py:240 {"event": "issue in creating formula information", "exception": "Traceback (most recent call last):\n  File \"/home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-topology-normalizer/src/nomad_topology_normalizer/normalizers/material.py\", line 199, in material\n    material.structural_type = self.structural_type\n    ^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/metainfo.py\", line 969, in __setattr__\n    return super().__setattr__(name, value)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/metainfo.py\", line 722, in wrapper\n    return method(self, obj, value, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/metainfo.py\", line 3186, in __set__\n    value = self.type.normalize(value, section=obj, **kwargs)\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/data_type.py\", line 786, in normalize\n    return self._normalize_impl(value, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/data_type.py\", line 1088, in _normalize_impl\n    return self._validate_value(value)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/data_type.py\", line 1073, in _validate_value\n    raise ValueError(f'{value} is not a value of this enumeration.')\nValueError: molecule is not a value of this enumeration.", "normalizer": "ResultsNormalizerBase", "timestamp": "2026-04-07T11:22:35Z"}
+_____________ test_data_schema_skips_dos_cleanly_without_runschema _____________
+
+archive_with_data_schema = EntryArchive(data, metadata, results)
+caplog = <_pytest.logging.LogCaptureFixture object at 0x758688321190>
+
+    def test_data_schema_skips_dos_cleanly_without_runschema(
+        archive_with_data_schema, caplog
+    ):
+        """DOS mapping should skip cleanly when runschema-based payload cannot be built."""
+        output = Outputs()
+        dos = ElectronicDensityOfStates(
+            value=np.array([0.1, 0.2, 0.3]) / ureg.eV,
+            spin_channel=0,
+        )
+        dos.energies = Energy2(points=np.array([-1.0, 0.0, 1.0]) * ureg.eV)
+        output.electronic_dos.append(dos)
+        archive_with_data_schema.data.outputs.append(output)
+    
+        normalizer = ResultsNormalizer()
+        caplog.clear()
+>       normalizer.normalize(archive_with_data_schema, LOGGER)
+
+tests/normalizers/test_results_normalizer.py:1141: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/nomad_topology_normalizer/normalizers/results.py:234: in normalize
+    self._normalize_with_data_schema(archive, self.logger, system_v2)
+src/nomad_topology_normalizer/normalizers/results.py:296: in _normalize_with_data_schema
+    topology_normalizer.normalize(archive, logger, system_v2=system_v2)
+src/nomad_topology_normalizer/normalizers/topology.py:488: in normalize
+    ).material(populate_topology=False)
+src/nomad_topology_normalizer/normalizers/material.py:242: in material
+    material.symmetry = self.symmetry()
+src/nomad_topology_normalizer/normalizers/material.py:503: in symmetry
+    proto = self.repr_system.prototype if self.repr_system else None
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = test_system:ModelSystem(name, lattice_vectors, periodic_boundary_conditions, type, is_representative, n_particles, positions, particle_states)
+name = 'prototype'
+
+    def __getattr__(self, name):
+        if name.startswith('a_'):
+            if (annotation_name := name[2:]) in self.m_annotations:
+                return self.m_get_annotations(annotation_name)
+        elif name in self.m_def.all_aliases or self.m_def.has_variable_names:
+            # the first case will not throw
+            # the second case will throw if the name is not found
+            # we do not blindly try `m_get` for all unidentified names since it is very slow
+            try:
+                return self.m_get(name)
+            except (MetainfoError, ValueError):
+                pass
+    
+>       raise AttributeError(name)
+E       AttributeError: prototype
+
+../nomad-FAIR/nomad/metainfo/metainfo.py:1020: AttributeError
+------------------------------ Captured log call -------------------------------
+INFO     test_results_normalizer:results.py:233 {"event": "Using v2 data schema results normalization", "normalizer": "ResultsNormalizerBase", "timestamp": "2026-04-07T11:22:35Z"}
+ERROR    test_results_normalizer:material.py:240 {"event": "issue in creating formula information", "exception": "Traceback (most recent call last):\n  File \"/home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-topology-normalizer/src/nomad_topology_normalizer/normalizers/material.py\", line 199, in material\n    material.structural_type = self.structural_type\n    ^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/metainfo.py\", line 969, in __setattr__\n    return super().__setattr__(name, value)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/metainfo.py\", line 722, in wrapper\n    return method(self, obj, value, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/metainfo.py\", line 3186, in __set__\n    value = self.type.normalize(value, section=obj, **kwargs)\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/data_type.py\", line 786, in normalize\n    return self._normalize_impl(value, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/data_type.py\", line 1088, in _normalize_impl\n    return self._validate_value(value)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/data_type.py\", line 1073, in _validate_value\n    raise ValueError(f'{value} is not a value of this enumeration.')\nValueError: molecule is not a value of this enumeration.", "normalizer": "ResultsNormalizerBase", "timestamp": "2026-04-07T11:22:35Z"}
+______________________ test_data_schema_priority_over_run ______________________
+
+archive_with_data_schema = EntryArchive(run, data, metadata, results)
+
+    def test_data_schema_priority_over_run(archive_with_data_schema):
+        """Test that v2 data schema takes priority when both schemas present."""
+        # Add a mock run section to the data schema archive
+        from nomad.datamodel.data import ArchiveSection
+    
+        class MockRun(ArchiveSection):
+            system = []
+    
+        archive_with_data_schema.run = [MockRun()]
+    
+        normalizer = ResultsNormalizer()
+    
+        # Run normalization (should use data schema path, not run)
+>       normalizer.normalize(archive_with_data_schema, LOGGER)
+
+tests/normalizers/test_results_normalizer.py:1172: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/nomad_topology_normalizer/normalizers/results.py:234: in normalize
+    self._normalize_with_data_schema(archive, self.logger, system_v2)
+src/nomad_topology_normalizer/normalizers/results.py:296: in _normalize_with_data_schema
+    topology_normalizer.normalize(archive, logger, system_v2=system_v2)
+src/nomad_topology_normalizer/normalizers/topology.py:488: in normalize
+    ).material(populate_topology=False)
+src/nomad_topology_normalizer/normalizers/material.py:242: in material
+    material.symmetry = self.symmetry()
+src/nomad_topology_normalizer/normalizers/material.py:503: in symmetry
+    proto = self.repr_system.prototype if self.repr_system else None
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = test_system:ModelSystem(name, lattice_vectors, periodic_boundary_conditions, type, is_representative, n_particles, positions, particle_states)
+name = 'prototype'
+
+    def __getattr__(self, name):
+        if name.startswith('a_'):
+            if (annotation_name := name[2:]) in self.m_annotations:
+                return self.m_get_annotations(annotation_name)
+        elif name in self.m_def.all_aliases or self.m_def.has_variable_names:
+            # the first case will not throw
+            # the second case will throw if the name is not found
+            # we do not blindly try `m_get` for all unidentified names since it is very slow
+            try:
+                return self.m_get(name)
+            except (MetainfoError, ValueError):
+                pass
+    
+>       raise AttributeError(name)
+E       AttributeError: prototype
+
+../nomad-FAIR/nomad/metainfo/metainfo.py:1020: AttributeError
+------------------------------ Captured log call -------------------------------
+INFO     test_results_normalizer:results.py:233 {"event": "Using v2 data schema results normalization", "normalizer": "ResultsNormalizerBase", "timestamp": "2026-04-07T11:22:36Z"}
+ERROR    test_results_normalizer:material.py:240 {"event": "issue in creating formula information", "exception": "Traceback (most recent call last):\n  File \"/home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-topology-normalizer/src/nomad_topology_normalizer/normalizers/material.py\", line 199, in material\n    material.structural_type = self.structural_type\n    ^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/metainfo.py\", line 969, in __setattr__\n    return super().__setattr__(name, value)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/metainfo.py\", line 722, in wrapper\n    return method(self, obj, value, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/metainfo.py\", line 3186, in __set__\n    value = self.type.normalize(value, section=obj, **kwargs)\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/data_type.py\", line 786, in normalize\n    return self._normalize_impl(value, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/data_type.py\", line 1088, in _normalize_impl\n    return self._validate_value(value)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/data_type.py\", line 1073, in _validate_value\n    raise ValueError(f'{value} is not a value of this enumeration.')\nValueError: molecule is not a value of this enumeration.", "normalizer": "ResultsNormalizerBase", "timestamp": "2026-04-07T11:22:36Z"}
+__________ test_normalize_with_data_schema_calls_topology_normalizer ___________
+
+archive_with_data_schema = EntryArchive(data, metadata, results)
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7586883512b0>
+
+    def test_normalize_with_data_schema_calls_topology_normalizer(
+        archive_with_data_schema, monkeypatch
+    ):
+        """Test that _normalize_with_data_schema calls TopologyNormalizer."""
+        from nomad_topology_normalizer.normalizers.topology import TopologyNormalizer
+    
+        # Track if TopologyNormalizer.normalize was called
+        normalize_called = []
+    
+        original_normalize = TopologyNormalizer.normalize
+    
+        def mock_normalize(self, archive, logger, system_v2=None):
+            normalize_called.append(True)
+            # Call original to avoid breaking the test
+            return original_normalize(self, archive, logger, system_v2=system_v2)
+    
+        monkeypatch.setattr(TopologyNormalizer, 'normalize', mock_normalize)
+    
+        normalizer = ResultsNormalizer()
+>       normalizer.normalize(archive_with_data_schema, LOGGER)
+
+tests/normalizers/test_results_normalizer.py:1197: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/nomad_topology_normalizer/normalizers/results.py:234: in normalize
+    self._normalize_with_data_schema(archive, self.logger, system_v2)
+src/nomad_topology_normalizer/normalizers/results.py:296: in _normalize_with_data_schema
+    topology_normalizer.normalize(archive, logger, system_v2=system_v2)
+tests/normalizers/test_results_normalizer.py:1192: in mock_normalize
+    return original_normalize(self, archive, logger, system_v2=system_v2)
+src/nomad_topology_normalizer/normalizers/topology.py:488: in normalize
+    ).material(populate_topology=False)
+src/nomad_topology_normalizer/normalizers/material.py:242: in material
+    material.symmetry = self.symmetry()
+src/nomad_topology_normalizer/normalizers/material.py:503: in symmetry
+    proto = self.repr_system.prototype if self.repr_system else None
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = test_system:ModelSystem(name, lattice_vectors, periodic_boundary_conditions, type, is_representative, n_particles, positions, particle_states)
+name = 'prototype'
+
+    def __getattr__(self, name):
+        if name.startswith('a_'):
+            if (annotation_name := name[2:]) in self.m_annotations:
+                return self.m_get_annotations(annotation_name)
+        elif name in self.m_def.all_aliases or self.m_def.has_variable_names:
+            # the first case will not throw
+            # the second case will throw if the name is not found
+            # we do not blindly try `m_get` for all unidentified names since it is very slow
+            try:
+                return self.m_get(name)
+            except (MetainfoError, ValueError):
+                pass
+    
+>       raise AttributeError(name)
+E       AttributeError: prototype
+
+../nomad-FAIR/nomad/metainfo/metainfo.py:1020: AttributeError
+------------------------------ Captured log call -------------------------------
+INFO     test_results_normalizer:results.py:233 {"event": "Using v2 data schema results normalization", "normalizer": "ResultsNormalizerBase", "timestamp": "2026-04-07T11:22:36Z"}
+ERROR    test_results_normalizer:material.py:240 {"event": "issue in creating formula information", "exception": "Traceback (most recent call last):\n  File \"/home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-topology-normalizer/src/nomad_topology_normalizer/normalizers/material.py\", line 199, in material\n    material.structural_type = self.structural_type\n    ^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/metainfo.py\", line 969, in __setattr__\n    return super().__setattr__(name, value)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/metainfo.py\", line 722, in wrapper\n    return method(self, obj, value, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/metainfo.py\", line 3186, in __set__\n    value = self.type.normalize(value, section=obj, **kwargs)\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/data_type.py\", line 786, in normalize\n    return self._normalize_impl(value, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/data_type.py\", line 1088, in _normalize_impl\n    return self._validate_value(value)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/data_type.py\", line 1073, in _validate_value\n    raise ValueError(f'{value} is not a value of this enumeration.')\nValueError: molecule is not a value of this enumeration.", "normalizer": "ResultsNormalizerBase", "timestamp": "2026-04-07T11:22:36Z"}
+___________________ test_topology_calculation_with_subsystem ___________________
+
+    def test_topology_calculation_with_subsystem():
+        """Test topology_calculation with subsystems."""
+    
+        # Create archive
+        archive = EntryArchive(metadata=EntryMetadata())
+    
+        # Create root ModelSystem with subsystems
+        root = ModelSystem(
+            name='test_system',
+            type='molecule',
+            is_representative=True,
+            positions=np.array([[0.0, 0.0, 0.0], [1.0, 0.0, 0.0], [0.0, 1.0, 0.0]])
+            * ureg.angstrom,
+            n_particles=3,
+        )
+    
+        # Add particle states
+        root.particle_states.append(AtomsState(chemical_symbol='O', atomic_number=8))
+        root.particle_states.append(AtomsState(chemical_symbol='H', atomic_number=1))
+        root.particle_states.append(AtomsState(chemical_symbol='H', atomic_number=1))
+    
+        # Add cell properties directly to ModelSystem (v2 schema)
+        root.lattice_vectors = np.eye(3) * 10.0 * ureg.angstrom
+        root.periodic_boundary_conditions = [True, True, True]
+    
+        # Add a subsystem
+        subsystem = ModelSystem(
+            name='molecule',
+            branch_label='molecule',
+            particle_indices=np.array([0, 1, 2], dtype=np.int32),
+        )
+        root.sub_systems.append(subsystem)
+    
+        # Add to simulation
+        simulation = Simulation()
+        simulation.model_system.append(root)
+        archive.data = simulation
+    
+        # Initialize results
+        archive.results = Results()
+        archive.results.material = Material()
+    
+        # Create normalizer and normalize
+        normalizer = TopologyNormalizer()
+>       normalizer.normalize(archive, LOGGER)
+
+tests/normalizers/test_topology_normalizer.py:102: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/nomad_topology_normalizer/normalizers/topology.py:491: in normalize
+    topology = self.topology(self.entry_archive.results.material, system_v2)
+src/nomad_topology_normalizer/normalizers/topology.py:504: in topology
+    topology = self.topology_calculation()
+src/nomad_topology_normalizer/normalizers/topology.py:650: in topology_calculation
+    active_orbital_states = self._extract_orbital()
+src/nomad_topology_normalizer/normalizers/topology.py:1066: in _extract_orbital
+    core_hole = particle_state.core_hole
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = AtomsState(chemical_symbol, atomic_number), name = 'core_hole'
+
+    def __getattr__(self, name):
+        if name.startswith('a_'):
+            if (annotation_name := name[2:]) in self.m_annotations:
+                return self.m_get_annotations(annotation_name)
+        elif name in self.m_def.all_aliases or self.m_def.has_variable_names:
+            # the first case will not throw
+            # the second case will throw if the name is not found
+            # we do not blindly try `m_get` for all unidentified names since it is very slow
+            try:
+                return self.m_get(name)
+            except (MetainfoError, ValueError):
+                pass
+    
+>       raise AttributeError(name)
+E       AttributeError: core_hole
+
+../nomad-FAIR/nomad/metainfo/metainfo.py:1020: AttributeError
+_________ test_topology_root_populates_atoms_when_ase_conversion_fails _________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x758688320bf0>
+
+    def test_topology_root_populates_atoms_when_ase_conversion_fails(monkeypatch):
+        archive = EntryArchive(metadata=EntryMetadata())
+    
+        root = ModelSystem(
+            name='test_system',
+            type='molecule',
+            is_representative=True,
+            positions=np.array([[0.0, 0.0, 0.0], [1.0, 0.0, 0.0]]) * ureg.angstrom,
+            n_particles=2,
+        )
+        root.periodic_boundary_conditions = [True, True, True]
+        root.particle_states.append(AtomsState(chemical_symbol='H', atomic_number=1))
+        root.particle_states.append(AtomsState(chemical_symbol='H', atomic_number=1))
+        subsystem = ModelSystem(
+            name='molecule',
+            branch_label='molecule',
+            particle_indices=np.array([0, 1], dtype=np.int32),
+        )
+        root.sub_systems.append(subsystem)
+    
+        simulation = Simulation()
+        simulation.model_system.append(root)
+        archive.data = simulation
+        archive.results = Results()
+        archive.results.material = Material()
+    
+        def _raise_to_ase_atoms(self):
+            raise ValueError('forced failure for fallback path test')
+    
+        monkeypatch.setattr(ModelSystem, 'to_ase_atoms', _raise_to_ase_atoms)
+    
+        normalizer = TopologyNormalizer()
+>       normalizer.normalize(archive, LOGGER)
+
+tests/normalizers/test_topology_normalizer.py:144: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/nomad_topology_normalizer/normalizers/topology.py:491: in normalize
+    topology = self.topology(self.entry_archive.results.material, system_v2)
+src/nomad_topology_normalizer/normalizers/topology.py:504: in topology
+    topology = self.topology_calculation()
+src/nomad_topology_normalizer/normalizers/topology.py:650: in topology_calculation
+    active_orbital_states = self._extract_orbital()
+src/nomad_topology_normalizer/normalizers/topology.py:1066: in _extract_orbital
+    core_hole = particle_state.core_hole
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = AtomsState(chemical_symbol, atomic_number), name = 'core_hole'
+
+    def __getattr__(self, name):
+        if name.startswith('a_'):
+            if (annotation_name := name[2:]) in self.m_annotations:
+                return self.m_get_annotations(annotation_name)
+        elif name in self.m_def.all_aliases or self.m_def.has_variable_names:
+            # the first case will not throw
+            # the second case will throw if the name is not found
+            # we do not blindly try `m_get` for all unidentified names since it is very slow
+            try:
+                return self.m_get(name)
+            except (MetainfoError, ValueError):
+                pass
+    
+>       raise AttributeError(name)
+E       AttributeError: core_hole
+
+../nomad-FAIR/nomad/metainfo/metainfo.py:1020: AttributeError
+___________ test_topology_calculation_prefers_representative_system ____________
+
+    def test_topology_calculation_prefers_representative_system():
+        archive = EntryArchive(metadata=EntryMetadata())
+    
+        non_rep = ModelSystem(name='non_rep', is_representative=False)
+    
+        representative = ModelSystem(
+            name='rep_system',
+            type='molecule',
+            is_representative=True,
+            positions=np.array([[0.0, 0.0, 0.0], [1.0, 0.0, 0.0]]) * ureg.angstrom,
+            n_particles=2,
+        )
+        representative.particle_states.append(
+            AtomsState(chemical_symbol='H', atomic_number=1)
+        )
+        representative.particle_states.append(
+            AtomsState(chemical_symbol='H', atomic_number=1)
+        )
+        representative.lattice_vectors = np.eye(3) * 10.0 * ureg.angstrom
+        representative.periodic_boundary_conditions = [True, True, True]
+        representative.sub_systems.append(
+            ModelSystem(
+                name='molecule',
+                branch_label='molecule',
+                particle_indices=np.array([0, 1], dtype=np.int32),
+            )
+        )
+    
+        simulation = Simulation()
+        simulation.model_system.append(non_rep)
+        simulation.model_system.append(representative)
+        archive.data = simulation
+        archive.results = Results()
+        archive.results.material = Material()
+    
+        normalizer = TopologyNormalizer()
+>       normalizer.normalize(archive, LOGGER)
+
+tests/normalizers/test_topology_normalizer.py:194: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/nomad_topology_normalizer/normalizers/topology.py:491: in normalize
+    topology = self.topology(self.entry_archive.results.material, system_v2)
+src/nomad_topology_normalizer/normalizers/topology.py:504: in topology
+    topology = self.topology_calculation()
+src/nomad_topology_normalizer/normalizers/topology.py:650: in topology_calculation
+    active_orbital_states = self._extract_orbital()
+src/nomad_topology_normalizer/normalizers/topology.py:1066: in _extract_orbital
+    core_hole = particle_state.core_hole
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = AtomsState(chemical_symbol, atomic_number), name = 'core_hole'
+
+    def __getattr__(self, name):
+        if name.startswith('a_'):
+            if (annotation_name := name[2:]) in self.m_annotations:
+                return self.m_get_annotations(annotation_name)
+        elif name in self.m_def.all_aliases or self.m_def.has_variable_names:
+            # the first case will not throw
+            # the second case will throw if the name is not found
+            # we do not blindly try `m_get` for all unidentified names since it is very slow
+            try:
+                return self.m_get(name)
+            except (MetainfoError, ValueError):
+                pass
+    
+>       raise AttributeError(name)
+E       AttributeError: core_hole
+
+../nomad-FAIR/nomad/metainfo/metainfo.py:1020: AttributeError
+_______ test_topology_root_normalizes_atomic_numbers_from_symbol_and_nat _______
+
+    def test_topology_root_normalizes_atomic_numbers_from_symbol_and_nat():
+        archive = EntryArchive(metadata=EntryMetadata())
+    
+        root = ModelSystem(
+            name='test_system',
+            type='molecule',
+            is_representative=True,
+            positions=np.array([[0.0, 0.0, 0.0]]) * ureg.angstrom,
+            n_particles=1,
+        )
+        root.periodic_boundary_conditions = [False, False, False]
+        root.particle_states.append(AtomsState(chemical_symbol='Sr', atomic_number=238))
+        root.sub_systems.append(
+            ModelSystem(
+                name='atom',
+                branch_label='molecule',
+                particle_indices=np.array([0], dtype=np.int32),
+            )
+        )
+    
+        simulation = Simulation()
+        simulation.model_system.append(root)
+        archive.data = simulation
+        archive.results = Results()
+        archive.results.material = Material()
+    
+        normalizer = TopologyNormalizer()
+>       normalizer.normalize(archive, LOGGER)
+
+tests/normalizers/test_topology_normalizer.py:231: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/nomad_topology_normalizer/normalizers/topology.py:491: in normalize
+    topology = self.topology(self.entry_archive.results.material, system_v2)
+src/nomad_topology_normalizer/normalizers/topology.py:504: in topology
+    topology = self.topology_calculation()
+src/nomad_topology_normalizer/normalizers/topology.py:650: in topology_calculation
+    active_orbital_states = self._extract_orbital()
+src/nomad_topology_normalizer/normalizers/topology.py:1066: in _extract_orbital
+    core_hole = particle_state.core_hole
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = AtomsState(chemical_symbol, atomic_number), name = 'core_hole'
+
+    def __getattr__(self, name):
+        if name.startswith('a_'):
+            if (annotation_name := name[2:]) in self.m_annotations:
+                return self.m_get_annotations(annotation_name)
+        elif name in self.m_def.all_aliases or self.m_def.has_variable_names:
+            # the first case will not throw
+            # the second case will throw if the name is not found
+            # we do not blindly try `m_get` for all unidentified names since it is very slow
+            try:
+                return self.m_get(name)
+            except (MetainfoError, ValueError):
+                pass
+    
+>       raise AttributeError(name)
+E       AttributeError: core_hole
+
+../nomad-FAIR/nomad/metainfo/metainfo.py:1020: AttributeError
+________ test_topology_root_converts_unitless_geometry_to_meter_storage ________
+
+    def test_topology_root_converts_unitless_geometry_to_meter_storage():
+        archive = EntryArchive(metadata=EntryMetadata())
+    
+        root = ModelSystem(
+            name='test_system',
+            type='bulk',
+            is_representative=True,
+            positions=np.array([[0.0, 0.0, 0.0], [1.0, 2.0, 3.0]]),
+            n_particles=2,
+        )
+        root.lattice_vectors = np.array(
+            [[5.0, 0.0, 0.0], [0.0, 5.0, 0.0], [0.0, 0.0, 5.0]]
+        )
+        root.periodic_boundary_conditions = [True, True, True]
+        root.particle_states.append(AtomsState(chemical_symbol='Si', atomic_number=14))
+        root.particle_states.append(AtomsState(chemical_symbol='Si', atomic_number=14))
+        root.sub_systems.append(
+            ModelSystem(
+                name='subsystem',
+                branch_label='molecule',
+                particle_indices=np.array([0, 1], dtype=np.int32),
+            )
+        )
+    
+        simulation = Simulation()
+        simulation.model_system.append(root)
+        archive.data = simulation
+        archive.results = Results()
+        archive.results.material = Material()
+    
+        normalizer = TopologyNormalizer()
+>       normalizer.normalize(archive, LOGGER)
+
+tests/normalizers/test_topology_normalizer.py:273: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/nomad_topology_normalizer/normalizers/topology.py:491: in normalize
+    topology = self.topology(self.entry_archive.results.material, system_v2)
+src/nomad_topology_normalizer/normalizers/topology.py:504: in topology
+    topology = self.topology_calculation()
+src/nomad_topology_normalizer/normalizers/topology.py:650: in topology_calculation
+    active_orbital_states = self._extract_orbital()
+src/nomad_topology_normalizer/normalizers/topology.py:1066: in _extract_orbital
+    core_hole = particle_state.core_hole
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = AtomsState(chemical_symbol, atomic_number), name = 'core_hole'
+
+    def __getattr__(self, name):
+        if name.startswith('a_'):
+            if (annotation_name := name[2:]) in self.m_annotations:
+                return self.m_get_annotations(annotation_name)
+        elif name in self.m_def.all_aliases or self.m_def.has_variable_names:
+            # the first case will not throw
+            # the second case will throw if the name is not found
+            # we do not blindly try `m_get` for all unidentified names since it is very slow
+            try:
+                return self.m_get(name)
+            except (MetainfoError, ValueError):
+                pass
+    
+>       raise AttributeError(name)
+E       AttributeError: core_hole
+
+../nomad-FAIR/nomad/metainfo/metainfo.py:1020: AttributeError
+_________________ test_topology_calculation_nested_subsystems __________________
+
+    def test_topology_calculation_nested_subsystems():
+        """Test nested hierarchy: root -> molecule_group -> molecule."""
+    
+        archive = EntryArchive(metadata=EntryMetadata())
+    
+        # Create root system with 6 atoms (2 water molecules)
+        root = ModelSystem(
+            name='test_system',
+            type='molecule',
+            is_representative=True,
+            positions=np.array(
+                [
+                    [0.0, 0.0, 0.0],
+                    [1.0, 0.0, 0.0],
+                    [0.0, 1.0, 0.0],  # H2O molecule 1
+                    [5.0, 0.0, 0.0],
+                    [6.0, 0.0, 0.0],
+                    [5.0, 1.0, 0.0],  # H2O molecule 2
+                ]
+            )
+            * ureg.angstrom,
+            n_particles=6,
+        )
+    
+        # Add particle states
+        particle_data = [('O', 8), ('H', 1), ('H', 1), ('O', 8), ('H', 1), ('H', 1)]
+        for symbol, atomic_num in particle_data:
+            root.particle_states.append(
+                AtomsState(chemical_symbol=symbol, atomic_number=atomic_num)
+            )
+    
+        # Add cell properties directly to ModelSystem (v2 schema)
+        root.lattice_vectors = np.eye(3) * 10.0 * ureg.angstrom
+        root.periodic_boundary_conditions = [True, True, True]
+    
+        # Add molecule_group containing two molecules
+        molecule_group = ModelSystem(
+            name='water_group',
+            branch_label='molecule_group',
+            particle_indices=np.array([0, 1, 2, 3, 4, 5], dtype=np.int32),
+        )
+    
+        # Add nested molecules within the group
+        mol1 = ModelSystem(
+            name='water0',
+            branch_label='molecule',
+            particle_indices=np.array([0, 1, 2], dtype=np.int32),
+        )
+        mol2 = ModelSystem(
+            name='water',
+            branch_label='molecule',
+            particle_indices=np.array([3, 4, 5], dtype=np.int32),
+        )
+        molecule_group.sub_systems.append(mol1)
+        molecule_group.sub_systems.append(mol2)
+    
+        root.sub_systems.append(molecule_group)
+    
+        # Add to simulation
+        simulation = Simulation()
+        simulation.model_system.append(root)
+        archive.data = simulation
+    
+        # Initialize results
+        archive.results = Results()
+        archive.results.material = Material()
+    
+        # Normalize and run topology calculation
+        normalizer = TopologyNormalizer()
+>       normalizer.normalize(archive, LOGGER)
+
+tests/normalizers/test_topology_normalizer.py:356: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/nomad_topology_normalizer/normalizers/topology.py:491: in normalize
+    topology = self.topology(self.entry_archive.results.material, system_v2)
+src/nomad_topology_normalizer/normalizers/topology.py:504: in topology
+    topology = self.topology_calculation()
+src/nomad_topology_normalizer/normalizers/topology.py:650: in topology_calculation
+    active_orbital_states = self._extract_orbital()
+src/nomad_topology_normalizer/normalizers/topology.py:1066: in _extract_orbital
+    core_hole = particle_state.core_hole
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = AtomsState(chemical_symbol, atomic_number), name = 'core_hole'
+
+    def __getattr__(self, name):
+        if name.startswith('a_'):
+            if (annotation_name := name[2:]) in self.m_annotations:
+                return self.m_get_annotations(annotation_name)
+        elif name in self.m_def.all_aliases or self.m_def.has_variable_names:
+            # the first case will not throw
+            # the second case will throw if the name is not found
+            # we do not blindly try `m_get` for all unidentified names since it is very slow
+            try:
+                return self.m_get(name)
+            except (MetainfoError, ValueError):
+                pass
+    
+>       raise AttributeError(name)
+E       AttributeError: core_hole
+
+../nomad-FAIR/nomad/metainfo/metainfo.py:1020: AttributeError
+________________ test_topology_calculation_multiple_same_label _________________
+
+    def test_topology_calculation_multiple_same_label():
+        """Test multiple subsystems with same label (e.g., multiple H2O molecules)."""
+    
+        archive = EntryArchive(metadata=EntryMetadata())
+    
+        # Create root with 6 atoms
+        root = ModelSystem(
+            name='test_system',
+            type='molecule',
+            is_representative=True,
+            positions=np.array(
+                [
+                    [0.0, 0.0, 0.0],
+                    [1.0, 0.0, 0.0],
+                    [0.0, 1.0, 0.0],
+                    [5.0, 0.0, 0.0],
+                    [6.0, 0.0, 0.0],
+                    [5.0, 1.0, 0.0],
+                ]
+            )
+            * ureg.angstrom,
+            n_particles=6,
+        )
+    
+        # Add particle states
+        particle_data = [('O', 8), ('H', 1), ('H', 1), ('O', 8), ('H', 1), ('H', 1)]
+        for symbol, atomic_num in particle_data:
+            root.particle_states.append(
+                AtomsState(chemical_symbol=symbol, atomic_number=atomic_num)
+            )
+    
+        # Add two molecules with identical labels
+        mol1 = ModelSystem(
+            name='water',
+            branch_label='molecule',
+            particle_indices=np.array([0, 1, 2], dtype=np.int32),
+        )
+        mol2 = ModelSystem(
+            name='water',
+            branch_label='molecule',
+            particle_indices=np.array([3, 4, 5], dtype=np.int32),
+        )
+        root.sub_systems.append(mol1)
+        root.sub_systems.append(mol2)
+    
+        simulation = Simulation()
+        simulation.model_system.append(root)
+        archive.data = simulation
+    
+        archive.results = Results()
+        archive.results.material = Material()
+    
+        normalizer = TopologyNormalizer()
+>       normalizer.normalize(archive, LOGGER)
+
+tests/normalizers/test_topology_normalizer.py:419: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/nomad_topology_normalizer/normalizers/topology.py:491: in normalize
+    topology = self.topology(self.entry_archive.results.material, system_v2)
+src/nomad_topology_normalizer/normalizers/topology.py:504: in topology
+    topology = self.topology_calculation()
+src/nomad_topology_normalizer/normalizers/topology.py:650: in topology_calculation
+    active_orbital_states = self._extract_orbital()
+src/nomad_topology_normalizer/normalizers/topology.py:1066: in _extract_orbital
+    core_hole = particle_state.core_hole
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = AtomsState(chemical_symbol, atomic_number), name = 'core_hole'
+
+    def __getattr__(self, name):
+        if name.startswith('a_'):
+            if (annotation_name := name[2:]) in self.m_annotations:
+                return self.m_get_annotations(annotation_name)
+        elif name in self.m_def.all_aliases or self.m_def.has_variable_names:
+            # the first case will not throw
+            # the second case will throw if the name is not found
+            # we do not blindly try `m_get` for all unidentified names since it is very slow
+            try:
+                return self.m_get(name)
+            except (MetainfoError, ValueError):
+                pass
+    
+>       raise AttributeError(name)
+E       AttributeError: core_hole
+
+../nomad-FAIR/nomad/metainfo/metainfo.py:1020: AttributeError
+_________________ test_topology_calculation_branch_label_types _________________
+
+    def test_topology_calculation_branch_label_types():
+        """Test different branch_label types: monomer, monomer_group."""
+    
+        archive = EntryArchive(metadata=EntryMetadata())
+    
+        root = ModelSystem(
+            name='test_system',
+            type='molecule',
+            is_representative=True,
+            positions=np.array(
+                [
+                    # First ethylene molecule (C2H4)
+                    [0.0, 0.0, 0.0],  # C1
+                    [1.34, 0.0, 0.0],  # C2 (C=C bond ~1.34 Å)
+                    [-0.51, 0.93, 0.0],  # H1
+                    [-0.51, -0.93, 0.0],  # H2
+                    [1.85, 0.93, 0.0],  # H3
+                    [1.85, -0.93, 0.0],  # H4
+                    # Second ethylene molecule (C2H4), shifted 5 Å along x
+                    [5.0, 0.0, 0.0],
+                    [6.34, 0.0, 0.0],
+                    [4.49, 0.93, 0.0],
+                    [4.49, -0.93, 0.0],
+                    [6.85, 0.93, 0.0],
+                    [6.85, -0.93, 0.0],
+                ]
+            )
+            * ureg.angstrom,
+            n_particles=12,
+        )
+    
+        # Add particle states
+        particle_data = [
+            ('C', 6),
+            ('C', 6),
+            ('H', 1),
+            ('H', 1),
+            ('H', 1),
+            ('H', 1),
+            ('C', 6),
+            ('C', 6),
+            ('H', 1),
+            ('H', 1),
+            ('H', 1),
+            ('H', 1),
+        ]
+        for symbol, atomic_num in particle_data:
+            root.particle_states.append(
+                AtomsState(chemical_symbol=symbol, atomic_number=atomic_num)
+            )
+    
+        # Add monomer_group containing both ethylene molecules
+        monomer_group = ModelSystem(
+            name='ethylene_group',
+            branch_label='monomer_group',
+            particle_indices=np.array(list(range(12)), dtype=np.int32),
+        )
+    
+        # Add monomers within group
+        monomer1 = ModelSystem(
+            name='ethylene',
+            branch_label='monomer',
+            particle_indices=np.array([0, 1, 2, 3, 4, 5], dtype=np.int32),
+        )
+        monomer2 = ModelSystem(
+            name='ethylene',
+            branch_label='monomer',
+            particle_indices=np.array([6, 7, 8, 9, 10, 11], dtype=np.int32),
+        )
+        monomer_group.sub_systems.append(monomer1)
+        monomer_group.sub_systems.append(monomer2)
+    
+        root.sub_systems.append(monomer_group)
+    
+        simulation = Simulation()
+        simulation.model_system.append(root)
+        archive.data = simulation
+    
+        archive.results = Results()
+        archive.results.material = Material()
+    
+        normalizer = TopologyNormalizer()
+>       normalizer.normalize(archive, LOGGER)
+
+tests/normalizers/test_topology_normalizer.py:515: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/nomad_topology_normalizer/normalizers/topology.py:491: in normalize
+    topology = self.topology(self.entry_archive.results.material, system_v2)
+src/nomad_topology_normalizer/normalizers/topology.py:504: in topology
+    topology = self.topology_calculation()
+src/nomad_topology_normalizer/normalizers/topology.py:650: in topology_calculation
+    active_orbital_states = self._extract_orbital()
+src/nomad_topology_normalizer/normalizers/topology.py:1066: in _extract_orbital
+    core_hole = particle_state.core_hole
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = AtomsState(chemical_symbol, atomic_number), name = 'core_hole'
+
+    def __getattr__(self, name):
+        if name.startswith('a_'):
+            if (annotation_name := name[2:]) in self.m_annotations:
+                return self.m_get_annotations(annotation_name)
+        elif name in self.m_def.all_aliases or self.m_def.has_variable_names:
+            # the first case will not throw
+            # the second case will throw if the name is not found
+            # we do not blindly try `m_get` for all unidentified names since it is very slow
+            try:
+                return self.m_get(name)
+            except (MetainfoError, ValueError):
+                pass
+    
+>       raise AttributeError(name)
+E       AttributeError: core_hole
+
+../nomad-FAIR/nomad/metainfo/metainfo.py:1020: AttributeError
+____________ test_topology_calculation_mismatched_label_atom_counts ____________
+
+    def test_topology_calculation_mismatched_label_atom_counts():
+        """Test same label but different atom counts - should log warning."""
+    
+        archive = EntryArchive(metadata=EntryMetadata())
+    
+        root = ModelSystem(
+            name='test_system',
+            type='molecule',
+            is_representative=True,
+            positions=np.array(
+                [
+                    [0.0, 0.0, 0.0],
+                    [1.0, 0.0, 0.0],
+                    [0.0, 1.0, 0.0],
+                    [5.0, 0.0, 0.0],
+                    [6.0, 0.0, 0.0],
+                ]
+            )
+            * ureg.angstrom,
+            n_particles=5,
+        )
+    
+        for _ in range(5):
+            root.particle_states.append(AtomsState(chemical_symbol='H', atomic_number=1))
+    
+        # First molecule with 3 atoms
+        mol1 = ModelSystem(
+            name='fragment',
+            branch_label='molecule',
+            particle_indices=np.array([0, 1, 2], dtype=np.int32),
+        )
+        # Second molecule with 2 atoms but same label - should trigger warning
+        mol2 = ModelSystem(
+            name='fragment',
+            branch_label='molecule',
+            particle_indices=np.array([3, 4], dtype=np.int32),
+        )
+        root.sub_systems.append(mol1)
+        root.sub_systems.append(mol2)
+    
+        simulation = Simulation()
+        simulation.model_system.append(root)
+        archive.data = simulation
+    
+        archive.results = Results()
+        archive.results.material = Material()
+    
+        normalizer = TopologyNormalizer()
+>       normalizer.normalize(archive, LOGGER)
+
+tests/normalizers/test_topology_normalizer.py:654: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/nomad_topology_normalizer/normalizers/topology.py:491: in normalize
+    topology = self.topology(self.entry_archive.results.material, system_v2)
+src/nomad_topology_normalizer/normalizers/topology.py:504: in topology
+    topology = self.topology_calculation()
+src/nomad_topology_normalizer/normalizers/topology.py:650: in topology_calculation
+    active_orbital_states = self._extract_orbital()
+src/nomad_topology_normalizer/normalizers/topology.py:1066: in _extract_orbital
+    core_hole = particle_state.core_hole
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = AtomsState(chemical_symbol, atomic_number), name = 'core_hole'
+
+    def __getattr__(self, name):
+        if name.startswith('a_'):
+            if (annotation_name := name[2:]) in self.m_annotations:
+                return self.m_get_annotations(annotation_name)
+        elif name in self.m_def.all_aliases or self.m_def.has_variable_names:
+            # the first case will not throw
+            # the second case will throw if the name is not found
+            # we do not blindly try `m_get` for all unidentified names since it is very slow
+            try:
+                return self.m_get(name)
+            except (MetainfoError, ValueError):
+                pass
+    
+>       raise AttributeError(name)
+E       AttributeError: core_hole
+
+../nomad-FAIR/nomad/metainfo/metainfo.py:1020: AttributeError
+------------------------------ Captured log call -------------------------------
+WARNING  test_topology_normalizer:topology.py:644 {"event": "The topology contains entries with the same label but with different numbers of atoms", "timestamp": "2026-04-07T11:22:38Z"}
+___________________ test_topology_calculation_cgbead_system ____________________
+
+    def test_topology_calculation_cgbead_system():
+        """Test coarse-grained system with CGBeadState particles and mass processing."""
+        from nomad_simulations.schema_packages.atoms_state import CGBeadState
+    
+        archive = EntryArchive(metadata=EntryMetadata())
+    
+        root = ModelSystem(
+            name='test_system',
+            type='molecule',
+            is_representative=True,
+            positions=np.array(
+                [
+                    [0.0, 0.0, 0.0],
+                    [5.0, 0.0, 0.0],
+                    [10.0, 0.0, 0.0],
+                ]
+            )
+            * ureg.angstrom,
+            n_particles=3,
+        )
+    
+        # Add coarse-grained beads with explicit masses
+        bead1 = CGBeadState(bead_name='CG_A', mass=100.0 * ureg.amu)
+        bead2 = CGBeadState(bead_name='CG_B', mass=150.0 * ureg.amu)
+        bead3 = CGBeadState(bead_name='CG_C', mass=250.0 * ureg.amu)
+        root.particle_states.append(bead1)
+        root.particle_states.append(bead2)
+        root.particle_states.append(bead3)
+    
+        # Add subsystem with first two beads (total mass: 250 amu)
+        subsystem = ModelSystem(
+            name='cg_molecule',
+            branch_label='molecule',
+            particle_indices=np.array([0, 1], dtype=np.int32),
+        )
+        root.sub_systems.append(subsystem)
+    
+        simulation = Simulation()
+        simulation.model_system.append(root)
+        archive.data = simulation
+    
+        archive.results = Results()
+        archive.results.material = Material()
+    
+>       normalize_all(archive)
+
+tests/normalizers/test_topology_normalizer.py:714: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../nomad-FAIR/nomad/client/processing.py:119: in normalize_all
+    normalize(normalizer, entry_archive, logger=logger)
+../nomad-FAIR/nomad/client/processing.py:104: in normalize
+    normalizer_instance.normalize(logger=logger)
+../nomad-FAIR/nomad/normalizing/__init__.py:97: in normalize
+    self.normalizer.normalize(self.archive, logger)
+src/nomad_topology_normalizer/normalizers/results.py:234: in normalize
+    self._normalize_with_data_schema(archive, self.logger, system_v2)
+src/nomad_topology_normalizer/normalizers/results.py:296: in _normalize_with_data_schema
+    topology_normalizer.normalize(archive, logger, system_v2=system_v2)
+src/nomad_topology_normalizer/normalizers/topology.py:491: in normalize
+    topology = self.topology(self.entry_archive.results.material, system_v2)
+src/nomad_topology_normalizer/normalizers/topology.py:504: in topology
+    topology = self.topology_calculation()
+src/nomad_topology_normalizer/normalizers/topology.py:650: in topology_calculation
+    active_orbital_states = self._extract_orbital()
+src/nomad_topology_normalizer/normalizers/topology.py:1066: in _extract_orbital
+    core_hole = particle_state.core_hole
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = CGBeadState(datetime, mass), name = 'core_hole'
+
+    def __getattr__(self, name):
+        if name.startswith('a_'):
+            if (annotation_name := name[2:]) in self.m_annotations:
+                return self.m_get_annotations(annotation_name)
+        elif name in self.m_def.all_aliases or self.m_def.has_variable_names:
+            # the first case will not throw
+            # the second case will throw if the name is not found
+            # we do not blindly try `m_get` for all unidentified names since it is very slow
+            try:
+                return self.m_get(name)
+            except (MetainfoError, ValueError):
+                pass
+    
+>       raise AttributeError(name)
+E       AttributeError: core_hole
+
+../nomad-FAIR/nomad/metainfo/metainfo.py:1020: AttributeError
+------------------------------ Captured log call -------------------------------
+INFO     nomad.client:processing.py:102 {"event": "identified normalizer", "normalizer": "NormalizerInterface", "timestamp": "2026-04-07T11:22:38Z"}
+INFO     nomad.client:processing.py:105 {"event": "ran normalizer", "normalizer": "NormalizerInterface", "timestamp": "2026-04-07T11:22:38Z"}
+INFO     nomad.client:processing.py:102 {"event": "identified normalizer", "normalizer": "NormalizerInterface", "timestamp": "2026-04-07T11:22:38Z"}
+INFO     nomad.client:processing.py:105 {"event": "ran normalizer", "normalizer": "NormalizerInterface", "timestamp": "2026-04-07T11:22:38Z"}
+INFO     nomad.client:processing.py:102 {"event": "identified normalizer", "normalizer": "NormalizerInterfaceNew", "timestamp": "2026-04-07T11:22:38Z"}
+INFO     nomad.client:results.py:233 {"event": "Using v2 data schema results normalization", "normalizer": "ResultsNormalizer", "timestamp": "2026-04-07T11:22:38Z"}
+___________ test_second_archive_populates_results_material_topology ____________
+
+    def test_second_archive_populates_results_material_topology():
+        """Direct v2 System fixture should populate topology with mapped fractions."""
+        test_file = os.path.join('tests', 'data', 'second.archive.yaml')
+        entry_archive = parse(test_file)[0]
+>       normalize_all(entry_archive)
+
+tests/schema_packages/test_schema_package.py:18: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../nomad-FAIR/nomad/client/processing.py:119: in normalize_all
+    normalize(normalizer, entry_archive, logger=logger)
+../nomad-FAIR/nomad/client/processing.py:104: in normalize
+    normalizer_instance.normalize(logger=logger)
+../nomad-FAIR/nomad/normalizing/__init__.py:97: in normalize
+    self.normalizer.normalize(self.archive, logger)
+src/nomad_topology_normalizer/normalizers/results.py:234: in normalize
+    self._normalize_with_data_schema(archive, self.logger, system_v2)
+src/nomad_topology_normalizer/normalizers/results.py:296: in _normalize_with_data_schema
+    topology_normalizer.normalize(archive, logger, system_v2=system_v2)
+src/nomad_topology_normalizer/normalizers/topology.py:475: in normalize
+    self._initialize_representative_system(archive, system_v2)
+src/nomad_topology_normalizer/normalizers/topology.py:445: in _initialize_representative_system
+    self.repr_system = self._representative_system(archive)
+src/nomad_topology_normalizer/normalizers/normalizer.py:70: in _representative_system
+    if not archive.data or len(archive.data.model_system) == 0:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = second:System(name, datetime, sub_systems), name = 'model_system'
+
+    def __getattr__(self, name):
+        if name.startswith('a_'):
+            if (annotation_name := name[2:]) in self.m_annotations:
+                return self.m_get_annotations(annotation_name)
+        elif name in self.m_def.all_aliases or self.m_def.has_variable_names:
+            # the first case will not throw
+            # the second case will throw if the name is not found
+            # we do not blindly try `m_get` for all unidentified names since it is very slow
+            try:
+                return self.m_get(name)
+            except (MetainfoError, ValueError):
+                pass
+    
+>       raise AttributeError(name)
+E       AttributeError: model_system
+
+../nomad-FAIR/nomad/metainfo/metainfo.py:1020: AttributeError
+------------------------------ Captured log call -------------------------------
+INFO     nomad.client:processing.py:67 {"event": "identified parser", "parser": "parsers/archive", "timestamp": "2026-04-07T11:22:40Z"}
+INFO     nomad.client:processing.py:82 {"event": "ran parser", "parser": "parsers/archive", "timestamp": "2026-04-07T11:22:40Z"}
+INFO     nomad.client:processing.py:102 {"event": "identified normalizer", "normalizer": "NormalizerInterface", "timestamp": "2026-04-07T11:22:40Z"}
+INFO     nomad.client:processing.py:105 {"event": "ran normalizer", "normalizer": "NormalizerInterface", "timestamp": "2026-04-07T11:22:40Z"}
+INFO     nomad.client:processing.py:102 {"event": "identified normalizer", "normalizer": "NormalizerInterface", "timestamp": "2026-04-07T11:22:40Z"}
+INFO     nomad.client:processing.py:105 {"event": "ran normalizer", "normalizer": "NormalizerInterface", "timestamp": "2026-04-07T11:22:40Z"}
+INFO     nomad.client:processing.py:102 {"event": "identified normalizer", "normalizer": "NormalizerInterfaceNew", "timestamp": "2026-04-07T11:22:40Z"}
+INFO     nomad.client:results.py:233 {"event": "Using v2 data schema results normalization", "normalizer": "ResultsNormalizer", "timestamp": "2026-04-07T11:22:40Z"}
+=============================== warnings summary ===============================
+tests/normalizers/test_material_normalizer.py::TestMaterialNormalizer::test_particle_states_chemical_symbols
+tests/normalizers/test_material_normalizer.py::TestMaterialNormalizer::test_complex_composition
+  /home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/.venv/lib/python3.12/site-packages/spglib/spg.py:438: DeprecationWarning: Set OLD_ERROR_HANDLING to false and catch the errors directly.
+    _set_no_error(_throw)
+
+tests/normalizers/test_material_normalizer.py::TestMaterialNormalizer::test_particle_states_chemical_symbols
+tests/normalizers/test_material_normalizer.py::TestMaterialNormalizer::test_complex_composition
+  /home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/metainfo.py:1378: SyntaxWarning: primitive:Representation(name, lattice_vectors, volume, local_symmetry) is not derived from its definition nomad_simulations.schema_packages.model_system.ModelSystem.representations:SubSection.
+    warnings.warn(
+
+tests/normalizers/test_material_normalizer.py::TestMaterialNormalizer::test_particle_states_chemical_symbols
+tests/normalizers/test_material_normalizer.py::TestMaterialNormalizer::test_complex_composition
+  /home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/metainfo.py:1378: SyntaxWarning: conventional:Representation(name, lattice_vectors, volume, local_symmetry) is not derived from its definition nomad_simulations.schema_packages.model_system.ModelSystem.representations:SubSection.
+    warnings.warn(
+
+tests/normalizers/test_results_normalizer.py: 6 warnings
+tests/normalizers/test_topology_normalizer.py: 4 warnings
+  /home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/.venv/lib/python3.12/site-packages/logstash/formatter.py:73: DeprecationWarning: datetime.datetime.utcfromtimestamp() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.fromtimestamp(timestamp, datetime.UTC).
+    tstamp = datetime.utcfromtimestamp(time)
+
+tests/normalizers/test_results_normalizer.py::test_schema_detection_no_schema
+  /home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/.venv/lib/python3.12/site-packages/dosnormalizer/__init__.py:28: PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    return DosNormalizer(**self.dict())
+
+tests/normalizers/test_results_normalizer.py::test_schema_detection_no_schema
+  /home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/.venv/lib/python3.12/site-packages/spectranormalizer/__init__.py:28: PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    return SpectraNormalizer(**self.dict())
+
+tests/normalizers/test_results_normalizer.py::test_schema_detection_no_schema
+  /home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/.venv/lib/python3.12/site-packages/systemnormalizer/__init__.py:28: PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    return SystemNormalizer(**self.dict())
+
+tests/normalizers/test_results_normalizer.py::test_schema_detection_no_schema
+  /home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/.venv/lib/python3.12/site-packages/soapnormalizer/__init__.py:28: PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    return SoapNormalizer(**self.dict())
+
+tests/normalizers/test_results_normalizer.py::test_non_simulation_data_schema_uses_legacy_path
+  /home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/metainfo.py:1378: SyntaxWarning: CustomData() is not derived from its definition nomad.datamodel.datamodel.EntryArchive.data:SubSection.
+    warnings.warn(
+
+tests/normalizers/test_results_normalizer.py::test_schema_detection_nested_system
+  /home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/metainfo.py:1378: SyntaxWarning: Container(sub) is not derived from its definition nomad.datamodel.datamodel.EntryArchive.data:SubSection.
+    warnings.warn(
+
+tests/normalizers/test_results_normalizer.py::test_data_schema_maps_outputs_electronic_properties
+tests/normalizers/test_results_normalizer.py::test_data_schema_uses_latest_output_for_electronic_properties
+tests/normalizers/test_results_normalizer.py::test_data_schema_prefers_representative_system_outputs_for_electronic_properties
+tests/normalizers/test_results_normalizer.py::test_data_schema_band_structure_mapping_does_not_create_run_sections
+  /home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/metainfo.py:1378: SyntaxWarning: _DummyKPath(points) is not derived from its definition nomad_simulations.schema_packages.properties.band_structure.ElectronicBandStructure.k_path:SubSection.
+    warnings.warn(
+
+tests/normalizers/test_results_normalizer.py::test_data_schema_band_structure_uses_kline_vertex_values_fallback
+  /home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/metainfo.py:1378: SyntaxWarning: KLinePath() is not derived from its definition nomad_simulations.schema_packages.numerical_settings.KSpace.k_line_path:SubSection.
+    warnings.warn(
+
+tests/normalizers/test_results_normalizer.py::test_data_schema_priority_over_run
+  /home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/metainfo.py:1378: SyntaxWarning: MockRun() is not derived from its definition nomad.datamodel.datamodel.EntryArchive.run:SubSection.
+    warnings.warn(
+
+tests/normalizers/test_topology_normalizer.py::test_topology_bulk_prefers_v2_symmetry_no_matid_recompute
+tests/normalizers/test_topology_normalizer.py::test_topology_skips_matid_for_bulk_with_complete_v2_symmetry
+  /home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/metainfo.py:1378: SyntaxWarning: namespace(hall_number=523, hall_symbol='-F 4 2 3', bravais_lattice='cF', crystal_system='cubic', space_group_number=225, space_group_symbol='Fm-3m', point_group_symbol='m-3m') is not derived from its definition nomad_simulations.schema_packages.model_system.ModelSystem.symmetry:SubSection.
+    warnings.warn(
+
+tests/normalizers/test_topology_normalizer.py::test_topology_bulk_uses_matid_for_material_id_fallback
+tests/normalizers/test_topology_normalizer.py::test_topology_runs_matid_for_bulk_with_incomplete_v2_symmetry
+  /home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/metainfo.py:1378: SyntaxWarning: namespace(hall_number=523, hall_symbol='-F 4 2 3', bravais_lattice='cF', crystal_system='cubic', space_group_number=225, space_group_symbol='Fm-3m', point_group_symbol=None) is not derived from its definition nomad_simulations.schema_packages.model_system.ModelSystem.symmetry:SubSection.
+    warnings.warn(
+
+tests/schema_packages/test_schema_package.py::test_schema_package
+  /home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-simulation-parsers/src/nomad_simulation_parsers/parsers/phonopy/parser.py:18: DeprecationWarning: phonopy.units.* is deprecated. Use phonopy.physical_units.physical_units instead.
+    from phonopy.units import THzToEv
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/normalizers/test_results_normalizer.py::test_schema_detection_data_schema
+FAILED tests/normalizers/test_results_normalizer.py::test_schema_detection_nested_system
+FAILED tests/normalizers/test_results_normalizer.py::test_data_schema_initializes_results_sections
+FAILED tests/normalizers/test_results_normalizer.py::test_data_schema_populates_method_from_simulation
+FAILED tests/normalizers/test_results_normalizer.py::test_data_schema_skips_unsupported_method_names
+FAILED tests/normalizers/test_results_normalizer.py::test_data_schema_maps_method_details_for_gw_bse_dmft
+FAILED tests/normalizers/test_results_normalizer.py::test_data_schema_method_name_uses_first_supported_model_method
+FAILED tests/normalizers/test_results_normalizer.py::test_data_schema_maps_dft_spin_and_jacobs_ladder
+FAILED tests/normalizers/test_results_normalizer.py::test_data_schema_maps_outputs_electronic_properties
+FAILED tests/normalizers/test_results_normalizer.py::test_data_schema_uses_latest_output_for_electronic_properties
+FAILED tests/normalizers/test_results_normalizer.py::test_data_schema_prefers_representative_system_outputs_for_electronic_properties
+FAILED tests/normalizers/test_results_normalizer.py::test_data_schema_band_structure_mapping_does_not_create_run_sections
+FAILED tests/normalizers/test_results_normalizer.py::test_data_schema_band_structure_uses_numerical_settings_kline_path_fallback
+FAILED tests/normalizers/test_results_normalizer.py::test_data_schema_band_structure_uses_kline_vertex_values_fallback
+FAILED tests/normalizers/test_results_normalizer.py::test_data_schema_populates_deprecated_dos_mapping
+FAILED tests/normalizers/test_results_normalizer.py::test_data_schema_populates_deprecated_dos_with_references
+FAILED tests/normalizers/test_results_normalizer.py::test_data_schema_replaces_malformed_existing_dos_entries
+FAILED tests/normalizers/test_results_normalizer.py::test_data_schema_drops_malformed_stale_dos_without_new_electronic_payload
+FAILED tests/normalizers/test_results_normalizer.py::test_data_schema_does_not_create_empty_electronic_properties
+FAILED tests/normalizers/test_results_normalizer.py::test_data_schema_logs_unmapped_output_groups
+FAILED tests/normalizers/test_results_normalizer.py::test_data_schema_skips_dos_cleanly_without_runschema
+FAILED tests/normalizers/test_results_normalizer.py::test_data_schema_priority_over_run
+FAILED tests/normalizers/test_results_normalizer.py::test_normalize_with_data_schema_calls_topology_normalizer
+FAILED tests/normalizers/test_topology_normalizer.py::test_topology_calculation_with_subsystem
+FAILED tests/normalizers/test_topology_normalizer.py::test_topology_root_populates_atoms_when_ase_conversion_fails
+FAILED tests/normalizers/test_topology_normalizer.py::test_topology_calculation_prefers_representative_system
+FAILED tests/normalizers/test_topology_normalizer.py::test_topology_root_normalizes_atomic_numbers_from_symbol_and_nat
+FAILED tests/normalizers/test_topology_normalizer.py::test_topology_root_converts_unitless_geometry_to_meter_storage
+FAILED tests/normalizers/test_topology_normalizer.py::test_topology_calculation_nested_subsystems
+FAILED tests/normalizers/test_topology_normalizer.py::test_topology_calculation_multiple_same_label
+FAILED tests/normalizers/test_topology_normalizer.py::test_topology_calculation_branch_label_types
+FAILED tests/normalizers/test_topology_normalizer.py::test_topology_calculation_mismatched_label_atom_counts
+FAILED tests/normalizers/test_topology_normalizer.py::test_topology_calculation_cgbead_system
+FAILED tests/schema_packages/test_schema_package.py::test_second_archive_populates_results_material_topology
+============ 34 failed, 28 passed, 1 skipped, 33 warnings in 23.36s ============

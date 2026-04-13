@@ -1,0 +1,175 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.9, pytest-7.4.4, pluggy-1.6.0
+rootdir: /home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-topology-normalizer
+plugins: socket-0.7.0, timeout-2.4.0, split-0.10.0, anyio-4.12.1, asyncio-0.23.8, cov-7.0.0, xdist-3.8.0
+asyncio: mode=Mode.STRICT
+collected 69 items
+
+tests/normalizers/test_material_normalizer.py .........                  [ 13%]
+tests/normalizers/test_normalizer_helper.py ....                         [ 18%]
+tests/normalizers/test_results_normalizer.py ........................... [ 57%]
+..F..s                                                                   [ 66%]
+tests/normalizers/test_symmetry_adapter.py ...                           [ 71%]
+tests/normalizers/test_topology_normalizer.py ..................         [ 97%]
+tests/schema_packages/test_schema_package.py ..                          [100%]
+
+=================================== FAILURES ===================================
+_______ test_data_schema_merges_electronic_payload_split_across_outputs ________
+
+archive_with_data_schema = EntryArchive(data, metadata, results)
+
+    def test_data_schema_merges_electronic_payload_split_across_outputs(
+        archive_with_data_schema,
+    ):
+        representative = archive_with_data_schema.data.model_system[0]
+    
+        output_bs = Outputs(model_system_ref=representative)
+        output_bs.electronic_band_structures.append(
+>           ElectronicBandStructure(
+                value=np.array([[[0.0, 1.0], [0.1, 1.1]]]) * ureg.eV,
+                highest_occupied=0.0 * ureg.eV,
+                lowest_unoccupied=1.0 * ureg.eV,
+                k_path=_kline_path(),
+            )
+        )
+
+tests/normalizers/test_results_normalizer.py:1373: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../nomad-FAIR/nomad/metainfo/metainfo.py:839: in __init__
+    self.m_update_from_dict(kwargs, skip_virtual=False)
+../nomad-FAIR/nomad/metainfo/metainfo.py:2091: in m_update_from_dict
+    self.m_set(
+../nomad-FAIR/nomad/metainfo/metainfo.py:1104: in m_set
+    return definition.__set__(self, value, **kwargs)
+../nomad-FAIR/nomad/metainfo/metainfo.py:722: in wrapper
+    return method(self, obj, value, **kwargs)
+../nomad-FAIR/nomad/metainfo/metainfo.py:3186: in __set__
+    value = self.type.normalize(value, section=obj, **kwargs)
+../nomad-FAIR/nomad/metainfo/data_type.py:545: in normalize
+    return super().normalize(value, **kwargs)
+../nomad-FAIR/nomad/metainfo/data_type.py:378: in normalize
+    return self._check_shape(array)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = m_float64(float64)
+value = array([[[0.00000000e+00, 1.60217663e-19],
+        [1.60217663e-20, 1.76239430e-19]]])
+
+    def _check_shape(self, value):
+        """
+        Check the **shape** of the given value.
+        If the definition defines a scalar, the value must be a scalar.
+        If the definition defines an array, the value must be an array.
+        """
+        if self._disable_shape_check:
+            # _logger.warning(
+            #     f'Not checking shape of {value} for definition {self._definition}.'
+            # )
+            return value
+    
+        if self.is_scalar:
+            if isinstance(value, list | np.ndarray):
+                raise ValueError(f'Shape mismatch for {value}.')
+        else:
+            if not self.support_array:
+                raise TypeError(
+                    'The underlying data type does not support array like values.'
+                )
+            if isinstance(value, np.ndarray):
+                if len(value.shape) != len(self.shape):
+>                   raise ValueError(f'Invalid shape for {value}.')
+E                   ValueError: Invalid shape for [[[0.00000000e+00 1.60217663e-19]
+E                     [1.60217663e-20 1.76239430e-19]]].
+
+../nomad-FAIR/nomad/metainfo/data_type.py:241: ValueError
+=============================== warnings summary ===============================
+tests/normalizers/test_material_normalizer.py::TestMaterialNormalizer::test_particle_states_chemical_symbols
+tests/normalizers/test_material_normalizer.py::TestMaterialNormalizer::test_complex_composition
+  /home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/.venv/lib/python3.12/site-packages/spglib/spg.py:438: DeprecationWarning: Set OLD_ERROR_HANDLING to false and catch the errors directly.
+    _set_no_error(_throw)
+
+tests/normalizers/test_material_normalizer.py::TestMaterialNormalizer::test_particle_states_chemical_symbols
+tests/normalizers/test_material_normalizer.py::TestMaterialNormalizer::test_complex_composition
+  /home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/metainfo.py:1378: SyntaxWarning: primitive:Representation(name, lattice_vectors, volume, local_symmetry) is not derived from its definition nomad_simulations.schema_packages.model_system.ModelSystem.representations:SubSection.
+    warnings.warn(
+
+tests/normalizers/test_material_normalizer.py::TestMaterialNormalizer::test_particle_states_chemical_symbols
+tests/normalizers/test_material_normalizer.py::TestMaterialNormalizer::test_complex_composition
+  /home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/metainfo.py:1378: SyntaxWarning: conventional:Representation(name, lattice_vectors, volume, local_symmetry) is not derived from its definition nomad_simulations.schema_packages.model_system.ModelSystem.representations:SubSection.
+    warnings.warn(
+
+tests/normalizers/test_results_normalizer.py::test_schema_detection_no_schema
+  /home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/.venv/lib/python3.12/site-packages/dosnormalizer/__init__.py:28: PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    return DosNormalizer(**self.dict())
+
+tests/normalizers/test_results_normalizer.py::test_schema_detection_no_schema
+  /home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/.venv/lib/python3.12/site-packages/spectranormalizer/__init__.py:28: PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    return SpectraNormalizer(**self.dict())
+
+tests/normalizers/test_results_normalizer.py::test_schema_detection_no_schema
+  /home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/.venv/lib/python3.12/site-packages/systemnormalizer/__init__.py:28: PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    return SystemNormalizer(**self.dict())
+
+tests/normalizers/test_results_normalizer.py::test_schema_detection_no_schema
+  /home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/.venv/lib/python3.12/site-packages/soapnormalizer/__init__.py:28: PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    return SoapNormalizer(**self.dict())
+
+tests/normalizers/test_results_normalizer.py::test_non_simulation_data_schema_uses_legacy_path
+  /home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/metainfo.py:1378: SyntaxWarning: CustomData() is not derived from its definition nomad.datamodel.datamodel.EntryArchive.data:SubSection.
+    warnings.warn(
+
+tests/normalizers/test_results_normalizer.py::test_schema_detection_nested_system
+  /home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/metainfo.py:1378: SyntaxWarning: Container(sub) is not derived from its definition nomad.datamodel.datamodel.EntryArchive.data:SubSection.
+    warnings.warn(
+
+tests/normalizers/test_results_normalizer.py: 5 warnings
+tests/normalizers/test_topology_normalizer.py: 7 warnings
+tests/schema_packages/test_schema_package.py: 2 warnings
+  /home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/.venv/lib/python3.12/site-packages/logstash/formatter.py:73: DeprecationWarning: datetime.datetime.utcfromtimestamp() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.fromtimestamp(timestamp, datetime.UTC).
+    tstamp = datetime.utcfromtimestamp(time)
+
+tests/normalizers/test_results_normalizer.py::test_data_schema_maps_outputs_electronic_properties
+tests/normalizers/test_results_normalizer.py::test_data_schema_uses_latest_output_for_electronic_properties
+tests/normalizers/test_results_normalizer.py::test_data_schema_prefers_representative_system_outputs_for_electronic_properties
+tests/normalizers/test_results_normalizer.py::test_data_schema_band_structure_mapping_creates_valid_segment_refs
+tests/normalizers/test_results_normalizer.py::test_data_schema_propagates_reference_energy_to_legacy_electronic_sections
+  /home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/metainfo.py:1378: SyntaxWarning: _DummyKPath(points) is not derived from its definition nomad_simulations.schema_packages.properties.band_structure.ElectronicBandStructure.k_path:SubSection.
+    warnings.warn(
+
+tests/normalizers/test_results_normalizer.py::test_data_schema_band_structure_uses_numerical_settings_kline_path_fallback
+  /home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/metainfo.py:1378: SyntaxWarning: _DummyKPath(points) is not derived from its definition nomad_simulations.schema_packages.numerical_settings.KSpace.k_line_path:SubSection.
+    warnings.warn(
+
+tests/normalizers/test_results_normalizer.py::test_data_schema_band_structure_uses_kline_vertex_values_fallback
+  /home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/metainfo.py:1378: SyntaxWarning: KLinePath() is not derived from its definition nomad_simulations.schema_packages.numerical_settings.KSpace.k_line_path:SubSection.
+    warnings.warn(
+
+tests/normalizers/test_results_normalizer.py::test_data_schema_priority_over_run
+  /home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/metainfo.py:1378: SyntaxWarning: MockRun() is not derived from its definition nomad.datamodel.datamodel.EntryArchive.run:SubSection.
+    warnings.warn(
+
+tests/normalizers/test_topology_normalizer.py::test_topology_root_normalizes_atomic_numbers_from_symbol_and_nat
+tests/normalizers/test_topology_normalizer.py::test_topology_calculation_multiple_same_label
+tests/normalizers/test_topology_normalizer.py::test_topology_calculation_branch_label_types
+tests/normalizers/test_topology_normalizer.py::test_topology_calculation_mismatched_label_atom_counts
+  /home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/atomutils.py:521: RuntimeWarning: invalid value encountered in scalar divide
+    angles[i] = np.dot(cell[j], cell[k]) / (lengths[j] * lengths[k])
+
+tests/normalizers/test_topology_normalizer.py::test_topology_bulk_prefers_v2_symmetry_no_matid_recompute
+tests/normalizers/test_topology_normalizer.py::test_topology_skips_matid_for_bulk_with_complete_v2_symmetry
+  /home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/metainfo.py:1378: SyntaxWarning: namespace(hall_number=523, hall_symbol='-F 4 2 3', bravais_lattice='cF', crystal_system='cubic', space_group_number=225, space_group_symbol='Fm-3m', point_group_symbol='m-3m') is not derived from its definition nomad_simulations.schema_packages.model_system.ModelSystem.symmetry:SubSection.
+    warnings.warn(
+
+tests/normalizers/test_topology_normalizer.py::test_topology_bulk_uses_matid_for_material_id_fallback
+tests/normalizers/test_topology_normalizer.py::test_topology_runs_matid_for_bulk_with_incomplete_v2_symmetry
+  /home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-FAIR/nomad/metainfo/metainfo.py:1378: SyntaxWarning: namespace(hall_number=523, hall_symbol='-F 4 2 3', bravais_lattice='cF', crystal_system='cubic', space_group_number=225, space_group_symbol='Fm-3m', point_group_symbol=None) is not derived from its definition nomad_simulations.schema_packages.model_system.ModelSystem.symmetry:SubSection.
+    warnings.warn(
+
+tests/schema_packages/test_schema_package.py::test_schema_package
+  /home/jfrudzinski/work/soft/nomad-distro-dev-topology-normalizer-2026-02/packages/nomad-simulation-parsers/src/nomad_simulation_parsers/parsers/phonopy/parser.py:18: DeprecationWarning: phonopy.units.* is deprecated. Use phonopy.physical_units.physical_units instead.
+    from phonopy.units import THzToEv
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/normalizers/test_results_normalizer.py::test_data_schema_merges_electronic_payload_split_across_outputs
+============ 1 failed, 67 passed, 1 skipped, 43 warnings in 17.47s =============
