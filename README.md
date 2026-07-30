@@ -20,7 +20,7 @@ Below are instructions for how to create a dev environment for developing [nomad
 
 3. Install [node.js](https://nodejs.org/en) (v20) and [yarn](https://classic.yarnpkg.com/en/docs/install/)(v1.22). We will use it to setup the GUI.
 
-4. For Windows users, nomad-lab processing doesn't work natively on the platform. We highly recommend using the [Devcontainer](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) plugin in VSCode to run the repository within a container, or alternatively, using [Windows Subsystem for Linux](https://learn.microsoft.com/en-us/windows/wsl/about) (WSL) to run the project.
+4. For Windows users, nomad-distro-dev works natively on Windows. However, not all NOMAD plugins are tested on Windows, so there might be some bugs. If you face any issues, please file an issue in the respective plugin repository.
 
 5. Clone the forked repository.
 
@@ -129,6 +129,11 @@ A complete list of plugins maintained by FAIRmat-NFDI can by found in the [overv
 ### Day-to-Day Development
 
 After the initial setup, here’s how to manage your daily development tasks.
+
+> [!TIP]
+>
+> You can use `uv tool install poethepoet` to install it as a CLI tool, 
+> allowing you to run commands directly with `poe ...` (e.g., `poe start` instead of `uv run poe start`).
 
 1. Update the environment (This step installs the necessary dependencies):
 
