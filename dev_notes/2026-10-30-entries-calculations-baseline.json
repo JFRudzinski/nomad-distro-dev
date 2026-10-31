@@ -1,0 +1,1137 @@
+{
+  "source": {
+    "repository": "nomad-FAIR",
+    "commit": "eb7bcb69b8220368b2bdf6a15c54a6504ca2564e"
+  },
+  "apps": [
+    {
+      "entry_point_id": "apps/1_all/1_entries",
+      "identity": {
+        "label": "Entries",
+        "path": "entries",
+        "resource": "entries",
+        "category": "All",
+        "description": "Search entries across all domains"
+      },
+      "pagination": {
+        "order_by": "upload_create_time",
+        "order": "desc",
+        "page_size": 20
+      },
+      "column_quantities": [
+        "entry_name",
+        "results.material.chemical_formula_hill",
+        "entry_type",
+        "upload_create_time",
+        "authors",
+        "upload_name",
+        "upload_id",
+        "results.method.method_name",
+        "results.method.simulation.program_name",
+        "results.method.simulation.dft.xc_functional_type",
+        "results.method.simulation.precision.apw_cutoff",
+        "results.method.simulation.precision.basis_set",
+        "results.method.simulation.precision.k_line_density",
+        "results.method.simulation.precision.native_tier",
+        "results.method.simulation.precision.planewave_cutoff",
+        "results.material.structural_type",
+        "results.material.symmetry.crystal_system",
+        "results.material.symmetry.space_group_symbol",
+        "results.material.symmetry.space_group_number",
+        "results.eln.lab_ids",
+        "results.eln.sections",
+        "results.eln.methods",
+        "results.eln.tags",
+        "results.eln.instruments",
+        "mainfile",
+        "comment",
+        "references",
+        "datasets",
+        "published"
+      ],
+      "selected_columns": [
+        "entry_name",
+        "results.material.chemical_formula_hill",
+        "entry_type",
+        "upload_create_time",
+        "authors"
+      ],
+      "search_quantities": {
+        "exclude": [
+          "mainfile",
+          "entry_name",
+          "combine"
+        ]
+      },
+      "filters_locked": null,
+      "menu_items": [
+        {
+          "group": "Filters / Elements / Formula",
+          "type": "periodic_table",
+          "quantity": "results.material.elements"
+        },
+        {
+          "group": "Filters / Elements / Formula",
+          "type": "terms",
+          "quantity": "results.material.chemical_formula_hill"
+        },
+        {
+          "group": "Filters / Elements / Formula",
+          "type": "terms",
+          "quantity": "results.material.chemical_formula_iupac"
+        },
+        {
+          "group": "Filters / Elements / Formula",
+          "type": "terms",
+          "quantity": "results.material.chemical_formula_reduced"
+        },
+        {
+          "group": "Filters / Elements / Formula",
+          "type": "terms",
+          "quantity": "results.material.chemical_formula_anonymous"
+        },
+        {
+          "group": "Filters / Elements / Formula",
+          "type": "histogram",
+          "quantity": "results.material.n_elements"
+        },
+        {
+          "group": "Filters / Structure / Symmetry",
+          "type": "terms",
+          "quantity": "results.material.structural_type"
+        },
+        {
+          "group": "Filters / Structure / Symmetry",
+          "type": "terms",
+          "quantity": "results.material.symmetry.bravais_lattice"
+        },
+        {
+          "group": "Filters / Structure / Symmetry",
+          "type": "terms",
+          "quantity": "results.material.symmetry.crystal_system"
+        },
+        {
+          "group": "Filters / Structure / Symmetry",
+          "type": "terms",
+          "quantity": "results.material.symmetry.space_group_symbol"
+        },
+        {
+          "group": "Filters / Structure / Symmetry",
+          "type": "terms",
+          "quantity": "results.material.symmetry.structure_name"
+        },
+        {
+          "group": "Filters / Structure / Symmetry",
+          "type": "terms",
+          "quantity": "results.material.symmetry.strukturbericht_designation"
+        },
+        {
+          "group": "Filters / Structure / Symmetry",
+          "type": "terms",
+          "quantity": "results.material.symmetry.point_group"
+        },
+        {
+          "group": "Filters / Structure / Symmetry",
+          "type": "terms",
+          "quantity": "results.material.symmetry.hall_symbol"
+        },
+        {
+          "group": "Filters / Structure / Symmetry",
+          "type": "terms",
+          "quantity": "results.material.symmetry.prototype_aflow_id"
+        },
+        {
+          "group": "Filters / Method",
+          "type": "terms",
+          "quantity": "results.method.simulation.program_name"
+        },
+        {
+          "group": "Filters / Method",
+          "type": "terms",
+          "quantity": "results.method.simulation.program_version"
+        },
+        {
+          "group": "Filters / Precision",
+          "type": "histogram",
+          "quantity": "results.method.simulation.precision.k_line_density"
+        },
+        {
+          "group": "Filters / Precision",
+          "type": "terms",
+          "quantity": "results.method.simulation.precision.native_tier"
+        },
+        {
+          "group": "Filters / Precision",
+          "type": "terms",
+          "quantity": "results.method.simulation.precision.basis_set"
+        },
+        {
+          "group": "Filters / Precision",
+          "type": "histogram",
+          "quantity": "results.method.simulation.precision.planewave_cutoff"
+        },
+        {
+          "group": "Filters / Precision",
+          "type": "histogram",
+          "quantity": "results.method.simulation.precision.apw_cutoff"
+        },
+        {
+          "group": "Filters / DFT",
+          "type": "terms",
+          "quantity": "results.method.method_name"
+        },
+        {
+          "group": "Filters / DFT",
+          "type": "terms",
+          "quantity": "results.method.simulation.dft.xc_functional_type"
+        },
+        {
+          "group": "Filters / DFT",
+          "type": "terms",
+          "quantity": "results.method.simulation.dft.xc_functional_names"
+        },
+        {
+          "group": "Filters / DFT",
+          "type": "histogram",
+          "quantity": "results.method.simulation.dft.exact_exchange_mixing_factor"
+        },
+        {
+          "group": "Filters / DFT",
+          "type": "histogram",
+          "quantity": "results.method.simulation.dft.hubbard_kanamori_model.u_effective"
+        },
+        {
+          "group": "Filters / DFT",
+          "type": "terms",
+          "quantity": "results.method.simulation.dft.core_electron_treatment"
+        },
+        {
+          "group": "Filters / DFT",
+          "type": "terms",
+          "quantity": "results.method.simulation.dft.relativity_method"
+        },
+        {
+          "group": "Filters / TB",
+          "type": "terms",
+          "quantity": "results.method.method_name"
+        },
+        {
+          "group": "Filters / TB",
+          "type": "terms",
+          "quantity": "results.method.simulation.tb.type"
+        },
+        {
+          "group": "Filters / TB",
+          "type": "terms",
+          "quantity": "results.method.simulation.tb.localization_type"
+        },
+        {
+          "group": "Filters / GW",
+          "type": "terms",
+          "quantity": "results.method.method_name"
+        },
+        {
+          "group": "Filters / GW",
+          "type": "terms",
+          "quantity": "results.method.simulation.gw.type"
+        },
+        {
+          "group": "Filters / GW",
+          "type": "terms",
+          "quantity": "results.method.simulation.gw.starting_point_type"
+        },
+        {
+          "group": "Filters / GW",
+          "type": "terms",
+          "quantity": "results.method.simulation.gw.basis_set_type"
+        },
+        {
+          "group": "Filters / BSE",
+          "type": "terms",
+          "quantity": "results.method.method_name"
+        },
+        {
+          "group": "Filters / BSE",
+          "type": "terms",
+          "quantity": "results.method.simulation.bse.type"
+        },
+        {
+          "group": "Filters / BSE",
+          "type": "terms",
+          "quantity": "results.method.simulation.bse.solver"
+        },
+        {
+          "group": "Filters / BSE",
+          "type": "terms",
+          "quantity": "results.method.simulation.bse.starting_point_type"
+        },
+        {
+          "group": "Filters / BSE",
+          "type": "terms",
+          "quantity": "results.method.simulation.bse.starting_point_type"
+        },
+        {
+          "group": "Filters / BSE",
+          "type": "terms",
+          "quantity": "results.method.simulation.bse.basis_set_type"
+        },
+        {
+          "group": "Filters / BSE",
+          "type": "terms",
+          "quantity": "results.method.simulation.bse.gw_type"
+        },
+        {
+          "group": "Filters / DMFT",
+          "type": "terms",
+          "quantity": "results.method.method_name"
+        },
+        {
+          "group": "Filters / DMFT",
+          "type": "terms",
+          "quantity": "results.method.simulation.dmft.impurity_solver_type"
+        },
+        {
+          "group": "Filters / DMFT",
+          "type": "histogram",
+          "quantity": "results.method.simulation.dmft.inverse_temperature"
+        },
+        {
+          "group": "Filters / DMFT",
+          "type": "terms",
+          "quantity": "results.method.simulation.dmft.magnetic_state"
+        },
+        {
+          "group": "Filters / DMFT",
+          "type": "histogram",
+          "quantity": "results.method.simulation.dmft.u"
+        },
+        {
+          "group": "Filters / DMFT",
+          "type": "histogram",
+          "quantity": "results.method.simulation.dmft.jh"
+        },
+        {
+          "group": "Filters / DMFT",
+          "type": "terms",
+          "quantity": "results.method.simulation.dmft.analytical_continuation"
+        },
+        {
+          "group": "Filters / EELS",
+          "type": "terms",
+          "quantity": "results.method.method_name"
+        },
+        {
+          "group": "Filters / EELS",
+          "type": "terms",
+          "quantity": "results.properties.spectroscopic.spectra.provenance.eels.detector_type"
+        },
+        {
+          "group": "Filters / EELS",
+          "type": "histogram",
+          "quantity": "results.properties.spectroscopic.spectra.provenance.eels.resolution"
+        },
+        {
+          "group": "Filters / EELS",
+          "type": "histogram",
+          "quantity": "results.properties.spectroscopic.spectra.provenance.eels.min_energy"
+        },
+        {
+          "group": "Filters / EELS",
+          "type": "histogram",
+          "quantity": "results.properties.spectroscopic.spectra.provenance.eels.max_energy"
+        },
+        {
+          "group": "Filters / Molecular dynamics",
+          "type": "terms",
+          "quantity": "results.method.workflow_name"
+        },
+        {
+          "group": "Filters / Molecular dynamics",
+          "type": "terms",
+          "quantity": "results.properties.thermodynamic.trajectory.available_properties"
+        },
+        {
+          "group": "Filters / Molecular dynamics",
+          "type": "terms",
+          "quantity": "results.properties.thermodynamic.trajectory.provenance.molecular_dynamics.ensemble_type"
+        },
+        {
+          "group": "Filters / Molecular dynamics",
+          "type": "histogram",
+          "quantity": "results.properties.thermodynamic.trajectory.provenance.molecular_dynamics.time_step"
+        },
+        {
+          "group": "Filters / Geometry Optimization",
+          "type": "terms",
+          "quantity": "results.properties.available_properties"
+        },
+        {
+          "group": "Filters / Geometry Optimization",
+          "type": "histogram",
+          "quantity": "results.properties.geometry_optimization.final_energy_difference"
+        },
+        {
+          "group": "Filters / Geometry Optimization",
+          "type": "histogram",
+          "quantity": "results.properties.geometry_optimization.final_force_maximum"
+        },
+        {
+          "group": "Filters / Geometry Optimization",
+          "type": "histogram",
+          "quantity": "results.properties.geometry_optimization.final_displacement_maximum"
+        },
+        {
+          "group": "Filters / Electronic",
+          "type": "terms",
+          "quantity": "results.properties.available_properties"
+        },
+        {
+          "group": "Filters / Electronic",
+          "type": "terms",
+          "quantity": "results.properties.electronic.band_structure_electronic.band_gap.type"
+        },
+        {
+          "group": "Filters / Electronic",
+          "type": "histogram",
+          "quantity": "results.properties.electronic.band_structure_electronic.band_gap.value"
+        },
+        {
+          "group": "Filters / Electronic",
+          "type": "terms",
+          "quantity": "results.properties.electronic.band_structure_electronic.spin_polarized"
+        },
+        {
+          "group": "Filters / Electronic",
+          "type": "terms",
+          "quantity": "results.properties.electronic.dos_electronic.spin_polarized"
+        },
+        {
+          "group": "Filters / Vibrational",
+          "type": "terms",
+          "quantity": "results.properties.available_properties"
+        },
+        {
+          "group": "Filters / Mechanical",
+          "type": "terms",
+          "quantity": "results.properties.available_properties"
+        },
+        {
+          "group": "Filters / Mechanical",
+          "type": "terms",
+          "quantity": "results.properties.mechanical.bulk_modulus.type"
+        },
+        {
+          "group": "Filters / Mechanical",
+          "type": "histogram",
+          "quantity": "results.properties.mechanical.bulk_modulus.value"
+        },
+        {
+          "group": "Filters / Mechanical",
+          "type": "terms",
+          "quantity": "results.properties.mechanical.shear_modulus.type"
+        },
+        {
+          "group": "Filters / Mechanical",
+          "type": "histogram",
+          "quantity": "results.properties.mechanical.shear_modulus.value"
+        },
+        {
+          "group": "Filters / Mechanical",
+          "type": "terms",
+          "quantity": "results.properties.mechanical.energy_volume_curve.type"
+        },
+        {
+          "group": "Filters / Solar Cells",
+          "type": "histogram",
+          "quantity": "results.properties.optoelectronic.solar_cell.efficiency"
+        },
+        {
+          "group": "Filters / Solar Cells",
+          "type": "histogram",
+          "quantity": "results.properties.optoelectronic.solar_cell.fill_factor"
+        },
+        {
+          "group": "Filters / Solar Cells",
+          "type": "histogram",
+          "quantity": "results.properties.optoelectronic.solar_cell.open_circuit_voltage"
+        },
+        {
+          "group": "Filters / Solar Cells",
+          "type": "histogram",
+          "quantity": "results.properties.optoelectronic.solar_cell.short_circuit_current_density"
+        },
+        {
+          "group": "Filters / Solar Cells",
+          "type": "histogram",
+          "quantity": "results.properties.optoelectronic.solar_cell.illumination_intensity"
+        },
+        {
+          "group": "Filters / Solar Cells",
+          "type": "histogram",
+          "quantity": "results.properties.optoelectronic.solar_cell.device_area"
+        },
+        {
+          "group": "Filters / Solar Cells",
+          "type": "terms",
+          "quantity": "results.properties.optoelectronic.solar_cell.device_architecture"
+        },
+        {
+          "group": "Filters / Solar Cells",
+          "type": "terms",
+          "quantity": "results.properties.optoelectronic.solar_cell.device_stack"
+        },
+        {
+          "group": "Filters / Solar Cells",
+          "type": "terms",
+          "quantity": "results.properties.optoelectronic.solar_cell.absorber"
+        },
+        {
+          "group": "Filters / Solar Cells",
+          "type": "terms",
+          "quantity": "results.properties.optoelectronic.solar_cell.absorber_fabrication"
+        },
+        {
+          "group": "Filters / Solar Cells",
+          "type": "terms",
+          "quantity": "results.properties.optoelectronic.solar_cell.electron_transport_layer"
+        },
+        {
+          "group": "Filters / Solar Cells",
+          "type": "terms",
+          "quantity": "results.properties.optoelectronic.solar_cell.hole_transport_layer"
+        },
+        {
+          "group": "Filters / Solar Cells",
+          "type": "terms",
+          "quantity": "results.properties.optoelectronic.solar_cell.substrate"
+        },
+        {
+          "group": "Filters / Solar Cells",
+          "type": "terms",
+          "quantity": "results.properties.optoelectronic.solar_cell.back_contact"
+        },
+        {
+          "group": "Filters / Heterogeneous Catalysis / Catalytic Reactions",
+          "type": "terms",
+          "quantity": "results.properties.catalytic.reaction.name"
+        },
+        {
+          "group": "Filters / Heterogeneous Catalysis / Reactants",
+          "type": "terms",
+          "quantity": "results.properties.catalytic.reaction.reactants.name"
+        },
+        {
+          "group": "Filters / Heterogeneous Catalysis / Reactants",
+          "type": "histogram",
+          "quantity": "results.properties.catalytic.reaction.reactants.conversion"
+        },
+        {
+          "group": "Filters / Heterogeneous Catalysis / Reactants",
+          "type": "histogram",
+          "quantity": "results.properties.catalytic.reaction.reactants.mole_fraction_in"
+        },
+        {
+          "group": "Filters / Heterogeneous Catalysis / Reactants",
+          "type": "histogram",
+          "quantity": "results.properties.catalytic.reaction.reactants.mole_fraction_out"
+        },
+        {
+          "group": "Filters / Heterogeneous Catalysis / Products",
+          "type": "terms",
+          "quantity": "results.properties.catalytic.reaction.products.name"
+        },
+        {
+          "group": "Filters / Heterogeneous Catalysis / Products",
+          "type": "histogram",
+          "quantity": "results.properties.catalytic.reaction.products.selectivity"
+        },
+        {
+          "group": "Filters / Heterogeneous Catalysis / Products",
+          "type": "histogram",
+          "quantity": "results.properties.catalytic.reaction.products.mole_fraction_out"
+        },
+        {
+          "group": "Filters / Heterogeneous Catalysis / Reaction Conditions",
+          "type": "histogram",
+          "quantity": "results.properties.catalytic.reaction.reaction_conditions.temperature"
+        },
+        {
+          "group": "Filters / Heterogeneous Catalysis / Reaction Conditions",
+          "type": "histogram",
+          "quantity": "results.properties.catalytic.reaction.reaction_conditions.pressure"
+        },
+        {
+          "group": "Filters / Heterogeneous Catalysis / Reaction Conditions",
+          "type": "histogram",
+          "quantity": "results.properties.catalytic.reaction.reaction_conditions.time_on_stream"
+        },
+        {
+          "group": "Filters / Heterogeneous Catalysis / Reaction Conditions",
+          "type": "histogram",
+          "quantity": "results.properties.catalytic.reaction.reaction_conditions.weight_hourly_space_velocity"
+        },
+        {
+          "group": "Filters / Heterogeneous Catalysis / Catalyst Materials",
+          "type": "terms",
+          "quantity": "results.properties.catalytic.catalyst.catalyst_type"
+        },
+        {
+          "group": "Filters / Heterogeneous Catalysis / Catalyst Materials",
+          "type": "terms",
+          "quantity": "results.properties.catalytic.catalyst.support"
+        },
+        {
+          "group": "Filters / Heterogeneous Catalysis / Catalyst Materials",
+          "type": "terms",
+          "quantity": "results.properties.catalytic.catalyst.preparation_method"
+        },
+        {
+          "group": "Filters / Heterogeneous Catalysis / Catalyst Materials",
+          "type": "terms",
+          "quantity": "results.properties.catalytic.catalyst.catalyst_name"
+        },
+        {
+          "group": "Filters / Heterogeneous Catalysis / Catalyst Materials",
+          "type": "terms",
+          "quantity": "results.properties.catalytic.catalyst.characterization_methods"
+        },
+        {
+          "group": "Filters / Heterogeneous Catalysis / Catalyst Materials",
+          "type": "histogram",
+          "quantity": "results.properties.catalytic.catalyst.surface_area"
+        },
+        {
+          "group": "Filters / Author / Origin / Dataset",
+          "type": "terms",
+          "quantity": "authors.name"
+        },
+        {
+          "group": "Filters / Author / Origin / Dataset",
+          "type": "histogram",
+          "quantity": "upload_create_time"
+        },
+        {
+          "group": "Filters / Author / Origin / Dataset",
+          "type": "terms",
+          "quantity": "external_db"
+        },
+        {
+          "group": "Filters / Author / Origin / Dataset",
+          "type": "terms",
+          "quantity": "datasets.dataset_name"
+        },
+        {
+          "group": "Filters / Author / Origin / Dataset",
+          "type": "terms",
+          "quantity": "datasets.doi"
+        },
+        {
+          "group": "Filters / Visibility / IDs / Schema",
+          "type": "terms",
+          "quantity": "entry_id"
+        },
+        {
+          "group": "Filters / Visibility / IDs / Schema",
+          "type": "terms",
+          "quantity": "upload_id"
+        },
+        {
+          "group": "Filters / Visibility / IDs / Schema",
+          "type": "terms",
+          "quantity": "upload_name"
+        },
+        {
+          "group": "Filters / Visibility / IDs / Schema",
+          "type": "terms",
+          "quantity": "results.material.material_id"
+        },
+        {
+          "group": "Filters / Visibility / IDs / Schema",
+          "type": "terms",
+          "quantity": "datasets.dataset_id"
+        }
+      ],
+      "dashboard_widgets": []
+    },
+    {
+      "entry_point_id": "apps/2_theory/1_calculations",
+      "identity": {
+        "label": "Calculations",
+        "path": "calculations",
+        "resource": "entries",
+        "category": "Theory",
+        "description": "Search calculations"
+      },
+      "pagination": {
+        "order_by": "upload_create_time",
+        "order": "desc",
+        "page_size": 20
+      },
+      "column_quantities": [
+        "results.material.chemical_formula_hill",
+        "results.method.simulation.program_name",
+        "results.method.method_name",
+        "results.method.simulation.dft.xc_functional_type",
+        "upload_create_time",
+        "authors",
+        "results.method.simulation.precision.apw_cutoff",
+        "results.method.simulation.precision.basis_set",
+        "results.method.simulation.precision.k_line_density",
+        "results.method.simulation.precision.native_tier",
+        "results.method.simulation.precision.planewave_cutoff",
+        "results.material.structural_type",
+        "results.material.symmetry.crystal_system",
+        "results.material.symmetry.space_group_symbol",
+        "results.material.symmetry.space_group_number",
+        "entry_name",
+        "mainfile",
+        "comment",
+        "references",
+        "datasets",
+        "published"
+      ],
+      "selected_columns": [
+        "results.material.chemical_formula_hill",
+        "results.method.simulation.program_name",
+        "results.method.method_name",
+        "results.method.simulation.dft.xc_functional_type",
+        "upload_create_time",
+        "authors"
+      ],
+      "search_quantities": {
+        "exclude": [
+          "mainfile",
+          "entry_name",
+          "combine"
+        ]
+      },
+      "filters_locked": {
+        "quantities": "results.method.simulation.program_name"
+      },
+      "menu_items": [
+        {
+          "group": "Filters / Elements / Formula",
+          "type": "periodic_table",
+          "quantity": "results.material.elements"
+        },
+        {
+          "group": "Filters / Elements / Formula",
+          "type": "terms",
+          "quantity": "results.material.chemical_formula_hill"
+        },
+        {
+          "group": "Filters / Elements / Formula",
+          "type": "terms",
+          "quantity": "results.material.chemical_formula_iupac"
+        },
+        {
+          "group": "Filters / Elements / Formula",
+          "type": "terms",
+          "quantity": "results.material.chemical_formula_reduced"
+        },
+        {
+          "group": "Filters / Elements / Formula",
+          "type": "terms",
+          "quantity": "results.material.chemical_formula_anonymous"
+        },
+        {
+          "group": "Filters / Elements / Formula",
+          "type": "histogram",
+          "quantity": "results.material.n_elements"
+        },
+        {
+          "group": "Filters / Structure / Symmetry",
+          "type": "terms",
+          "quantity": "results.material.structural_type"
+        },
+        {
+          "group": "Filters / Structure / Symmetry",
+          "type": "terms",
+          "quantity": "results.material.symmetry.bravais_lattice"
+        },
+        {
+          "group": "Filters / Structure / Symmetry",
+          "type": "terms",
+          "quantity": "results.material.symmetry.crystal_system"
+        },
+        {
+          "group": "Filters / Structure / Symmetry",
+          "type": "terms",
+          "quantity": "results.material.symmetry.space_group_symbol"
+        },
+        {
+          "group": "Filters / Structure / Symmetry",
+          "type": "terms",
+          "quantity": "results.material.symmetry.structure_name"
+        },
+        {
+          "group": "Filters / Structure / Symmetry",
+          "type": "terms",
+          "quantity": "results.material.symmetry.strukturbericht_designation"
+        },
+        {
+          "group": "Filters / Structure / Symmetry",
+          "type": "terms",
+          "quantity": "results.material.symmetry.point_group"
+        },
+        {
+          "group": "Filters / Structure / Symmetry",
+          "type": "terms",
+          "quantity": "results.material.symmetry.hall_symbol"
+        },
+        {
+          "group": "Filters / Structure / Symmetry",
+          "type": "terms",
+          "quantity": "results.material.symmetry.prototype_aflow_id"
+        },
+        {
+          "group": "Filters / Method",
+          "type": "terms",
+          "quantity": "results.method.simulation.program_name"
+        },
+        {
+          "group": "Filters / Method",
+          "type": "terms",
+          "quantity": "results.method.simulation.program_version"
+        },
+        {
+          "group": "Filters / Precision",
+          "type": "histogram",
+          "quantity": "results.method.simulation.precision.k_line_density"
+        },
+        {
+          "group": "Filters / Precision",
+          "type": "terms",
+          "quantity": "results.method.simulation.precision.native_tier"
+        },
+        {
+          "group": "Filters / Precision",
+          "type": "terms",
+          "quantity": "results.method.simulation.precision.basis_set"
+        },
+        {
+          "group": "Filters / Precision",
+          "type": "histogram",
+          "quantity": "results.method.simulation.precision.planewave_cutoff"
+        },
+        {
+          "group": "Filters / Precision",
+          "type": "histogram",
+          "quantity": "results.method.simulation.precision.apw_cutoff"
+        },
+        {
+          "group": "Filters / DFT",
+          "type": "terms",
+          "quantity": "results.method.method_name"
+        },
+        {
+          "group": "Filters / DFT",
+          "type": "terms",
+          "quantity": "results.method.simulation.dft.xc_functional_type"
+        },
+        {
+          "group": "Filters / DFT",
+          "type": "terms",
+          "quantity": "results.method.simulation.dft.xc_functional_names"
+        },
+        {
+          "group": "Filters / DFT",
+          "type": "histogram",
+          "quantity": "results.method.simulation.dft.exact_exchange_mixing_factor"
+        },
+        {
+          "group": "Filters / DFT",
+          "type": "histogram",
+          "quantity": "results.method.simulation.dft.hubbard_kanamori_model.u_effective"
+        },
+        {
+          "group": "Filters / DFT",
+          "type": "terms",
+          "quantity": "results.method.simulation.dft.core_electron_treatment"
+        },
+        {
+          "group": "Filters / DFT",
+          "type": "terms",
+          "quantity": "results.method.simulation.dft.relativity_method"
+        },
+        {
+          "group": "Filters / TB",
+          "type": "terms",
+          "quantity": "results.method.method_name"
+        },
+        {
+          "group": "Filters / TB",
+          "type": "terms",
+          "quantity": "results.method.simulation.tb.type"
+        },
+        {
+          "group": "Filters / TB",
+          "type": "terms",
+          "quantity": "results.method.simulation.tb.localization_type"
+        },
+        {
+          "group": "Filters / GW",
+          "type": "terms",
+          "quantity": "results.method.method_name"
+        },
+        {
+          "group": "Filters / GW",
+          "type": "terms",
+          "quantity": "results.method.simulation.gw.type"
+        },
+        {
+          "group": "Filters / GW",
+          "type": "terms",
+          "quantity": "results.method.simulation.gw.starting_point_type"
+        },
+        {
+          "group": "Filters / GW",
+          "type": "terms",
+          "quantity": "results.method.simulation.gw.basis_set_type"
+        },
+        {
+          "group": "Filters / BSE",
+          "type": "terms",
+          "quantity": "results.method.method_name"
+        },
+        {
+          "group": "Filters / BSE",
+          "type": "terms",
+          "quantity": "results.method.simulation.bse.type"
+        },
+        {
+          "group": "Filters / BSE",
+          "type": "terms",
+          "quantity": "results.method.simulation.bse.solver"
+        },
+        {
+          "group": "Filters / BSE",
+          "type": "terms",
+          "quantity": "results.method.simulation.bse.starting_point_type"
+        },
+        {
+          "group": "Filters / BSE",
+          "type": "terms",
+          "quantity": "results.method.simulation.bse.starting_point_type"
+        },
+        {
+          "group": "Filters / BSE",
+          "type": "terms",
+          "quantity": "results.method.simulation.bse.basis_set_type"
+        },
+        {
+          "group": "Filters / BSE",
+          "type": "terms",
+          "quantity": "results.method.simulation.bse.gw_type"
+        },
+        {
+          "group": "Filters / DMFT",
+          "type": "terms",
+          "quantity": "results.method.method_name"
+        },
+        {
+          "group": "Filters / DMFT",
+          "type": "terms",
+          "quantity": "results.method.simulation.dmft.impurity_solver_type"
+        },
+        {
+          "group": "Filters / DMFT",
+          "type": "histogram",
+          "quantity": "results.method.simulation.dmft.inverse_temperature"
+        },
+        {
+          "group": "Filters / DMFT",
+          "type": "terms",
+          "quantity": "results.method.simulation.dmft.magnetic_state"
+        },
+        {
+          "group": "Filters / DMFT",
+          "type": "histogram",
+          "quantity": "results.method.simulation.dmft.u"
+        },
+        {
+          "group": "Filters / DMFT",
+          "type": "histogram",
+          "quantity": "results.method.simulation.dmft.jh"
+        },
+        {
+          "group": "Filters / DMFT",
+          "type": "terms",
+          "quantity": "results.method.simulation.dmft.analytical_continuation"
+        },
+        {
+          "group": "Filters / Molecular dynamics",
+          "type": "terms",
+          "quantity": "results.method.workflow_name"
+        },
+        {
+          "group": "Filters / Molecular dynamics",
+          "type": "terms",
+          "quantity": "results.properties.thermodynamic.trajectory.available_properties"
+        },
+        {
+          "group": "Filters / Molecular dynamics",
+          "type": "terms",
+          "quantity": "results.properties.thermodynamic.trajectory.provenance.molecular_dynamics.ensemble_type"
+        },
+        {
+          "group": "Filters / Molecular dynamics",
+          "type": "histogram",
+          "quantity": "results.properties.thermodynamic.trajectory.provenance.molecular_dynamics.time_step"
+        },
+        {
+          "group": "Filters / Geometry Optimization",
+          "type": "terms",
+          "quantity": "results.properties.available_properties"
+        },
+        {
+          "group": "Filters / Geometry Optimization",
+          "type": "histogram",
+          "quantity": "results.properties.geometry_optimization.final_energy_difference"
+        },
+        {
+          "group": "Filters / Geometry Optimization",
+          "type": "histogram",
+          "quantity": "results.properties.geometry_optimization.final_force_maximum"
+        },
+        {
+          "group": "Filters / Geometry Optimization",
+          "type": "histogram",
+          "quantity": "results.properties.geometry_optimization.final_displacement_maximum"
+        },
+        {
+          "group": "Filters / Electronic",
+          "type": "terms",
+          "quantity": "results.properties.available_properties"
+        },
+        {
+          "group": "Filters / Electronic",
+          "type": "terms",
+          "quantity": "results.properties.electronic.band_structure_electronic.band_gap.type"
+        },
+        {
+          "group": "Filters / Electronic",
+          "type": "histogram",
+          "quantity": "results.properties.electronic.band_structure_electronic.band_gap.value"
+        },
+        {
+          "group": "Filters / Electronic",
+          "type": "terms",
+          "quantity": "results.properties.electronic.band_structure_electronic.spin_polarized"
+        },
+        {
+          "group": "Filters / Electronic",
+          "type": "terms",
+          "quantity": "results.properties.electronic.dos_electronic.spin_polarized"
+        },
+        {
+          "group": "Filters / Vibrational",
+          "type": "terms",
+          "quantity": "results.properties.available_properties"
+        },
+        {
+          "group": "Filters / Mechanical",
+          "type": "terms",
+          "quantity": "results.properties.available_properties"
+        },
+        {
+          "group": "Filters / Mechanical",
+          "type": "terms",
+          "quantity": "results.properties.mechanical.bulk_modulus.type"
+        },
+        {
+          "group": "Filters / Mechanical",
+          "type": "histogram",
+          "quantity": "results.properties.mechanical.bulk_modulus.value"
+        },
+        {
+          "group": "Filters / Mechanical",
+          "type": "terms",
+          "quantity": "results.properties.mechanical.shear_modulus.type"
+        },
+        {
+          "group": "Filters / Mechanical",
+          "type": "histogram",
+          "quantity": "results.properties.mechanical.shear_modulus.value"
+        },
+        {
+          "group": "Filters / Mechanical",
+          "type": "terms",
+          "quantity": "results.properties.mechanical.energy_volume_curve.type"
+        },
+        {
+          "group": "Filters / Author / Origin / Dataset",
+          "type": "terms",
+          "quantity": "authors.name"
+        },
+        {
+          "group": "Filters / Author / Origin / Dataset",
+          "type": "histogram",
+          "quantity": "upload_create_time"
+        },
+        {
+          "group": "Filters / Author / Origin / Dataset",
+          "type": "terms",
+          "quantity": "external_db"
+        },
+        {
+          "group": "Filters / Author / Origin / Dataset",
+          "type": "terms",
+          "quantity": "datasets.dataset_name"
+        },
+        {
+          "group": "Filters / Author / Origin / Dataset",
+          "type": "terms",
+          "quantity": "datasets.doi"
+        },
+        {
+          "group": "Filters / Visibility / IDs / Schema",
+          "type": "terms",
+          "quantity": "entry_id"
+        },
+        {
+          "group": "Filters / Visibility / IDs / Schema",
+          "type": "terms",
+          "quantity": "upload_id"
+        },
+        {
+          "group": "Filters / Visibility / IDs / Schema",
+          "type": "terms",
+          "quantity": "upload_name"
+        },
+        {
+          "group": "Filters / Visibility / IDs / Schema",
+          "type": "terms",
+          "quantity": "results.material.material_id"
+        },
+        {
+          "group": "Filters / Visibility / IDs / Schema",
+          "type": "terms",
+          "quantity": "datasets.dataset_id"
+        }
+      ],
+      "dashboard_widgets": [
+        {
+          "type": "periodictable",
+          "quantity": "results.material.elements"
+        },
+        {
+          "type": "terms",
+          "quantity": "results.material.symmetry.space_group_symbol"
+        },
+        {
+          "type": "terms",
+          "quantity": "results.material.structural_type"
+        },
+        {
+          "type": "terms",
+          "quantity": "results.method.simulation.program_name"
+        },
+        {
+          "type": "terms",
+          "quantity": "results.material.symmetry.crystal_system"
+        }
+      ]
+    }
+  ]
+}
