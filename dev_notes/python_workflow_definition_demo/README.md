@@ -46,7 +46,7 @@ where each tested commit came from.
 | --- | --- | --- |
 | `nomad-FAIR` | `develop` | `9b101b103951` |
 | `nomad-gui` | `fix-coarse-grained-particle-visualization` | `8e3688eaa2a5` |
-| `nomad-parser-python-workflow-definition` | `feature/pwd-utility-grouping-function-sources` | `5f0054a0b338` |
+| `nomad-parser-python-workflow-definition` | `feature/pwd-utility-grouping-function-sources` | `084a1a2d4283` |
 | `electronic-parsers` | `develop` | `95207c87b75b` |
 | `atomistic-parsers` | `fix-publishing-python` | `c782e592159e` |
 | `nomad-schema-plugin-run` | `fix-publishing-python` | `4bc2282fdd59` |
