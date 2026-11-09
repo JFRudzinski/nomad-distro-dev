@@ -17,7 +17,7 @@
 [submodule "packages/nomad-parser-python-workflow-definition"]
 	path = packages/nomad-parser-python-workflow-definition
 	url = https://github.com/FAIRmat-NFDI/nomad-parser-python-workflow-definition.git
-	branch = feature/pwd-utility-grouping-function-sources
+	branch = main
 [submodule "packages/nomad-gui"]
 	path = packages/nomad-gui
 	url = https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-gui.git
