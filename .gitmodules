@@ -1,3 +1,24 @@
 [submodule "packages/nomad-FAIR"]
 	path = packages/nomad-FAIR
 	url = https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-FAIR.git
+	branch = develop
+[submodule "packages/atomistic-parsers"]
+	path = packages/atomistic-parsers
+	url = https://github.com/nomad-coe/atomistic-parsers.git
+	branch = fix-publishing-python
+[submodule "packages/nomad-schema-plugin-run"]
+	path = packages/nomad-schema-plugin-run
+	url = https://github.com/nomad-coe/nomad-schema-plugin-run.git
+	branch = fix-publishing-python
+[submodule "packages/electronic-parsers"]
+	path = packages/electronic-parsers
+	url = https://github.com/nomad-coe/electronic-parsers.git
+	branch = develop
+[submodule "packages/nomad-parser-python-workflow-definition"]
+	path = packages/nomad-parser-python-workflow-definition
+	url = https://github.com/FAIRmat-NFDI/nomad-parser-python-workflow-definition.git
+	branch = feature/pwd-utility-grouping-function-sources
+[submodule "packages/nomad-gui"]
+	path = packages/nomad-gui
+	url = https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-gui.git
+	branch = fix-coarse-grained-particle-visualization

@@ -52,6 +52,19 @@ services:
     command: mongod
     # --logpath=/dev/null # --quiet
 
+  # Local test identity provider used by the standalone GUI development setup.
+  keycloak:
+    image: gitlab-registry.mpcdf.mpg.de/nomad-lab/nomad-test-keycloak:v1.1
+    platform: linux/amd64
+    container_name: nomad_keycloak
+    environment:
+      - KC_HTTP_PORT=8008
+      - KC_HOSTNAME=http://localhost:8008
+    volumes:
+      - ./packages/nomad-gui/infra/import:/opt/keycloak/data/import:ro
+    ports:
+      - 8008:8008
+
   temporal:
     container_name: nomad_temporal
     image: temporalio/temporal:1.6.1

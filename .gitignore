@@ -78,6 +78,7 @@ docs/_build/
 .pybuilder/
 target/
 .volumes
+/run/
 
 # Jupyter Notebook
 .ipynb_checkpoints
